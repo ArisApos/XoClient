@@ -12,7 +12,7 @@ const Games = ({ gamesIds, addNewGameDis }) => {
     const gameContainers = gamesIds.map(gameId=><GameContainer {...{key:gameId, gameId}} />)
   return (
     <>
-      <GamesMenu {...{ addNewGameDisUCB }} />
+      <GamesMenu className='gamesMenuu' {...{ addNewGameDisUCB }} />
       { gameContainers }
     </>
   );
