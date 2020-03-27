@@ -6,4 +6,6 @@ export { GameInfo } from "./GameInfo";
 export { Timer } from  './Timer'
 export { GamesContainer } from "./Games";
 export { GamesMenu } from './GamesMenu';
-
+export { OnLinePageContainer } from "./OnLinePage";
+export { OffLinePageContainer } from './OffLinePage';
+export { HomePageContainer } from './HomePage';
