@@ -1,3 +1,25 @@
 .onLinePage {
     background: indianred;
+    .controlPanel {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        .charts {
+            background: crimson;
+        }
+        .mainContent {
+            background: cyan;
+            .status.options {
+                background: white;
+            }
+            .timeRooms {
+                background: blue;
+                .timeRoom {
+                    background: darkgrey;
+                    .tPlayer {
+                        background: darkmagenta;
+                    }
+                }
+            }
+        }
+    }
 }

@@ -10,9 +10,27 @@ import './Static/onlinePage.scss';
 const OnLinePage = ({ games }) => {
   
   return (
-    <>
-    <div className="onLinePage">OnLinePage</div>
-    </>
+    <div className="onLinePage">
+      <div className="controlPanel">
+        <div className="charts">
+          <div className="cPlayer">Chart Player1</div>
+          <div className="cPlayer">Chart Player2</div>
+          <div className="cPlayer">Chart Player3</div>
+        </div>
+        <div className="mainContent">
+          <div className="status options">
+            Total active players, options, others
+          </div>
+          <div className="timeRooms">
+            <div className="timeRoom">
+              <div className="tPlayer">Status Player1</div>
+              <div className="tPlayer">Status Player2</div>
+              <div className="tPlayer">Status Player3</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
