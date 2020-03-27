@@ -10,7 +10,6 @@ const OffLinePage = ({ games }) => {
   return (
     <>
       <div className="offLinePage">
-        OffLinePage
         <GamesContainer />
       </div>
     </>
