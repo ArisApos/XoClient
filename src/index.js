@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './static/main.scss';
-import { GamesContainer } from './TicToe/';
+import { HomePageContainer } from './TicToe/';
 import * as serviceWorker from './serviceWorker';
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
@@ -15,7 +15,7 @@ const gameReducer = combineReducers(reducers),
 
 ReactDOM.render(
   <Provider store={gameStore}>
-    <GamesContainer />
+    <HomePageContainer />
   </Provider>,
   document.getElementById("root")
 );
