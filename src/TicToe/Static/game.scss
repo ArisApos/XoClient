@@ -1,4 +1,29 @@
-
+.modes {
+    display: flex;
+    justify-content: space-evenly;
+    .modeLink {
+    background: indianred;
+    width: 100px;
+    height: 40px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    margin-top: 36px;
+    color: blueviolet;
+    font-weight: 700;
+    &:hover {
+      background: darken(indianred, 10);
+    }
+    }
+}
+.offLinePage {
+  background: gray;
+}
+.onLinePage {
+  background: indianred;
+}
 .game {
   display: flex;
   flex-direction: row;
