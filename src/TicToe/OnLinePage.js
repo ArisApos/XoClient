@@ -32,11 +32,13 @@ const OnLinePage = ({ games }) => {
           </div>
           <div className="timeRooms">
             <div className="timeRoom">
+              <div className="timeLimit">timeLimit</div>
               <div className="tPlayer">Status Player1</div>
               <div className="tPlayer">Status Player2</div>
               <div className="tPlayer">Status Player3</div>
             </div>
             <div className="timeRoom">
+              <div className="timeLimit">timeLimit</div>
               <div className="tPlayer">Status Player1</div>
               <div className="tPlayer">Status Player2</div>
               <div className="tPlayer">Status Player3</div>

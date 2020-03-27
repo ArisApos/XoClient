@@ -32,20 +32,29 @@
             }
         }
         .mainContent {
-            background: #004090;
+            background: #002b60;
             .status.options {
                 height: 50px;
                 color: white;
             }
             .timeRooms {
-                background: blue;
+                background: white;
                 .timeRoom {
-                    background: darkgrey;
                     display: flex;
-                    margin: 20px;
+                    height: 40px;
+                    border-top: 1px solid blue;
+                    .timeLimit {
+                        width: 80px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-right: 1px solid #002b60;
+                        background: #9cb2cd;
+                    }
                     .tPlayer {
-                        background: darkmagenta;
-                        margin: 7px;
+                        display: flex;
+                        align-items: center;
+                        margin: 0 10px;
                     }
                 }
             }
