@@ -1,18 +1,35 @@
+%title {
+    margin-top: 30px;
+    color: white;
+    position: relative;
+    &::after {
+        content: '';
+        display: block;
+        height: 1px;
+        background: white;
+        width: 85%;
+        position: absolute;
+    }
+}
 .onLinePage {
     background: indianred;
     font-size: 16px;
     .controlPanel {
         display: grid;
-        grid-template-columns: 25% 75%;
+        grid-template-columns: 25% 25% 50%;
         background:#004364;
         .charts {
-            margin: 10px;
+            margin:0 10px;
+            .title {
+                @extend %title;
+            }
             .cPlayer {
                 background:#033046;
                 display: flex;
                 height: 40px;
                 justify-content: space-evenly;
                 align-items: center;
+                width: 170px;
                 &:not(:first-child) {
                     border-top: 1px solid white;
                 }
@@ -31,8 +48,27 @@
                 }
             }
         }
-        .mainContent {
+        .myStatus {
+            background: #19385e;
+            color: white;
+            .title {
+                @extend %title;
+            }
+            .opponents {
+            }
+            .points {
+            }
+            .avaiablility {
+            }
+            .playTime {
+            }
+        }
+        .liveOverview {
             background: #002b60;
+            padding: 0px 8px 25px;
+            .title {
+                @extend %title;
+            }
             .status.options {
                 height: 50px;
                 color: white;
