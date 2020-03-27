@@ -1,22 +1,51 @@
 .onLinePage {
     background: indianred;
+    font-size: 16px;
     .controlPanel {
         display: grid;
-        grid-template-columns: 50% 50%;
+        grid-template-columns: 25% 75%;
+        background:#004364;
         .charts {
-            background: crimson;
+            margin: 10px;
+            .cPlayer {
+                background:#033046;
+                display: flex;
+                height: 40px;
+                justify-content: space-evenly;
+                align-items: center;
+                &:not(:first-child) {
+                    border-top: 1px solid white;
+                }
+                .name {
+                    color: white;
+                }
+                .rate {
+                    background: red;
+                    color: white;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 20px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
         }
         .mainContent {
-            background: cyan;
+            background: #004090;
             .status.options {
-                background: white;
+                height: 50px;
+                color: white;
             }
             .timeRooms {
                 background: blue;
                 .timeRoom {
                     background: darkgrey;
+                    display: flex;
+                    margin: 20px;
                     .tPlayer {
                         background: darkmagenta;
+                        margin: 7px;
                     }
                 }
             }
