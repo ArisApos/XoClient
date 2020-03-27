@@ -1,16 +1,5 @@
 body {
     font: 14px "Century Gothic", Futura, sans-serif;
-    margin: 0;
+    margin: 84px 8px;
     background: #181a1b;
-}
-#root {
-    display: grid;
-    grid-template-columns: 33% 33% 33%;
-    grid-template-rows: auto;
-    @media screen and (max-width: 1300px) {
-        grid-template-columns: 50% 50%;
-    }
-    @media screen and (max-width: 950px) {
-        grid-template-columns: 100%;
-    }
 }

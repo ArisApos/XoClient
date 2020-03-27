@@ -12,8 +12,8 @@ const Games = ({ gamesIds, addNewGameDis }) => {
     const gameContainers = gamesIds.map(gameId=><GameContainer {...{key:gameId, gameId}} />)
   return (
     <>
-      <GamesMenu className='gamesMenuu' {...{ addNewGameDisUCB }} />
-      { gameContainers }
+      <GamesMenu className="gamesMenuu" {...{ addNewGameDisUCB }} />
+      <div className="gamesContainer">{gameContainers}</div>
     </>
   );
 };

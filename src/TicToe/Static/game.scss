@@ -19,26 +19,40 @@
     }
 }
 .offLinePage {
-  background: gray;
 }
 .onLinePage {
   background: indianred;
 }
-.game {
-  display: flex;
-  flex-direction: row;
-  text-align: center;
-  height: 340px;
-  width: 500px;
-  position: relative;
-  .gameBoard {
-    width: 210px;
+.gamesContainer {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: auto;
+
+  @media screen and (max-width: 1300px) {
+    grid-template-columns: 50% 50%;
+  }
+
+  @media screen and (max-width: 950px) {
+    grid-template-columns: 100%;
+  }
+  .game {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    height: 340px;
+    width: 500px;
+    position: relative;
+
+    .gameBoard {
+      width: 210px;
+
       .boardRow {
         &:after {
           clear: both;
           content: "";
           display: table;
         }
+
         .square {
           color: white;
           background: #fff;
@@ -62,6 +76,7 @@
           border-bottom-color: rgb(71, 71, 71);
           border-left-color: rgb(71, 71, 71);
           box-shadow: rgb(14, 98, 73) 1px 0px 11px 2px;
+
           &:hover {
             background: #b1d0ee;
             border: 3px solid rgb(0, 189, 110);
@@ -72,104 +87,129 @@
             border-bottom-color: rgb(0, 217, 126);
             border-left-color: rgb(0, 217, 126);
           }
+
           &:focus {
             outline: none;
           }
+
           &.squareW {
             background: dodgerblue;
             font-size: 28px;
             color: antiquewhite;
+
             &:hover {
               background: dodgerblue;
             }
           }
+
           &.squareA {
             margin-right: 4px;
             margin-top: 4px;
           }
         }
       }
-  }
-  .gameInfo {
-    width: 150px;
-    .status {
-      color: white;
-      font-size: 14px;
-      transition: 0.3s;
     }
-    .winner {
-      color: #5da1e4;
-      font-size: 20px;
-    }
-    ol {
-      padding-left: 30px;
-      list-style: none;
-      li {
-        button {
-          &.travel {
-          background: rgb(99, 167, 217);
-          color: white;
-          padding: 4px;
-          margin-top: 2px;
-          border-radius: 6px;
-          border: none;
-          transition: 0.3s;
-          cursor: pointer;
-          &:active {
-            background: rgb(15, 98, 146);
+
+    .gameInfo {
+      width: 150px;
+
+      .status {
+        color: white;
+        font-size: 14px;
+        transition: 0.3s;
+      }
+
+      .winner {
+        color: #5da1e4;
+        font-size: 20px;
+      }
+
+      ol {
+        padding-left: 30px;
+        list-style: none;
+
+        li {
+          button {
+            &.travel {
+              background: rgb(99, 167, 217);
+              color: white;
+              padding: 4px;
+              margin-top: 2px;
+              border-radius: 6px;
+              border: none;
+              transition: 0.3s;
+              cursor: pointer;
+
+              &:active {
+                background: rgb(15, 98, 146);
+              }
+            }
+
+            &.current {
+              padding: 8px;
+              background: rgb(91, 180, 176);
+            }
           }
         }
-         &.current {
-           padding: 8px;
-           background: rgb(91, 180, 176);
-         }
+      }
+    }
+
+    .totalScore {
+      display: grid;
+      grid-template-columns: 70px 60px;
+      grid-template-rows: 40px 40px;
+
+      span {
+        font-size: 23px;
+        color: #90e3f9;
+        margin: 10px;
+
+        &.header {
+          font-weight: bolds;
+        }
+
+        &.xi,
+        &.omikron {
+          font-size: 18px;
         }
       }
     }
-  }
-  .totalScore {
-    display: grid;
-    grid-template-columns: 70px 60px;
-    grid-template-rows: 40px 40px;
-    span {
-      font-size: 23px;
-      color: #90e3f9;
-      margin: 10px;
-      &.header {
-        font-weight: bolds;
+
+    .timer {
+      position: absolute;
+      right: 97px;
+      top: 135px;
+      color: white;
+      font-size: 25px;
+      transition: right 0.5s ease;
+
+      &.green {
+        color: green;
       }
-      &.xi, &.omikron {
-        font-size: 18px;
+
+      &.yellow {
+        color: yellow;
       }
-    }
-  }
-  .timer {
-    position: absolute;
-    right: 97px;
-    top: 135px;
-    color: white;
-    font-size: 25px;
-    transition: right 0.5s ease;
-    &.green {
-      color: green;
-    }
-    &.yellow {
-      color: yellow;
-    }
-    &.orange {
-      color: orange;
-    }
-    &.red {
-      color: red;
-    }
-    &.big {
-      font-size: 30px;
-    }
-    &.oIsNext {
-      right: 33px;
+
+      &.orange {
+        color: orange;
+      }
+
+      &.red {
+        color: red;
+      }
+
+      &.big {
+        font-size: 30px;
+      }
+
+      &.oIsNext {
+        right: 33px;
+      }
     }
   }
 }
+
 
 .scoreRotation {
   animation: spinHorizontal 2s normal forwards ease;
