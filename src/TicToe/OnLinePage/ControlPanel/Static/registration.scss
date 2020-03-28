@@ -1,0 +1,26 @@
+@import 'mixins';
+
+.controlPanel .account .registration {
+    position: absolute;
+    background: inherit;
+    padding: inherit;
+    left: 0;
+    right: 0;
+    top: 0;
+
+    .title {
+        @include title;
+    }
+
+    .statusItem {
+        margin: 15px;
+
+        &.opponents {}
+
+        &.points {}
+
+        &.avaiablility {}
+
+        &.playTime {}
+    }
+}

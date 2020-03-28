@@ -1,0 +1,19 @@
+@import 'mixins';
+
+.controlPanel .account .myStatus {
+    .title {
+        @include title;
+    }
+
+    .statusItem {
+        margin: 15px;
+
+        &.opponents {}
+
+        &.points {}
+
+        &.avaiablility {}
+
+        &.playTime {}
+    }
+}

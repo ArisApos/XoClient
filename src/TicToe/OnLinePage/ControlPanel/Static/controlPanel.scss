@@ -1,0 +1,11 @@
+.controlPanel {
+    display: grid;
+    grid-template-columns: 25% 25% 50%;
+    background: #004364;
+    .account {
+        background: #19385e;
+        color: white;
+        padding: 0px 8px 25px;
+        position: relative;
+    }
+}

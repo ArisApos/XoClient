@@ -1,0 +1,40 @@
+@import 'mixins';
+
+.controlPanel .liveOverview {
+    background: #002b60;
+    padding: 0px 8px 25px;
+
+    .title {
+        @include title;
+    }
+
+    .status.options {
+        height: 50px;
+        color: white;
+    }
+
+    .timeRooms {
+        background: white;
+
+        .timeRoom {
+            display: flex;
+            height: 40px;
+            border-top: 1px solid blue;
+
+            .timeLimit {
+                width: 80px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-right: 1px solid #002b60;
+                background: #9cb2cd;
+            }
+
+            .tPlayer {
+                display: flex;
+                align-items: center;
+                margin: 0 10px;
+            }
+        }
+    }
+}
