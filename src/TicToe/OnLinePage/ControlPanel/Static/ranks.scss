@@ -13,13 +13,12 @@
         height: 40px;
         align-items: center;
         width: 170px;
-
+        color: white;
         &:not(:first-child) {
             border-top: 1px solid white;
         }
         .rate {
             background: red;
-            color: white;
             width: 20px;
             height: 20px;
             border-radius: 20px;
@@ -29,7 +28,6 @@
             margin-left: 10px;
         }
         .name {
-            color: white;
             margin-left: 10px;
         }
     }
