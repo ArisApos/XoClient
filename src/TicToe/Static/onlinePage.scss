@@ -51,6 +51,7 @@
         .myStatus {
             background: #19385e;
             color: white;
+            padding: 0px 8px 25px;
             .title {
                 @extend %title;
             }
