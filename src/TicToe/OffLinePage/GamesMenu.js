@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
-import { getGameId } from "../libs";
+import { getGameId } from "../../libs";
 let GamesMenu = ({ addNewGameDisUCB }) => {
     const [menuVisible, setMenuVisible] = useState(false);
     const { register, handleSubmit, errors } = useForm(); // initialise the hook

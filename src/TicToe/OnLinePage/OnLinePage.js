@@ -1,6 +1,6 @@
 import React, {  } from "react";
 import { } from "./";
-import { } from "../models/tic-tac-toe/";
+import { } from "../../models/tic-tac-toe";
 import { connect } from "react-redux";
 import './Static/onlinePage.scss';
 //actionFunctions functions

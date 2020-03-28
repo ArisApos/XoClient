@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
-import { GameContainer, GamesMenu } from "./";
-import { addNewGame_A } from "../models/tic-tac-toe/";
+import { GameContainer } from "../Game";
+import { GamesMenu } from ".";
+import { addNewGame_A } from "../../models/tic-tac-toe";
 import { connect } from "react-redux";
 
 //actionFunctions functions

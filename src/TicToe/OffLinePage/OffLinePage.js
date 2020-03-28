@@ -1,6 +1,6 @@
 import React from "react";
 import { GamesContainer } from "./";
-import {} from "../models/tic-tac-toe/";
+import {} from "../../models/tic-tac-toe/";
 import { connect } from "react-redux";
 
 //actionFunctions functions

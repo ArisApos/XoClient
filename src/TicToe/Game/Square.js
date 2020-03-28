@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addSquare_A, changeXIsNext_A, changeStepNumber_A} from '../models/tic-tac-toe/'
-import { dispatchAll } from '../libs'
+import {addSquare_A, changeXIsNext_A, changeStepNumber_A} from '../../models/tic-tac-toe/'
+import { dispatchAll } from '../../libs'
 
 //Helper actionFunctions
 const addSquare = (gameId, index, xIsNext, stepNumber)=>{

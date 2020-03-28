@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { OffLinePageContainer, OnLinePageContainer } from './';
+import { OffLinePageContainer } from './OffLinePage';
+import { OnLinePageContainer } from "./OnLinePage";
 import {
   BrowserRouter as Router,
   Switch,

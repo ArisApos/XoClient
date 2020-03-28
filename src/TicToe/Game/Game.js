@@ -1,8 +1,8 @@
 import React from 'react'
 import { Board, TotalScore, GameInfo, Timer } from './'
 import { connect } from 'react-redux'
-import { changeXIsNext_A, changeStepNumber_A, cut_A, losePoints_A } from '../models/tic-tac-toe/'
-import { dispatchAll } from '../libs'
+import { changeXIsNext_A, changeStepNumber_A, cut_A, losePoints_A } from '../../models/tic-tac-toe/'
+import { dispatchAll } from '../../libs'
 import './Static/game.scss';
 
 //actionFunctions functions
