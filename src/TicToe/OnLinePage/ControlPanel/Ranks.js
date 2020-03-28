@@ -15,6 +15,7 @@ const Ranks = ({ranks=mockRanks}) => {
     <div className="rPlayer">
       <span className="rate">{rPlayer.rank}</span>
       <span className="name">{rPlayer.name}</span>
+      <span className="point">{rPlayer.points}</span>
     </div>
   ));
     return (
