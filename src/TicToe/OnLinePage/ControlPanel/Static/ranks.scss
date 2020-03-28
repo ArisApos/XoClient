@@ -11,18 +11,12 @@
         background: #033046;
         display: flex;
         height: 40px;
-        justify-content: space-evenly;
         align-items: center;
         width: 170px;
 
         &:not(:first-child) {
             border-top: 1px solid white;
         }
-
-        .name {
-            color: white;
-        }
-
         .rate {
             background: red;
             color: white;
@@ -32,6 +26,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-left: 10px;
+        }
+        .name {
+            color: white;
+            margin-left: 10px;
         }
     }
 }
