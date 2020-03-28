@@ -14,18 +14,18 @@
     .title {
         @include title;
     }
-
-    input {
-        margin: 10px;
-        height: 23px;
-        border: none;
-        font-weight: bold;
-        &.opponents {}
-
-        &.points {}
-
-        &.avaiablility {}
-
-        &.playTime {}
+    .form {
+        margin: 0 10;
+        input {
+            display: block;
+            margin: 10px 0;
+            height: 23px;
+            border: none;
+            font-weight: bold;
+        }
+        .error {
+            font-size: 10px;
+            color: red;
+        }
     }
 }
