@@ -1,8 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import socketIOClient from "socket.io-client";
 import "./Static/registration.scss";
 
+
+
 const Registration = ({ isLoggedIn=true }) => {
+      const [socketData, setSocketData] = useState({
+        response: false,
+        endpoint: "http://127.0.0.1:5000"
+      });
+      useEffect(()=> {
+        const socket = socketIOClient(socketData.endpoint);
+        socket.on("sConnectionReply", data => {
+          console.log(data);
+          setSocketData({...socketData, response:data.msg})
+          socket.emit("cConnectionReply", { data: "Dude!!! This is awesome, from React Client" });
+        });
+      }, []);
       const { register, handleSubmit, errors } = useForm(); // initialise the hook
       const onSubmit = data => {console.log(data);};
   return (
@@ -42,6 +57,7 @@ const Registration = ({ isLoggedIn=true }) => {
           </span>
         )}
         <input className="submit" type="submit" />
+        {socketData.response && <div>{socketData.response}</div>}
       </form>
     </section>
   );
