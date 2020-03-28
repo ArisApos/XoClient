@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import socketIOClient from "socket.io-client";
 import "./Static/registration.scss";
 
+let socket;
 
 
 const Registration = ({ isLoggedIn=true }) => {
@@ -11,7 +12,7 @@ const Registration = ({ isLoggedIn=true }) => {
         endpoint: "http://127.0.0.1:5000"
       });
       useEffect(()=> {
-        const socket = socketIOClient(socketData.endpoint);
+        socket = socketIOClient(socketData.endpoint);
         socket.on("sConnectionReply", data => {
           console.log(data);
           setSocketData({...socketData, response:data.msg})
@@ -19,7 +20,10 @@ const Registration = ({ isLoggedIn=true }) => {
         });
       }, []);
       const { register, handleSubmit, errors } = useForm(); // initialise the hook
-      const onSubmit = data => {console.log(data);};
+      const onSubmit = data => {
+        socket.emit("cRegistrationFormSubmit", data);
+        console.log(data);
+      };
   return (
     <section
       className={isLoggedIn ? "registration isLoggedIn" : "registration"}
