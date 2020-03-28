@@ -55,13 +55,20 @@
             .title {
                 @extend %title;
             }
-            .opponents {
-            }
-            .points {
-            }
-            .avaiablility {
-            }
-            .playTime {
+            .statusItem {
+                margin: 15px;
+              &.opponents {
+
+              }
+              &.points {
+
+              }
+              &.avaiablility {
+
+              }
+              &.playTime {
+
+              }
             }
         }
         .liveOverview {

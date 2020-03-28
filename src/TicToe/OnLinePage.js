@@ -29,10 +29,10 @@ const OnLinePage = ({ games }) => {
         </section>
         <section className="myStatus">
           <h3 className="title">My Status</h3>
-          <div className="opponents">Oponents</div>
-          <div className="points">Points</div>
-          <div className="availability">availability</div>
-          <div className="playTime">playTime</div>
+          <div className="statusItem opponents">Oponents</div>
+          <div className="statusItem points">Points</div>
+          <div className="statusItem availability">availability</div>
+          <div className="statusItem playTime">playTime</div>
         </section>
         <section className="liveOverview">
           <h3 className="title">Live Overview</h3>
