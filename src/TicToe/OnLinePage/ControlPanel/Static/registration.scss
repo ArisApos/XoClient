@@ -7,14 +7,19 @@
     left: 0;
     right: 0;
     top: 0;
+    &.isLoggedIn {
+        top: -200px;
+    }
 
     .title {
         @include title;
     }
 
-    .statusItem {
-        margin: 15px;
-
+    input {
+        margin: 10px;
+        height: 23px;
+        border: none;
+        font-weight: bold;
         &.opponents {}
 
         &.points {}
