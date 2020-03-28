@@ -18,6 +18,10 @@ const Registration = ({ isLoggedIn=true }) => {
           setSocketData({...socketData, response:data.msg})
           socket.emit("cConnectionReply", { data: "Dude!!! This is awesome, from React Client" });
         });
+        socket.on("sRegistrationFormSubmit", (data) => {
+          console.log(data);
+          setSocketData({ ...socketData, response: data.checkingPassed }); 
+        });
       }, []);
       const { register, handleSubmit, errors } = useForm(); // initialise the hook
       const onSubmit = data => {
