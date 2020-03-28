@@ -8,11 +8,9 @@ import { connect } from "react-redux";
 //Component
 const OffLinePage = ({ games }) => {
   return (
-    <>
       <div className="offLinePage">
         <GamesContainer />
       </div>
-    </>
   );
 };
 
