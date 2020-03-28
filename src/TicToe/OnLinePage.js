@@ -28,11 +28,20 @@ const OnLinePage = ({ games }) => {
           </div>
         </section>
         <section className="myStatus">
-          <h3 className="title">My Status</h3>
-          <div className="statusItem opponents">Oponents</div>
-          <div className="statusItem points">Points</div>
-          <div className="statusItem availability">availability</div>
-          <div className="statusItem playTime">playTime</div>
+          <section className="loggedInStatus">
+            <h3 className="title">LoggedInStatus</h3>
+            <div className="statusItem opponents">Oponents</div>
+            <div className="statusItem points">Points</div>
+            <div className="statusItem availability">availability</div>
+            <div className="statusItem playTime">playTime</div>
+          </section>
+          <section className="registration">
+            <h3 className="title">Register</h3>
+            <div className="statusItem opponents">Oponents</div>
+            <div className="statusItem points">Points</div>
+            <div className="statusItem availability">availability</div>
+            <div className="statusItem playTime">playTime</div>
+          </section>
         </section>
         <section className="liveOverview">
           <h3 className="title">Live Overview</h3>

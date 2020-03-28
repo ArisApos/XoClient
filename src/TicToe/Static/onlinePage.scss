@@ -52,23 +52,43 @@
             background: #19385e;
             color: white;
             padding: 0px 8px 25px;
-            .title {
-                @extend %title;
+            position: relative;
+            .registration {
+                position: absolute;
+                background: inherit;
+                left: 0;
+                right: 0;
+                top: 0;
+                .title {
+                    @extend %title;
+                }
+                .statusItem {
+                    margin: 15px;
+                    &.opponents {
+                    }
+                    &.points {
+                    }
+                    &.avaiablility {
+                    }
+                    &.playTime {
+                    }
+                }
             }
-            .statusItem {
-                margin: 15px;
-              &.opponents {
-
-              }
-              &.points {
-
-              }
-              &.avaiablility {
-
-              }
-              &.playTime {
-
-              }
+            .loggedInStatus {
+                .title {
+                    @extend %title;
+                }
+                .statusItem {
+                    margin: 15px;
+                    &.opponents {
+                    }
+                    &.points {
+                    }
+                    &.avaiablility {
+                    }
+                    &.playTime {
+                    }
+                }
             }
         }
         .liveOverview {
