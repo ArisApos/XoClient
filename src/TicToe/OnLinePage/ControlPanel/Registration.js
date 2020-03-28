@@ -1,33 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import socketIOClient from "socket.io-client";
 import "./Static/registration.scss";
 
-let socket;
 
 
-const Registration = ({ isLoggedIn=true }) => {
+const Registration = ({socket, isLoggedIn=true }) => {
       const [socketData, setSocketData] = useState({
         response: false,
-        endpoint: "http://127.0.0.1:5000"
       });
+
       useEffect(()=> {
-        socket = socketIOClient(socketData.endpoint);
-        socket.on("sConnectionReply", data => {
-          console.log(data);
-          setSocketData({...socketData, response:data.msg})
-          socket.emit("cConnectionReply", { data: "Dude!!! This is awesome, from React Client" });
-        });
-        socket.on("sRegistrationFormSubmit", (data) => {
-          console.log(data);
-          setSocketData({ ...socketData, response: data.checkingPassed }); 
-        });
+        if(socket) {
+          socket.on("sRegistrationFormSubmit", data => {
+            console.log(data);
+            setSocketData({ response: data.checkingPassed });
+          });
+        }
       }, []);
+
       const { register, handleSubmit, errors } = useForm(); // initialise the hook
       const onSubmit = data => {
         socket.emit("cRegistrationFormSubmit", data);
         console.log(data);
       };
+
   return (
     <section
       className={isLoggedIn ? "registration isLoggedIn" : "registration"}
