@@ -20,7 +20,8 @@ const Ranks = ({ranks=mockRanks}) => {
   ));
     return (
       <section className="ranks">
-       { rankingPlayers }
+        <h3 className="title">Ranks</h3>
+        {rankingPlayers}
       </section>
     );
 }
