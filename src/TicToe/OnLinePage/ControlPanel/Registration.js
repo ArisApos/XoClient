@@ -4,23 +4,21 @@ import "./Static/registration.scss";
 
 
 
-const Registration = ({socket, isLoggedIn=true }) => {
-      const [socketData, setSocketData] = useState({
-        response: false,
-      });
+const Registration = ({socketData:{socket, ss, cs}, isLoggedIn=true }) => {
+      const [responseData, setResponseData] = useState({response: false});
 
       useEffect(()=> {
         if(socket) {
-          socket.on("sRegistrationFormSubmit", data => {
+          socket.on(ss.root.REGISTER, data => {
             console.log(data);
-            setSocketData({ response: data.checkingPassed });
+            setResponseData({ response: data.checkingPassed });
           });
         }
       }, []);
 
       const { register, handleSubmit, errors } = useForm(); // initialise the hook
       const onSubmit = data => {
-        socket.emit("cRegistrationFormSubmit", data);
+        socket.emit(cs.root.REGISTER, data);
         console.log(data);
       };
 
@@ -61,7 +59,7 @@ const Registration = ({socket, isLoggedIn=true }) => {
           </span>
         )}
         <input className="submit" type="submit" />
-        {socketData.response && <div>{socketData.response}</div>}
+        {responseData.response && <div>{responseData.response}</div>}
       </form>
     </section>
   );
