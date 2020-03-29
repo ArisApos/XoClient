@@ -19,7 +19,7 @@ const OnLinePage = ({ games }) => {
   const [onlinePlayers, setOnlinePlayers] = useState(null);
   useEffect(() => {
     const socket = socketIOClient(socketData.endpoint);
-    socket.on("sConectionBroadcast",({players})=>{
+    socket.on("sUpdatePlayers",({players})=>{
       console.log('Broaaaadcasstttted', players)
       setOnlinePlayers(players);
     });
