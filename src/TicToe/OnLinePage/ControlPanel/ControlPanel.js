@@ -6,14 +6,14 @@ import './Static/controlPanel.scss';
 //actionFuntions
 
 //Component
-const ControlPanel = ({socket, ranks, myStatus, liveOverview}) => {
+const ControlPanel = ({socketData, ranks, myStatus, liveOverview}) => {
   
   return (
     <section className="controlPanel">
       <Ranks ranks={ ranks } />
       <section className="account">
         <MyStatus mySatus={ null } />
-        <Registration isLoggedIn={ null } socket={ socket } />
+        <Registration isLoggedIn={ null } socketData={ socketData } />
       </section>
       <LiveOverview LiveOverview={ null } />
     </section>
