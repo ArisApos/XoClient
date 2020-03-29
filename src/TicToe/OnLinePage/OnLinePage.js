@@ -16,22 +16,31 @@ const OnLinePage = ({ games }) => {
     connected: false,
     id: null
   });
+  const [onlinePlayers, setOnlinePlayers] = useState(null);
   useEffect(() => {
     const socket = socketIOClient(socketData.endpoint);
-    socket.on("sConnectionReply", ({id, connected}) => {
-      console.log({id, connected});
+    socket.on("sConectionBroadcast",({players})=>{
+      console.log('Broaaaadcasstttted', players)
+      setOnlinePlayers(players);
+    });
+    socket.on("sConnectionReply", ({id, connected, players}) => {
+      console.log({id, connected, players });
       setSocketData({ ...socketData, socket, id, connected });
       socket.emit("cConnectionReply", {
         data: "Dude!!! This is awesome, from React Client"
       });
     });
   }, []);
+
   return (
     <section className="onLinePage">
-      <ControlPanelContainer socket={ socketData.socket }/>
-      { socketData.connected && 
-      <div className='connectionIndecation'>{ socketData.id }</div> 
-      }
+      <ControlPanelContainer socket={socketData.socket} />
+      {socketData.connected && (
+        <div className="connectionIndecation">{socketData.id}</div>
+      )}
+      {onlinePlayers && (
+        onlinePlayers.map(player=><div key={player.id}>{player.id}</div>)
+      )}
     </section>
   );
 };
