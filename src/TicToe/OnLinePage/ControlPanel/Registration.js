@@ -23,13 +23,11 @@ const Registration = ({socketData:{socket, ss, cs}, on=true }) => {
       };
 
   return (
-    <section
-      className={on ? "registration on" : "registration"}
-    >
+    <section className={on ? "registration on" : "registration"}>
       <h3 className="title">Register</h3>
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <input
-          className = { errors.name ? 'errorInput' : null }
+          className={errors.name ? "errorInput" : null}
           name="name"
           placeholder="name"
           ref={register({ required: true, pattern: /^([a-zA-Z0-9_-]){3,8}$/ })}
@@ -40,6 +38,7 @@ const Registration = ({socketData:{socket, ss, cs}, on=true }) => {
           </span>
         )}
         <input
+          className={errors.password ? "errorInput" : null}
           name="password"
           placeholder="password"
           ref={register({
@@ -61,6 +60,7 @@ const Registration = ({socketData:{socket, ss, cs}, on=true }) => {
           </span>
         )}
         <input
+          className={errors.playersLimmit ? "errorInput" : null}
           name="playersLimmit"
           placeholder="players Limmit (2-9)"
           ref={register({ required: true, pattern: /^[2-9]$/ })}
@@ -71,6 +71,7 @@ const Registration = ({socketData:{socket, ss, cs}, on=true }) => {
           </span>
         )}
         <input
+          className={errors.timeLimmit ? "errorInput" : null}
           name="timeLimmit"
           placeholder="time Limmit(2-9)'"
           ref={register({ required: true, pattern: /^[2-9]$/ })}
