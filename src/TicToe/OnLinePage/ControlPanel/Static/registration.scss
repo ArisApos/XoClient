@@ -19,20 +19,37 @@
         @include title;
     }
     .form {
-        margin: 0 10;
-        input {
-            display: block;
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        .inputField {
             margin: 10px 0;
-            height: 23px;
-            border: none;
-            font-weight: bold;
-            &.errorInput {
-                background: #ff8e8e;
+            input {
+                display: block;
+                height: 23px;
+                border: none;
+                font-weight: bold;
+                border-radius: 3px;
+                padding-left: 10px;
+                &.errorInput {
+                    border-color: #b8111d;
+                    border-width: 1px 1px 1px 10px;
+                    border-style: solid;
+                }
+            }
+            .error {
+                font-size: 13px;
+                color: red;
             }
         }
-        .error {
-            font-size: 10px;
-            color: red;
+        .submit {
+            background: #000;
+            color: #fff;
+            width: 70%;
+            padding: 4px;
+            border: 1px solid #b8111d;
+            cursor: pointer;
         }
     }
 }
