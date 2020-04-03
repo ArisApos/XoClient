@@ -13,8 +13,8 @@ const ControlPanel = ({socketData, ranks, myStatus, liveOverview}) => {
       <Ranks ranks={ranks} />
       <section className="account">
         <MyStatus mySatus={null} />
-        <Registration on={null} socketData={socketData} />
-        <Loggin on={true} socketData={socketData} />
+        <Registration on={true} socketData={socketData} />
+        <Loggin on={null} socketData={socketData} />
       </section>
       <LiveOverview LiveOverview={null} />
     </section>
