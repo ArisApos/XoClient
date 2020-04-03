@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import "./Static/loggin.scss";
 import axios from "axios";
+import { ENTRY_POINT } from "../../../models/onLine";
+import "./Static/loggin.scss";
 
 
 const Loggin = ({
@@ -23,7 +24,7 @@ const Loggin = ({
   const onSubmit = data => {
     console.log(data);
     axios
-      .post("/login", data)
+      .post(ENTRY_POINT+'/loggin', data)
       .then((response)=> {
         console.log(response);
       })
