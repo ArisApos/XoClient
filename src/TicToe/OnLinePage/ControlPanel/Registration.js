@@ -1,25 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { ENTRY_POINT } from "../../../models/onLine";
 import "./Static/registration.scss";
 
 
 
-const Registration = ({socketData:{socket, ss, cs}, on=true }) => {
+const Registration = ({ on=true }) => {
       const [responseData, setResponseData] = useState({response: false});
 
-      useEffect(()=> {
-        if(socket) {
-          socket.on(ss.root.REGISTER, data => {
-            console.log(data);
-            setResponseData({ response: data.checkingPassed });
-          });
-        }
-      }, []);
+      // useEffect(()=> {
+      //   if(socket) {
+      //     socket.on(ss.root.REGISTER, data => {
+      //       console.log(data);
+      //       setResponseData({ response: data.checkingPassed });
+      //     });
+      //   }
+      // }, []);
 
       const { register, handleSubmit, errors } = useForm(); // initialise the hook
       const onSubmit = data => {
-        socket.emit(cs.root.REGISTER, data);
+        // socket.emit(cs.root.REGISTER, data);
         console.log(data);
+        axios
+          .post(ENTRY_POINT+"/register", data)
+          .then(res => {
+            console.log(res);
+            setResponseData({ response: true, data: res.data });
+          })
+          .catch(error => {
+            console.log(error);
+          });
+
       };
 
   return (
@@ -93,8 +105,9 @@ const Registration = ({socketData:{socket, ss, cs}, on=true }) => {
           )}
         </div>
         <input className="submit" type="submit" />
-        {responseData.response && <div>{responseData.response}</div>}
       </form>
+      {responseData.response && 
+        <div className='response'>{JSON.stringify(responseData.data)}</div>}
     </section>
   );
 };
