@@ -6,9 +6,13 @@
     padding: inherit;
     left: 0;
     right: 0;
-    top: 0;
-    &.isLoggedIn {
-        top: -200px;
+    top: -320px;
+    bottom: unset;
+    transition: top 0.7s ease-in-out;
+
+    &.on {
+        top: 0;
+        bottom: unset;
     }
 
     .title {
@@ -22,6 +26,9 @@
             height: 23px;
             border: none;
             font-weight: bold;
+            &.errorInput {
+                background: #ff8e8e;
+            }
         }
         .error {
             font-size: 10px;
