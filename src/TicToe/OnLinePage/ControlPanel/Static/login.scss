@@ -1,0 +1,41 @@
+@import 'mixins';
+
+.controlPanel .account .login {
+    position: absolute;
+    background: inherit;
+    padding: inherit;
+    left: 0;
+    right: 0;
+    top: -320px;
+    bottom: unset;
+    transition: top 0.8s ease-in-out;
+
+    &.on {
+        top: 0;
+        bottom: 0;
+    }
+
+    .title {
+        @include title;
+    }
+
+    .form {
+        margin: 0 10px;
+
+        input {
+            display: block;
+            margin: 10px 0;
+            height: 23px;
+            border: none;
+            font-weight: bold;
+            &.errorInput {
+                background: #ff8e8e;
+            }
+        }
+
+        .error {
+            font-size: 10px;
+            color: red;
+        }
+    }
+}
