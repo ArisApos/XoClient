@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "./Static/loggin.scss";
+import axios from "axios";
 
 
 const Loggin = ({
@@ -20,8 +21,15 @@ const Loggin = ({
 
   const { register, handleSubmit, errors } = useForm(); // initialise the hook
   const onSubmit = data => {
-    socket.emit(cs.root.REGISTER, data);
     console.log(data);
+    axios
+      .post("/login", data)
+      .then((response)=> {
+        console.log(response);
+      })
+      .catch((error)=> {
+        console.log(error);
+      });
   };
 
   return (
@@ -32,15 +40,20 @@ const Loggin = ({
           <input
             name="name"
             placeholder="name"
+            ref={register({
+              required: true
+            })}
           />
         </div>
         <div className="inputField">
           <input
             name="password"
             placeholder="password"
+            ref={register({
+              required: true
+            })}
           />
         </div>
-        {responseData.response && <div>wrong username or password</div>}
         <input className="submit" type="submit" />
         {responseData.response && <div>{responseData.response}</div>}
       </form>
