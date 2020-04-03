@@ -4,7 +4,7 @@ import "./Static/registration.scss";
 
 
 
-const Registration = ({socketData:{socket, ss, cs}, isLoggedIn=true }) => {
+const Registration = ({socketData:{socket, ss, cs}, on=true }) => {
       const [responseData, setResponseData] = useState({response: false});
 
       useEffect(()=> {
@@ -24,11 +24,12 @@ const Registration = ({socketData:{socket, ss, cs}, isLoggedIn=true }) => {
 
   return (
     <section
-      className={isLoggedIn ? "registration isLoggedIn" : "registration"}
+      className={on ? "registration on" : "registration"}
     >
       <h3 className="title">Register</h3>
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <input
+          className = { errors.name ? 'errorInput' : null }
           name="name"
           placeholder="name"
           ref={register({ required: true, pattern: /^([a-zA-Z0-9_-]){3,8}$/ })}
@@ -36,6 +37,27 @@ const Registration = ({socketData:{socket, ss, cs}, isLoggedIn=true }) => {
         {errors.name && (
           <span className="error">
             name is required Please enter Alpanumeric Letters with length 3-8
+          </span>
+        )}
+        <input
+          name="password"
+          placeholder="password"
+          ref={register({
+            required: true,
+            pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
+          })}
+        />
+        {errors.password && (
+          <span className="error">
+            Password must contain
+            <br />
+            1)At least 1 lowercase alphabetical character
+            <br />
+            2)at least 1 uppercase alphabetical character
+            <br />
+            3)at least 1 numeric character
+            <br />
+            4)at least one special character(!@#$%^&*)
           </span>
         )}
         <input
