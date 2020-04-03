@@ -1,5 +1,5 @@
 import React, {  } from 'react';
-import { Ranks, MyStatus, Registration, LiveOverview } from './';
+import { Ranks, MyStatus, Registration, Loggin, LiveOverview } from './';
 import { connect } from 'react-redux';
 import './Static/controlPanel.scss';
 
@@ -10,12 +10,13 @@ const ControlPanel = ({socketData, ranks, myStatus, liveOverview}) => {
   
   return (
     <section className="controlPanel">
-      <Ranks ranks={ ranks } />
+      <Ranks ranks={ranks} />
       <section className="account">
-        <MyStatus mySatus={ null } />
-        <Registration isLoggedIn={ null } socketData={ socketData } />
+        <MyStatus mySatus={null} />
+        <Registration on={null} socketData={socketData} />
+        <Loggin on={null} socketData={socketData} />
       </section>
-      <LiveOverview LiveOverview={ null } />
+      <LiveOverview LiveOverview={null} />
     </section>
   );
 };
