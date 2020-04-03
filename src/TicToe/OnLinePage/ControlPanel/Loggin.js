@@ -5,28 +5,22 @@ import { ENTRY_POINT } from "../../../models/onLine";
 import "./Static/loggin.scss";
 
 
-const Loggin = ({
-  socketData: { socket, ss, cs },
-  on = true
-}) => {
+const Loggin = ({ on = true }) => {
+
   const [responseData, setResponseData] = useState({ response: false });
 
   useEffect(() => {
-    if (socket) {
-      socket.on(ss.root.REGISTER, data => {
-        console.log(data);
-        setResponseData({ response: data.checkingPassed });
-      });
-    }
+
   }, []);
 
-  const { register, handleSubmit, errors } = useForm(); // initialise the hook
+  const { register, handleSubmit } = useForm(); // initialise the hook
   const onSubmit = data => {
     console.log(data);
     axios
       .post(ENTRY_POINT+'/loggin', data)
-      .then((response)=> {
-        console.log(response);
+      .then((res)=> {
+        console.log(res);
+        setResponseData({response:true, data: res.data })
       })
       .catch((error)=> {
         console.log(error);
@@ -56,8 +50,10 @@ const Loggin = ({
           />
         </div>
         <input className="submit" type="submit" />
-        {responseData.response && <div>{responseData.response}</div>}
       </form>
+      {responseData.response && (
+        <div className="response">{JSON.stringify(responseData.data)}</div>
+      )}
     </section>
   );
 };
