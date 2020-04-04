@@ -80,12 +80,12 @@ const Registration = ({ on=true }) => {
         </div>
         <div className="inputField">
           <input
-            className={errors.playersLimmit ? "errorInput" : null}
-            name="playersLimmit"
+            className={errors.maxPlayers ? "errorInput" : null}
+            name="maxPlayers"
             placeholder="players Limmit (2-9)"
             ref={register({ required: true, pattern: /^[2-9]$/ })}
           />
-          {errors.playersLimmit && (
+          {errors.maxPlayers && (
             <span className="error">
               players Limmit is required Please enter a number 2-8
             </span>
@@ -93,12 +93,12 @@ const Registration = ({ on=true }) => {
         </div>
         <div className="inputField">
           <input
-            className={errors.timeLimmit ? "errorInput" : null}
-            name="timeLimmit"
+            className={errors.maxTime ? "errorInput" : null}
+            name="maxTime"
             placeholder="time Limmit(2-9)'"
             ref={register({ required: true, pattern: /^[2-9]$/ })}
           />
-          {errors.timeLimmit && (
+          {errors.maxTime && (
             <span className="error">
               time Limmit is required Please enter a number 2-9
             </span>
