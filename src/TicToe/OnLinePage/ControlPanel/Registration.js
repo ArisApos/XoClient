@@ -23,7 +23,7 @@ const Registration = ({ on=true }) => {
         // socket.emit(cs.root.REGISTER, data);
         console.log(data);
         axios
-          .post(ENTRY_POINT+"/players/register", data)
+          .post(ENTRY_POINT+"/players", data)
           .then(res => {
             console.log(res);
             setResponseData({ response: true, data: res.data });
