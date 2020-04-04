@@ -17,7 +17,7 @@ const Loggin = ({ on = true }) => {
   const onSubmit = data => {
     console.log(data);
     axios
-      .post(ENTRY_POINT+'/loggin', data)
+      .post(ENTRY_POINT+'/players/loggin', data)
       .then((res)=> {
         console.log(res);
         setResponseData({response:true, data: res.data })
