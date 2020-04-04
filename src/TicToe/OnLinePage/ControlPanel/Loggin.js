@@ -16,11 +16,12 @@ const Loggin = ({ on = true }) => {
   const { register, handleSubmit } = useForm(); // initialise the hook
   const onSubmit = data => {
     console.log(data);
+    const { name, password } = data;
     axios
-      .post(ENTRY_POINT+'/players/loggin', data)
+      .get(`${ ENTRY_POINT }/players/${ name }/${ password }`)
       .then((res)=> {
         console.log(res);
-        setResponseData({response:true, data: res.data })
+        setResponseData({response: true, data: res.data})
       })
       .catch((error)=> {
         console.log(error);
