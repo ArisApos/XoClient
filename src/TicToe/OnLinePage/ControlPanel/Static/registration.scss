@@ -25,7 +25,7 @@
         justify-content: center;
         .inputField {
             margin: 10px 0;
-            input {
+            input:not([type="file"]) {
                 display: block;
                 height: 23px;
                 border: none;
@@ -41,6 +41,22 @@
             .error {
                 font-size: 13px;
                 color: red;
+            }
+            .avatarButton {
+                .avatarLabel {
+                    display: inline-block;
+                    padding: 8px 12px;
+                    cursor: pointer;
+                    border-radius: 4px;
+                    background-color: #95252a;
+                    font-size: 16px;
+                    color: #fff;
+                }
+                .customFileInput {
+                    position: absolute;
+                    z-index: -999;
+                    top: -1000px;
+                }
             }
         }
         .submit {

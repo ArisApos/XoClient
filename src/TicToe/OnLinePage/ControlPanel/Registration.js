@@ -115,7 +115,11 @@ const Registration = ({ on=true }) => {
           )}
         </div>
         <div className="inputField">
-          <input type="file" name="myImage" onChange={ onChangeFile } />
+          <div className="avatarButton">
+            <label className="avatarLabel" for="avatar"> Upload Avatar 
+            <input className='customFileInput' id='avatar' type="file" name="avatar" onChange={ onChangeFile } />
+            </label>
+          </div>
         </div>
         <input className="submit" type="submit" />
       </form>
