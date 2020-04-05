@@ -36,14 +36,19 @@ const Registration = ({ on=true }) => {
           .post(ENTRY_POINT + "/players", formData, headersConfig)
           .then(res => {
             console.log(res);
-            setResponseData({ response: true, data: res.data });
+            const loggin = () => {console.log('loggin baby')}
+            setResponseData({ response: true, loggin, data: res.data });
           })
           .catch(error => {
             setResponseData({ response: true, data: error.response.data });
           });
-
       };
-
+      let message = null;
+      let loggin = null;
+      if(responseData.response) {
+        message = <div key='message' className={ responseData.data.successfulRegistration ? "response success" : "response fail"}>{responseData.data.message}</div>;
+        loggin =  responseData.data.successfulRegistration ? <div key='loggin' onClick={ responseData.loggin } className='logginButton'>Loggin</div> : null;
+      }
   return (
     <section className={on ? "registration on" : "registration"}>
       <h3 className="title">Register</h3>
@@ -116,16 +121,14 @@ const Registration = ({ on=true }) => {
         </div>
         <div className="inputField">
           <div className="avatarButton">
-            <label className="avatarLabel" for="avatar"> Upload Avatar 
-            <input className='customFileInput' id='avatar' type="file" name="avatar" onChange={ onChangeFile } />
+            <label className="avatarLabel" > Upload Avatar 
+            <input className='customFileInput' type="file" name="avatar" onChange={ onChangeFile } />
             </label>
           </div>
         </div>
         <input className="submit" type="submit" />
       </form>
-      {responseData.response && (
-        <div className={ responseData.data.successfulRegistration ? "response success" : "response fail"}>{responseData.data.message}</div>
-      )}
+      <div className='responseContainer'>{ [message, loggin] } </div>
     </section>
   );
 };
