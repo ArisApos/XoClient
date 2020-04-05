@@ -39,7 +39,7 @@ const Registration = ({ on=true }) => {
             setResponseData({ response: true, data: res.data });
           })
           .catch(error => {
-            console.log(error);
+            setResponseData({ response: true, data: error.response.data });
           });
 
       };
@@ -124,7 +124,7 @@ const Registration = ({ on=true }) => {
         <input className="submit" type="submit" />
       </form>
       {responseData.response && (
-        <div className="response">{JSON.stringify(responseData.data)}</div>
+        <div className={ responseData.data.successfulRegistration ? "response success" : "response fail"}>{responseData.data.message}</div>
       )}
     </section>
   );

@@ -70,5 +70,11 @@
     }
     .response {
         word-break: break-all;
+        &.success {
+            color: lime;
+        }
+        &.fail {
+            color: red;
+        }
     }
 }
