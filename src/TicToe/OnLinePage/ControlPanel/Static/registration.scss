@@ -68,13 +68,26 @@
             cursor: pointer;
         }
     }
-    .response {
-        word-break: break-all;
+    .responseContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        .response {
+            word-break: break-all;
         &.success {
             color: lime;
         }
         &.fail {
             color: red;
         }
+       }
+       .logginButton {
+            background: #028002;
+            color: white;
+            padding: 5px;
+            border-radius: 3px;
+            display: flex;
+            justify-content: center;
+       }
     }
 }
