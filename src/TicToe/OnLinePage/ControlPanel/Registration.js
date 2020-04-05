@@ -8,6 +8,7 @@ import "./Static/registration.scss";
 
 const Registration = ({ on=true }) => {
       const [responseData, setResponseData] = useState({response: false});
+       const [file, setFile] = useState(null);
 
       // useEffect(()=> {
       //   if(socket) {
@@ -19,11 +20,20 @@ const Registration = ({ on=true }) => {
       // }, []);
 
       const { register, handleSubmit, errors } = useForm(); // initialise the hook
+      const onChangeFile =(e) => setFile(e.target.files[0])
       const onSubmit = data => {
         // socket.emit(cs.root.REGISTER, data);
-        console.log(data);
+        console.log(data, file);
+        const formData = new FormData();
+        Object.keys(data).forEach(dataKey=>formData.append(dataKey, data[dataKey]))
+        formData.append("avatar", file);
+        const headersConfig = {
+          headers: {
+            "content-type": "multipart/form-data",
+          }
+        };
         axios
-          .post(ENTRY_POINT+"/players", data)
+          .post(ENTRY_POINT + "/players", formData, headersConfig)
           .then(res => {
             console.log(res);
             setResponseData({ response: true, data: res.data });
@@ -45,7 +55,7 @@ const Registration = ({ on=true }) => {
             placeholder="name"
             ref={register({
               required: true,
-              pattern: /^([a-zA-Z0-9_-]){3,8}$/
+              pattern: /^([a-zA-Z0-9_-]){3,8}$/,
             })}
           />
           {errors.name && (
@@ -61,7 +71,7 @@ const Registration = ({ on=true }) => {
             placeholder="password"
             ref={register({
               required: true,
-              pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
+              pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
             })}
           />
           {errors.password && (
@@ -104,10 +114,14 @@ const Registration = ({ on=true }) => {
             </span>
           )}
         </div>
+        <div className="inputField">
+          <input type="file" name="myImage" onChange={ onChangeFile } />
+        </div>
         <input className="submit" type="submit" />
       </form>
-      {responseData.response && 
-        <div className='response'>{JSON.stringify(responseData.data)}</div>}
+      {responseData.response && (
+        <div className="response">{JSON.stringify(responseData.data)}</div>
+      )}
     </section>
   );
 };
