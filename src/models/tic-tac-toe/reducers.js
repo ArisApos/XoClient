@@ -85,7 +85,7 @@ const gameStatusState = (state = {
     }
 }
 
-const games = (state = {},action) => {
+const games = (state = {}, action) => {
   switch (action.type) {
     case ADD_NEW_GAME:
         const newGameInitialState = { [action.newGameId]: gameStatusState(undefined, action) };
@@ -105,6 +105,7 @@ const games = (state = {},action) => {
       return state;
   }
 };
+
 
 
 const reducers = { games }
