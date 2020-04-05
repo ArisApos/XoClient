@@ -1,4 +1,4 @@
-export { reducers } from "./reducers";
+export { games } from "./reducers";
 
 export {
   addSquare_A,

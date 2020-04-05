@@ -1,0 +1,3 @@
+const PLAYER_LOGGED_IN = "PLAYER_LOGGED_IN";
+
+export { PLAYER_LOGGED_IN };

@@ -106,9 +106,6 @@ const games = (state = {}, action) => {
   }
 };
 
-
-
-const reducers = { games }
-export {reducers};
+export { games };
 
 

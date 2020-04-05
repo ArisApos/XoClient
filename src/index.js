@@ -5,10 +5,11 @@ import { HomePageContainer } from './TicToe/';
 import * as serviceWorker from './serviceWorker';
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
-import { reducers } from "./models/tic-tac-toe/";
+import { games } from "./models/tic-tac-toe/";
+import { player } from "./models/onLine/";
 
-const gameReducer = combineReducers(reducers),
-      gameStore = createStore(gameReducer,
+const fullReducer = combineReducers( { player, games }),
+      gameStore = createStore(fullReducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )
 
