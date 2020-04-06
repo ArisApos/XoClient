@@ -50,7 +50,7 @@ const stateOnLinePage = ({ player }) => {
 
 const dispatchOnLinePage = (dispatch) => ({
   setPlayerLoggedIn_D: (loggedIn)=>{ dispatch(setPlayerLoggedIn_A(loggedIn)); },
-  setPlayerStatus_D: (payload)=>{ dispatch(setPlayerLoggedIn_A(payload)) }
+  setPlayerStatus_D: (payload)=>{ dispatch(setPlayerStatus_A(payload)); }
 });
 
 const OnLinePageContainer = connect(
