@@ -14,8 +14,10 @@ const Registration = ({ on, setActiveWindows, setPlayerLoggedIn_D, setPlayerStat
        const deactivateBoth = ()=>setActiveWindows({ registration: false, loggin: false });
        const loggedIn = ()=> {
          deactivateBoth();
-         setPlayerLoggedIn_D(true);
-         setPlayerStatus_D(responseData.data.result);
+         batch(()=>{
+          setPlayerLoggedIn_D(true);
+          setPlayerStatus_D(responseData.data.result);
+         });
        }; 
       // useEffect(()=> {
       //   if(socket) {
