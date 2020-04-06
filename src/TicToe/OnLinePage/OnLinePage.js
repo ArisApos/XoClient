@@ -1,13 +1,13 @@
 import React, { useState, useEffect  } from "react";
 import { ControlPanelContainer } from "./ControlPanel";
-import { setPlayerLoggedIn_A } from "../../models/onLine";
+import { setPlayerLoggedIn_A, setPlayerStatus_A } from "../../models/onLine";
 import { ss, cs, ENTRY_POINT } from "../../models/onLine";
 import { connect } from "react-redux";
 import socketIOClient from "socket.io-client";
 import './Static/onlinePage.scss';
 
 //Component
-const OnLinePage = ({ player, setPlayerLoggedIn_D }) => {
+const OnLinePage = ({ player, setPlayerLoggedIn_D, setPlayerStatus_D }) => {
   const [socketData, setSocketData] = useState({ ss, cs, socket:null, connected: false, id: null });
   const [onlinePlayers, setOnlinePlayers] = useState(null);
   useEffect(() => {
@@ -28,13 +28,17 @@ const OnLinePage = ({ player, setPlayerLoggedIn_D }) => {
 
   return (
     <section className="onLinePage">
-      <ControlPanelContainer socketData={socketData} player={ player } setPlayerLoggedIn_D={ setPlayerLoggedIn_D} />
+      <ControlPanelContainer
+        socketData={socketData}
+        player={player}
+        setPlayerLoggedIn_D={setPlayerLoggedIn_D}
+        setPlayerStatus_D={setPlayerStatus_D}
+      />
       {socketData.connected && (
         <div className="connectionIndecation">{socketData.id}</div>
       )}
-      {onlinePlayers && (
-        onlinePlayers.map(player=><div key={player.id}>{player.id}</div>)
-      )}
+      {onlinePlayers &&
+        onlinePlayers.map((player) => <div key={player.id}>{player.id}</div>)}
     </section>
   );
 };
@@ -45,7 +49,8 @@ const stateOnLinePage = ({ player }) => {
 };
 
 const dispatchOnLinePage = (dispatch) => ({
-  setPlayerLoggedIn_D: (loggedIn)=>{ dispatch(setPlayerLoggedIn_A(loggedIn)); }
+  setPlayerLoggedIn_D: (loggedIn)=>{ dispatch(setPlayerLoggedIn_A(loggedIn)); },
+  setPlayerStatus_D: (payload)=>{ dispatch(setPlayerLoggedIn_A(payload)) }
 });
 
 const OnLinePageContainer = connect(
