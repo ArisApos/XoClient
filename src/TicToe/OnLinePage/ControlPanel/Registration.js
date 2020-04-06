@@ -13,10 +13,21 @@ const Registration = ({ on, setActiveWindows, setPlayerLoggedIn_D, setPlayerStat
        const goLoggin = ()=>setActiveWindows({ registration: false, loggin: true });
        const deactivateBoth = ()=>setActiveWindows({ registration: false, loggin: false });
        const loggedIn = ()=> {
-         deactivateBoth();
-         batch(()=>{
-          setPlayerLoggedIn_D(true);
-          setPlayerStatus_D(responseData.data.result);
+         axios.get(`${ENTRY_POINT}/players/${responseData.data.name}/${responseData.data.password}`)
+         .then(res=> {
+           if (res.authSuccess) {
+             console.log("GetPlayer------", res);
+             //  deactivateBoth();
+             //  batch(()=>{
+             //   setPlayerLoggedIn_D(true, res.token);
+             //   setPlayerStatus_D(res.status);
+             //  });
+           } else {
+             console.log(res.message);
+           }
+         })
+         .catch(err=>{
+           console.log('GetPlayer EEErrrorr!!');
          });
        }; 
       // useEffect(()=> {
@@ -44,7 +55,7 @@ const Registration = ({ on, setActiveWindows, setPlayerLoggedIn_D, setPlayerStat
         axios
           .post(ENTRY_POINT + "/players", formData, headersConfig)
           .then(res => {
-            console.log(res);
+            console.log(res);           
             setResponseData({ response: true, data: res.data });
           })
           .catch(error => {
