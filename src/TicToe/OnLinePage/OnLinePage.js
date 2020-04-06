@@ -49,7 +49,7 @@ const stateOnLinePage = ({ player }) => {
 };
 
 const dispatchOnLinePage = (dispatch) => ({
-  setPlayerLoggedIn_D: (loggedIn)=>{ dispatch(setPlayerLoggedIn_A(loggedIn)); },
+  setPlayerLoggedIn_D: (loggedIn, token)=>{ dispatch(setPlayerLoggedIn_A(loggedIn, token)); },
   setPlayerStatus_D: (payload)=>{ dispatch(setPlayerStatus_A(payload)); }
 });
 
