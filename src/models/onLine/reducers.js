@@ -24,7 +24,7 @@ const player = ( state = {
 }, action) => {
     switch (action.type) {
       case SET_LOGGED_STATUS:
-        return { ...state, loggedIn: loggedStatusState(state.loggedIn, action) };
+        return { ...state, loggedStatus: loggedStatusState(state.loggedIn, action) };
       case SET_PLAYER_STATUS:
         return { ...state, status: statusState(state.status, action) };
       default:
