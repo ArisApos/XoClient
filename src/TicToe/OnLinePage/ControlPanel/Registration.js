@@ -13,21 +13,25 @@ const Registration = ({ on, setActiveWindows, setPlayerLoggedIn_D, setPlayerStat
        const goLoggin = ()=>setActiveWindows({ registration: false, loggin: true });
        const deactivateBoth = ()=>setActiveWindows({ registration: false, loggin: false });
        const loggedIn = ()=> {
-         axios.get(`${ENTRY_POINT}/players/${responseData.data.name}/${responseData.data.password}`)
+         setResponseData({ response: true, data: {successfulRegistration:true,message: 'wait authentication loggin...'} });
+         const encodedPassword = encodeURIComponent(responseData.data.password);
+         const encodedUri = `${ENTRY_POINT}/players/${responseData.data.name}/${encodedPassword}`;
+         axios.get(encodedUri)
          .then(res=> {
-           if (res.authSuccess) {
-             console.log("GetPlayer------", res);
-             //  deactivateBoth();
-             //  batch(()=>{
-             //   setPlayerLoggedIn_D(true, res.token);
-             //   setPlayerStatus_D(res.status);
-             //  });
+           if (res.data.authSuccess) {
+             setResponseData({ response: true, data: {successfulRegistration:true, message: 'Success..'} });
+             console.log("GetPlayer------", res.data);
+              deactivateBoth();
+              batch(()=>{
+               setPlayerLoggedIn_D(true, res.data.token);
+               setPlayerStatus_D(res.data.status);
+              });
            } else {
-             console.log(res.message);
+             setResponseData({ response: true, data: {message:res.data.message} });
            }
          })
          .catch(err=>{
-           console.log('GetPlayer EEErrrorr!!');
+           setResponseData({ response: true, data: {message:'Internal error server'} });
          });
        }; 
       // useEffect(()=> {
