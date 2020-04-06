@@ -6,10 +6,15 @@ import "./Static/registration.scss";
 
 
 
-const Registration = ({ on=true }) => {
+const Registration = ({ on, setActiveWindows, setPlayerLoggedIn_D }) => {
       const [responseData, setResponseData] = useState({response: false});
        const [file, setFile] = useState(null);
-
+       const goLoggin = ()=>setActiveWindows({ registration: false, loggin: true });
+       const deactivateBoth = ()=>setActiveWindows({ registration: false, loggin: false });
+       const loggedIn = ()=> {
+         deactivateBoth();
+         setPlayerLoggedIn_D(true);
+       }; 
       // useEffect(()=> {
       //   if(socket) {
       //     socket.on(ss.root.REGISTER, data => {
@@ -20,7 +25,7 @@ const Registration = ({ on=true }) => {
       // }, []);
 
       const { register, handleSubmit, errors } = useForm(); // initialise the hook
-      const onChangeFile =(e) => setFile(e.target.files[0])
+      const onChangeFile =(e) => setFile(e.target.files[0]);
       const onSubmit = data => {
         // socket.emit(cs.root.REGISTER, data);
         console.log(data, file);
@@ -36,8 +41,7 @@ const Registration = ({ on=true }) => {
           .post(ENTRY_POINT + "/players", formData, headersConfig)
           .then(res => {
             console.log(res);
-            const loggin = () => {console.log('loggin baby')}
-            setResponseData({ response: true, loggin, data: res.data });
+            setResponseData({ response: true, data: res.data });
           })
           .catch(error => {
             setResponseData({ response: true, data: error.response.data });
@@ -45,9 +49,12 @@ const Registration = ({ on=true }) => {
       };
       let message = null;
       let loggin = null;
+      let goLogginDiv = <div className='goLoggin' onClick={ goLoggin }>GoLoggin</div>;
+
       if(responseData.response) {
         message = <div key='message' className={ responseData.data.successfulRegistration ? "response success" : "response fail"}>{responseData.data.message}</div>;
-        loggin =  responseData.data.successfulRegistration ? <div key='loggin' onClick={ responseData.loggin } className='logginButton'>Loggin</div> : null;
+        loggin =  responseData.data.successfulRegistration ? <div key='loggin' onClick={ loggedIn } className='logginButton'>Loggin</div> : null;
+        goLogginDiv = responseData.data.successfulRegistration ? null : goLogginDiv;
       }
   return (
     <section className={on ? "registration on" : "registration"}>
@@ -129,6 +136,7 @@ const Registration = ({ on=true }) => {
         <input className="submit" type="submit" />
       </form>
       <div className='responseContainer'>{ [message, loggin] } </div>
+      { goLogginDiv }
     </section>
   );
 };
