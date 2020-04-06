@@ -5,10 +5,10 @@ import { ENTRY_POINT } from "../../../models/onLine";
 import "./Static/loggin.scss";
 
 
-const Loggin = ({ on = true }) => {
+const Loggin = ({ on, setActiveWindows }) => {
 
   const [responseData, setResponseData] = useState({ response: false });
-
+  const goRegistration = ()=>setActiveWindows({registration:true, loggin: false});
   useEffect(() => {
 
   }, []);
@@ -55,6 +55,7 @@ const Loggin = ({ on = true }) => {
       {responseData.response && (
         <div className="response">{JSON.stringify(responseData.data)}</div>
       )}
+      <div className='goRegistration' onClick={ goRegistration }>GoRegistration</div>
     </section>
   );
 };
