@@ -46,7 +46,11 @@ const Registration = ({ on, setActiveWindows, setPlayerLoggedIn_D, setPlayerStat
             setResponseData({ response: true, data: res.data });
           })
           .catch(error => {
-            setResponseData({ response: true, data: error.response.data });
+            if(error.response) setResponseData({ response: true, data: error.response.data });
+            else {
+              console.log('internal error',error);
+              setResponseData({ response: true, data: {message:'Internal error server'} });
+            } 
           });
       };
       let message = null;
