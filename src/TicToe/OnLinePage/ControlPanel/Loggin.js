@@ -1,31 +1,41 @@
 import React, { useState, useEffect } from "react";
+import { batch } from 'react-redux';
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { ENTRY_POINT } from "../../../models/onLine";
 import "./Static/loggin.scss";
 
 
-const Loggin = ({ on, setActiveWindows }) => {
+const Loggin = ({ on, setActiveWindows, setPlayerLoggedIn_D, setPlayerStatus_D }) => {
 
   const [responseData, setResponseData] = useState({ response: false });
   const goRegistration = ()=>setActiveWindows({registration:true, loggin: false});
-  useEffect(() => {
-
-  }, []);
+  useEffect(() => {}, []);
 
   const { register, handleSubmit } = useForm(); // initialise the hook
+  const deactivateBoth = ()=>setActiveWindows({ registration: false, loggin: false });
   const onSubmit = data => {
     console.log(data);
     const { name, password } = data;
-    axios
-      .get(`${ ENTRY_POINT }/players/${ name }/${ password }`)
-      .then((res)=> {
-        console.log(res);
-        setResponseData({response: true, data: res.data})
-      })
-      .catch((error)=> {
-        console.log(error);
-      });
+    const encodedPassword = encodeURIComponent(password);
+    const encodedUri = `${ENTRY_POINT}/players/${name}/${encodedPassword}`;
+         axios.get(encodedUri)
+         .then(res=> {
+           if (res.data.authSuccess) {
+             setResponseData({ response: true, data: {successfulRegistration:true, message: 'Success..'} });
+             console.log("GetPlayer------", res.data);
+              deactivateBoth();
+              batch(()=>{
+               setPlayerLoggedIn_D(true, res.data.token);
+               setPlayerStatus_D(res.data.status);
+              });
+           } else {
+             setResponseData({ response: true, data: {message:res.data.message} });
+           }
+         })
+         .catch(err=>{
+           setResponseData({ response: true, data: {message:'Internal error server'} });
+         });
   };
 
   return (
