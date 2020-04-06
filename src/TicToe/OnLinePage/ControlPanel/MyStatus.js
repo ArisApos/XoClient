@@ -10,19 +10,15 @@ const MyStatus = ({myStatus}) => {
             <h3 className="title">LoggedInStatus</h3>
             <div className="statusItem person">
               <div className="name">{name}</div>
-              <img
-                src={ENTRY_POINT + avatar}
-                alt="avatar"
-                className="avatar"
-              />
+              <img src={ENTRY_POINT + avatar} alt="avatar" className="avatar" />
             </div>
-            <div className="statusItem points">{points}</div>
-            <div className="statusItem maxTime">{maxPlayers}</div>
-            <div className="statusItem maxPlayers">{maxTime}</div>
+            <div className="statusItem points">{`points: ${points}`}</div>
+            <div className="statusItem maxTime">{`maxTime: ${maxTime}`}</div>
+            <div className="statusItem maxPlayers">{`maxPlayers: ${maxPlayers}`}</div>
           </section>
         ); 
   }
-  return <div>NOT LOGGEDin, GO AWAY</div>  
+  return <div>NOT LOGGEDin, GO AWAY</div>;
 }
 
 export { MyStatus }; 
