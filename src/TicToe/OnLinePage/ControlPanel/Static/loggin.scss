@@ -56,4 +56,13 @@
     .response {
         word-break: break-all;
     }
+    .goRegistration {
+        display: flex;
+        justify-content: center;
+        background: #95252a;
+        border-radius: 2px;
+        padding: 4px;
+        margin-top: 20px;
+        cursor: pointer;
+    }
 }
