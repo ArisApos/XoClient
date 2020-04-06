@@ -7,13 +7,20 @@
 
     .statusItem {
         margin: 15px;
-
-        &.opponents {}
+        &.person {
+            background: yellow;
+            .name {
+                background: green;
+            }
+            .avatar {
+                background: grey;
+            }
+        }
 
         &.points {}
 
-        &.avaiablility {}
+        &.maxTime {}
 
-        &.playTime {}
+        &.maxPlayers {}
     }
 }
