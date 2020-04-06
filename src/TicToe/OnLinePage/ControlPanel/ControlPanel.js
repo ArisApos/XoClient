@@ -12,7 +12,7 @@ const ControlPanel = ({ socketData, ranks, player, setPlayerLoggedIn_D }) => {
     <section className="controlPanel">
       <Ranks ranks={ranks} />
       <section className="account">
-        <MyStatus mySatus={null} />
+        <MyStatus mySatus={player.loggedIn ? player.status : null} />
         <Registration
           on={!player.loggedIn && activeWindows.registration}
           setActiveWindows={setActiveWindows}
