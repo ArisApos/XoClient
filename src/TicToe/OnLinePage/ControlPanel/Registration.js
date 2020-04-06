@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { batch } from "react-redux";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { ENTRY_POINT } from "../../../models/onLine";
@@ -6,7 +7,7 @@ import "./Static/registration.scss";
 
 
 
-const Registration = ({ on, setActiveWindows, setPlayerLoggedIn_D }) => {
+const Registration = ({ on, setActiveWindows, setPlayerLoggedIn_D, setPlayerStatus_D }) => {
       const [responseData, setResponseData] = useState({response: false});
        const [file, setFile] = useState(null);
        const goLoggin = ()=>setActiveWindows({ registration: false, loggin: true });
@@ -14,6 +15,7 @@ const Registration = ({ on, setActiveWindows, setPlayerLoggedIn_D }) => {
        const loggedIn = ()=> {
          deactivateBoth();
          setPlayerLoggedIn_D(true);
+         setPlayerStatus_D(responseData.data.result);
        }; 
       // useEffect(()=> {
       //   if(socket) {
