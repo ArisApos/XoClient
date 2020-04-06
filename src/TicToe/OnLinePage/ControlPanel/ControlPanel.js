@@ -12,15 +12,15 @@ const ControlPanel = ({ socketData, ranks, player, setPlayerLoggedIn_D, setPlaye
     <section className="controlPanel">
       <Ranks ranks={ranks} />
       <section className="account">
-        <MyStatus myStatus={player.loggedIn ? player.status : null} />
+        <MyStatus myStatus={player.loggedStatus.loggedIn ? player.status : null} />
         <Registration
-          on={!player.loggedIn && activeWindows.registration}
+          on={!player.loggedStatus.loggedIn && activeWindows.registration}
           setActiveWindows={setActiveWindows}
           setPlayerLoggedIn_D={setPlayerLoggedIn_D}
           setPlayerStatus_D={setPlayerStatus_D}
         />
         <Loggin
-          on={!player.loggedIn && activeWindows.loggin}
+          on={!player.loggedStatus.loggedIn && activeWindows.loggin}
           setActiveWindows={setActiveWindows}
           setPlayerLoggedIn_D={setPlayerLoggedIn_D}
         />
