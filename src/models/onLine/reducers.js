@@ -19,7 +19,8 @@ const statusState = (state={}, action) => {
 }
 
 const player = ( state = { 
-    loggedIn: loggedInState(undefined, {}) 
+    loggedIn: loggedInState(undefined, {}),
+    status: statusState(undefined, {})
 }, action) => {
     switch (action.type) {
       case SET_PLAYER_LOGGED_IN:
