@@ -9,63 +9,60 @@ import "./Static/loggin.scss";
 const Loggin = ({ on, setActiveWindows, setPlayerLoggedIn_D, setPlayerStatus_D }) => {
 
   const [responseData, setResponseData] = useState({ response: false });
+  const [loader, setLoader] = useState(false);
   const goRegistration = ()=>setActiveWindows({registration:true, loggin: false});
   useEffect(() => {}, []);
 
-  const { register, handleSubmit } = useForm(); // initialise the hook
+  const { register, handleSubmit, reset } = useForm(); // initialise the hook
   const deactivateBoth = ()=>setActiveWindows({ registration: false, loggin: false });
   const onSubmit = data => {
     console.log(data);
+    setLoader(true);
     const { name, password } = data;
     const encodedPassword = encodeURIComponent(password);
     const encodedUri = `${ENTRY_POINT}/players/${name}/${encodedPassword}`;
-         axios.get(encodedUri)
-         .then(res=> {
-           if (res.data.authSuccess) {
-             setResponseData({ response: true, data: {successfulRegistration:true, message: 'Success..'} });
-             console.log("GetPlayer------", res.data);
-              deactivateBoth();
-              batch(()=>{
-               setPlayerLoggedIn_D(true, res.data.token);
-               setPlayerStatus_D(res.data.status);
-              });
-           } else {
-             setResponseData({ response: true, data: {message:res.data.message} });
+    axios.get(encodedUri)
+      .then(res=> {
+        if (res.data.authSuccess) {
+          setResponseData({ response: true, data: {authSuccess:res.data.authSuccess, message: res.data.message} });
+          console.log("GetPlayer-----success-", res.data);
+          deactivateBoth();
+          batch(()=>{
+            setPlayerStatus_D(res.data.status);
+            setPlayerLoggedIn_D(true, res.data.token);
+          });
+          reset();
+          setResponseData({ response: false });
+        } else {
+             console.log('problem');
+             setResponseData({ response: true, data: {authSuccess:res.data.authSuccess, message:res.data.message} });
            }
+           setLoader(false);
          })
          .catch(err=>{
-           setResponseData({ response: true, data: {message:'Internal error server'} });
+           console.log('ffffffffffffffff',err.message, err.body, err.data, err);
+           setResponseData({ response: true, data: {authSuccess: false, message:'Internal error server'} });
+           setLoader(false);
          });
+    
   };
-
   return (
     <section className={on ? "login on" : "login"}>
       <h3 className="title">Loggin</h3>
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <div className="inputField">
-          <input
-            name="name"
-            placeholder="name"
-            ref={register({
-              required: true
-            })}
-          />
+          <input name="name" placeholder="name" ref={register({required: true})}/>
         </div>
         <div className="inputField">
-          <input
-            name="password"
-            placeholder="password"
-            ref={register({
-              required: true
-            })}
-          />
+          <input name="password" placeholder="password" ref={register({ required: true })}/>
         </div>
         <input className="submit" type="submit" />
       </form>
-      {responseData.response && (
-        <div className="response">{JSON.stringify(responseData.data)}</div>
-      )}
       <div className='goRegistration' onClick={ goRegistration }>GoRegistration</div>
+      {responseData.response && !loader && (
+        <div className={ responseData.data.authSuccess? "response" : "response fail" }>{responseData.data.message}</div>
+      )}
+      {loader && <div className='loaderContainer'><div className='loader'></div></div>}
     </section>
   );
 };
