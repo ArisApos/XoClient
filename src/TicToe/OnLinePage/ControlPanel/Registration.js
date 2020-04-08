@@ -129,6 +129,8 @@ const Registration = ({ on, setActiveWindows, setPlayerLoggedIn_D, setPlayerStat
               3)at least 1 numeric character
               <br />
               4)at least one special character(!@#$%^&*)
+              <br />
+              5)at least 8 characters
             </span>
           )}
         </div>
@@ -160,16 +162,27 @@ const Registration = ({ on, setActiveWindows, setPlayerLoggedIn_D, setPlayerStat
         </div>
         <div className="inputField">
           <div className="avatarButton">
-            <label className="avatarLabel" > Upload Avatar 
-            <input className='customFileInput' type="file" name="avatar" onChange={ onChangeFile } />
+            <label className="avatarLabel">
+              {" "}
+              Upload Avatar
+              <input
+                className="customFileInput"
+                type="file"
+                name="avatar"
+                onChange={onChangeFile}
+              />
             </label>
           </div>
         </div>
         <input className="submit" type="submit" />
       </form>
-      { goLogginDiv }
-      <div className='responseContainer'>{ [message, loggin] } </div>
-      { loader && <div className='loaderContainer'><div className='loader'></div></div> }
+      {goLogginDiv}
+      <div className="responseContainer">{[message, loggin]} </div>
+      {loader && (
+        <div className="loaderContainer">
+          <div className="loader"></div>
+        </div>
+      )}
     </section>
   );
 };
