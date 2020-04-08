@@ -12,7 +12,12 @@ const ControlPanel = ({ socketData, ranks, player, setPlayerLoggedIn_D, setPlaye
     <section className="controlPanel">
       <Ranks ranks={ranks} />
       <section className="account">
-        <MyStatus myStatus={player.loggedStatus.loggedIn ? player.status : null} />
+        <MyStatus
+          myStatus={player.loggedStatus.loggedIn ? player.status : null}
+          setActiveWindows={setActiveWindows}
+          setPlayerLoggedIn_D={setPlayerLoggedIn_D}
+          setPlayerStatus_D={setPlayerStatus_D}
+        />
         <Registration
           on={!player.loggedStatus.loggedIn && activeWindows.registration}
           setActiveWindows={setActiveWindows}
@@ -23,6 +28,7 @@ const ControlPanel = ({ socketData, ranks, player, setPlayerLoggedIn_D, setPlaye
           on={!player.loggedStatus.loggedIn && activeWindows.loggin}
           setActiveWindows={setActiveWindows}
           setPlayerLoggedIn_D={setPlayerLoggedIn_D}
+          setPlayerStatus_D={setPlayerStatus_D}
         />
       </section>
       <LiveOverview LiveOverview={null} />
