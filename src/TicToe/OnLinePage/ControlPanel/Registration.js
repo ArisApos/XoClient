@@ -9,10 +9,12 @@ import "./Static/registration.scss";
 
 const Registration = ({ on, setActiveWindows, setPlayerLoggedIn_D, setPlayerStatus_D }) => {
       const [responseData, setResponseData] = useState({response: false});
+      const [loader, setLoader] = useState(false);
        const [file, setFile] = useState(null);
        const goLoggin = ()=>setActiveWindows({ registration: false, loggin: true });
        const deactivateBoth = ()=>setActiveWindows({ registration: false, loggin: false });
        const loggedIn = ()=> {
+         setLoader(true);
          setResponseData({ response: true, data: {successfulRegistration:true,message: 'wait authentication loggin...'} });
          const encodedPassword = encodeURIComponent(responseData.data.password);
          const encodedUri = `${ENTRY_POINT}/players/${responseData.data.name}/${encodedPassword}`;
@@ -26,12 +28,16 @@ const Registration = ({ on, setActiveWindows, setPlayerLoggedIn_D, setPlayerStat
                setPlayerLoggedIn_D(true, res.data.token);
                setPlayerStatus_D(res.data.status);
               });
+              reset();
+              setResponseData({ response: false });
            } else {
              setResponseData({ response: true, data: {message:res.data.message} });
            }
+           setLoader(false);
          })
          .catch(err=>{
            setResponseData({ response: true, data: {message:'Internal error server'} });
+           setLoader(false);
          });
        }; 
       // useEffect(()=> {
@@ -43,10 +49,11 @@ const Registration = ({ on, setActiveWindows, setPlayerLoggedIn_D, setPlayerStat
       //   }
       // }, []);
 
-      const { register, handleSubmit, errors } = useForm(); // initialise the hook
+      const { register, handleSubmit, errors, reset } = useForm(); // initialise the hook
       const onChangeFile =(e) => setFile(e.target.files[0]);
       const onSubmit = data => {
         // socket.emit(cs.root.REGISTER, data);
+        setLoader(true);
         console.log(data, file);
         const formData = new FormData();
         Object.keys(data).forEach(dataKey=>formData.append(dataKey, data[dataKey]))
@@ -61,6 +68,7 @@ const Registration = ({ on, setActiveWindows, setPlayerLoggedIn_D, setPlayerStat
           .then(res => {
             console.log(res);           
             setResponseData({ response: true, data: res.data });
+            setLoader(false);
           })
           .catch(error => {
             if(error.response) setResponseData({ response: true, data: error.response.data });
@@ -68,13 +76,14 @@ const Registration = ({ on, setActiveWindows, setPlayerLoggedIn_D, setPlayerStat
               console.log('internal error',error);
               setResponseData({ response: true, data: {message:'Internal error server'} });
             } 
+            setLoader(false);
           });
       };
       let message = null;
       let loggin = null;
       let goLogginDiv = <div className='goLoggin' onClick={ goLoggin }>GoLoggin</div>;
 
-      if(responseData.response) {
+      if(responseData.response && !loader) {
         message = <div key='message' className={ responseData.data.successfulRegistration ? "response success" : "response fail"}>{responseData.data.message}</div>;
         loggin =  responseData.data.successfulRegistration ? <div key='loggin' onClick={ loggedIn } className='logginButton'>Loggin</div> : null;
         goLogginDiv = responseData.data.successfulRegistration ? null : goLogginDiv;
@@ -158,8 +167,9 @@ const Registration = ({ on, setActiveWindows, setPlayerLoggedIn_D, setPlayerStat
         </div>
         <input className="submit" type="submit" />
       </form>
-      <div className='responseContainer'>{ [message, loggin] } </div>
       { goLogginDiv }
+      <div className='responseContainer'>{ [message, loggin] } </div>
+      { loader && <div className='loaderContainer'><div className='loader'></div></div> }
     </section>
   );
 };
