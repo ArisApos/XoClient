@@ -55,6 +55,13 @@
     }
     .response {
         word-break: break-all;
+        display: flex;
+        justify-content: center;
+        margin-top: 19px;
+        color: lime;
+        &.fail {
+            color: #95252a;
+        }
     }
     .goRegistration {
         display: flex;
@@ -64,5 +71,10 @@
         padding: 4px;
         margin-top: 20px;
         cursor: pointer;
+    }
+    .loaderContainer {
+        display: flex;
+        justify-content: center;
+        margin-top: 21px;
     }
 }
