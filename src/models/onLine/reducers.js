@@ -1,4 +1,4 @@
-import { SET_LOGGED_STATUS, SET_PLAYER_STATUS, LOAD_PLAYERS } from './actions';
+import { SET_LOGGED_STATUS, SET_PLAYER_STATUS, SET_PLAYERS } from './actions';
 
 const loggedStatusState = (state={loggedIn:false, token:null }, action) => {
     switch(action.type) {
@@ -20,7 +20,7 @@ const statusState = (state={}, action) => {
 
 const playersState = (state=[], action) => {
     switch(action.type) {
-        case LOAD_PLAYERS:
+        case SET_PLAYERS:
             return [...state, ...action.players];
         default:
             return state;
