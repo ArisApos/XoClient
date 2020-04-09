@@ -6,7 +6,7 @@ import { ENTRY_POINT } from "../../../models/onLine";
 import "./Static/loggin.scss";
 
 
-const Loggin = ({ on, setActiveWindows, setPlayerLoggedIn, setPlayerStatus }) => {
+const Loggin = ({ on, setActiveWindows, setPlayerLoggedStatus, setPlayerStatus }) => {
 
   const [responseData, setResponseData] = useState({ response: false });
   const [loader, setLoader] = useState(false);
@@ -38,7 +38,7 @@ const Loggin = ({ on, setActiveWindows, setPlayerLoggedIn, setPlayerStatus }) =>
           deactivateBoth();
           batch(()=>{
             setPlayerStatus(res.data.status);
-            setPlayerLoggedIn(true, res.data.token);
+            setPlayerLoggedStatus(true, res.data.token);
           });
           reset();
           setResponseData({ response: false });

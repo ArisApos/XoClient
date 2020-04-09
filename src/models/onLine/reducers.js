@@ -1,4 +1,4 @@
-import { SET_LOGGED_STATUS, SET_PLAYER_STATUS, SET_PLAYERS } from './actions';
+import { SET_LOGGED_STATUS, SET_PLAYER_STATUS, SET_PLAYERS } from './actionTypes';
 
 const loggedStatusState = (state={loggedIn:false, token:null }, action) => {
     switch(action.type) {

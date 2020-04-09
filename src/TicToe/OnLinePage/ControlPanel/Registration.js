@@ -7,7 +7,7 @@ import "./Static/registration.scss";
 
 
 
-const Registration = ({ on, setActiveWindows, setPlayerLoggedIn, setPlayerStatus }) => {
+const Registration = ({ on, setActiveWindows, setPlayerLoggedStatus, setPlayerStatus }) => {
       const [responseData, setResponseData] = useState({response: false});
       const [loader, setLoader] = useState(false);
        const [file, setFile] = useState(null);
@@ -25,7 +25,7 @@ const Registration = ({ on, setActiveWindows, setPlayerLoggedIn, setPlayerStatus
              console.log("GetPlayer------", res.data);
               deactivateBoth();
               batch(()=>{
-               setPlayerLoggedIn(true, res.data.token);
+               setPlayerLoggedStatus(true, res.data.token);
                setPlayerStatus(res.data.status);
               });
               reset();

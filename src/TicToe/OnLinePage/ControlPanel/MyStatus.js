@@ -2,10 +2,10 @@ import React, {} from 'react';
 import { ENTRY_POINT } from "../../../models/onLine";
 import './Static/myStatus.scss';
 
-const MyStatus = ({myStatus, setActiveWindows, setPlayerLoggedIn, setPlayerStatus}) => {
+const MyStatus = ({myStatus, setActiveWindows, setPlayerLoggedStatus, setPlayerStatus}) => {
     const loggedOut = ()=> {
       setActiveWindows({ registration: false, loggin: true });
-      setPlayerLoggedIn(false, null)
+      setPlayerLoggedStatus(false, null)
       setPlayerStatus(null);
     }
   if(myStatus) {

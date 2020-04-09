@@ -1,5 +1,10 @@
-const SET_LOGGED_STATUS = "SET_LOGGED_STATUS";
-const SET_PLAYER_STATUS = "SET_PLAYER_STATUS";
-const SET_PLAYERS = "SET_PLAYERS";
+import { actionCreator } from "../../libs/actionCreactor";
+import { SET_LOGGED_STATUS, SET_PLAYER_STATUS, SET_PLAYERS } from "./actionTypes";
 
-export { SET_LOGGED_STATUS, SET_PLAYER_STATUS, SET_PLAYERS };
+const setPlayerLoggedStatus = actionCreator(SET_LOGGED_STATUS, 'loggedIn', 'token');
+
+const setPlayerStatus = actionCreator(SET_PLAYER_STATUS, 'payload');
+
+const setPlayers = actionCreator(SET_PLAYERS, 'newPlayers');
+
+export { setPlayerLoggedStatus, setPlayerStatus, setPlayers };

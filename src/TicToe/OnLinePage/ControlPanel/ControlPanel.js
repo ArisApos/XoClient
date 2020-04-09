@@ -6,7 +6,7 @@ import './Static/controlPanel.scss';
 //actionFuntions
 
 //Component
-const ControlPanel = ({ socketData, ranks, player, setPlayerLoggedIn, setPlayerStatus, setPlayer }) => {
+const ControlPanel = ({ socketData, ranks, player, setPlayerLoggedStatus, setPlayerStatus, setPlayer }) => {
   const [ activeWindows, setActiveWindows ] = useState({registration:true,loggin:false});
   return (
     <section className="controlPanel">
@@ -15,19 +15,19 @@ const ControlPanel = ({ socketData, ranks, player, setPlayerLoggedIn, setPlayerS
         <MyStatus
           myStatus={player.loggedStatus.loggedIn ? player.status : null}
           setActiveWindows={setActiveWindows}
-          setPlayerLoggedIn={setPlayerLoggedIn}
+          setPlayerLoggedStatus={setPlayerLoggedStatus}
           setPlayerStatus={setPlayerStatus}
         />
         <Registration
           on={!player.loggedStatus.loggedIn && activeWindows.registration}
           setActiveWindows={setActiveWindows}
-          setPlayerLoggedIn={setPlayerLoggedIn}
+          setPlayerLoggedStatus={setPlayerLoggedStatus}
           setPlayerStatus={setPlayerStatus}
         />
         <Loggin
           on={!player.loggedStatus.loggedIn && activeWindows.loggin}
           setActiveWindows={ setActiveWindows }
-          setPlayerLoggedIn={ setPlayerLoggedIn }
+          setPlayerLoggedStatus={ setPlayerLoggedStatus }
           setPlayerStatus={ setPlayerStatus }
           setPlayer={ setPlayer }
         />
