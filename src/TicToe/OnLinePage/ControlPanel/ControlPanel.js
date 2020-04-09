@@ -6,7 +6,7 @@ import './Static/controlPanel.scss';
 //actionFuntions
 
 //Component
-const ControlPanel = ({ socketData, ranks, player, setPlayerLoggedIn_D, setPlayerStatus_D, setPlayers_D }) => {
+const ControlPanel = ({ socketData, ranks, player, setPlayerLoggedIn, setPlayerStatus, setPlayer }) => {
   const [ activeWindows, setActiveWindows ] = useState({registration:true,loggin:false});
   return (
     <section className="controlPanel">
@@ -15,21 +15,21 @@ const ControlPanel = ({ socketData, ranks, player, setPlayerLoggedIn_D, setPlaye
         <MyStatus
           myStatus={player.loggedStatus.loggedIn ? player.status : null}
           setActiveWindows={setActiveWindows}
-          setPlayerLoggedIn_D={setPlayerLoggedIn_D}
-          setPlayerStatus_D={setPlayerStatus_D}
+          setPlayerLoggedIn={setPlayerLoggedIn}
+          setPlayerStatus={setPlayerStatus}
         />
         <Registration
           on={!player.loggedStatus.loggedIn && activeWindows.registration}
           setActiveWindows={setActiveWindows}
-          setPlayerLoggedIn_D={setPlayerLoggedIn_D}
-          setPlayerStatus_D={setPlayerStatus_D}
+          setPlayerLoggedIn={setPlayerLoggedIn}
+          setPlayerStatus={setPlayerStatus}
         />
         <Loggin
           on={!player.loggedStatus.loggedIn && activeWindows.loggin}
           setActiveWindows={ setActiveWindows }
-          setPlayerLoggedIn_D={ setPlayerLoggedIn_D }
-          setPlayerStatus_D={ setPlayerStatus_D }
-          setPlayers_D={ setPlayers_D }
+          setPlayerLoggedIn={ setPlayerLoggedIn }
+          setPlayerStatus={ setPlayerStatus }
+          setPlayer={ setPlayer }
         />
       </section>
       <LiveOverview LiveOverview={null} />

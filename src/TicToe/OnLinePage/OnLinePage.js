@@ -1,13 +1,13 @@
 import React, { useState, useEffect  } from "react";
 import { ControlPanelContainer } from "./ControlPanel";
-import { setPlayerLoggedIn_A, setPlayerStatus_A, setPlayers_A } from "../../models/onLine";
+import { setPlayerLoggedIn, setPlayerStatus, setPlayers } from "../../models/onLine";
 import { ss, cs, ENTRY_POINT } from "../../models/onLine";
 import { connect } from "react-redux";
 import socketIOClient from "socket.io-client";
 import './Static/onlinePage.scss';
 
 //Component
-const OnLinePage = ({ player, setPlayerLoggedIn_D, setPlayerStatus_D, setPlayers_D }) => {
+const OnLinePage = ({ player, setPlayerLoggedIn, setPlayerStatus, setPlayer }) => {
   const [socketData, setSocketData] = useState({ ss, cs, socket:null, connected: false, id: null });
   const [onlinePlayers, setOnlinePlayers] = useState(null);
   useEffect(() => {
@@ -31,9 +31,9 @@ const OnLinePage = ({ player, setPlayerLoggedIn_D, setPlayerStatus_D, setPlayers
       <ControlPanelContainer
         socketData={socketData}
         player={player}
-        setPlayerLoggedIn_D={setPlayerLoggedIn_D}
-        setPlayerStatus_D={setPlayerStatus_D}
-        setPlayers_D={setPlayers_D}
+        setPlayerLoggedIn={setPlayerLoggedIn}
+        setPlayerStatus={setPlayerStatus}
+        setPlayer={setPlayer}
       />
       {socketData.connected && (
         <div className="connectionIndecation">{socketData.id}</div>
@@ -48,15 +48,8 @@ const OnLinePage = ({ player, setPlayerLoggedIn_D, setPlayerStatus_D, setPlayers
 const stateOnLinePage = ({ player }) => {
   return { player };
 };
-
-const dispatchOnLinePage = (dispatch) => ({
-  setPlayerLoggedIn_D: (loggedIn, token)=>{ dispatch(setPlayerLoggedIn_A(loggedIn, token)); },
-  setPlayerStatus_D: (payload)=>{ dispatch(setPlayerStatus_A(payload)); },
-  setPlayers_D: (players)=>{ dispatch(setPlayers_A(players)); }
-});
-
 const OnLinePageContainer = connect(
   stateOnLinePage,
-  dispatchOnLinePage
+  {setPlayerLoggedIn, setPlayerStatus, setPlayers}
 )(OnLinePage);
 export { OnLinePageContainer };
