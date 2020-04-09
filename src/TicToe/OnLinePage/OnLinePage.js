@@ -7,7 +7,7 @@ import socketIOClient from "socket.io-client";
 import './Static/onlinePage.scss';
 
 //Component
-const OnLinePage = ({ player, setPlayerLoggedIn_D, setPlayerStatus_D, loadPlayers_D }) => {
+const OnLinePage = ({ player, setPlayerLoggedIn_D, setPlayerStatus_D, setPlayers_D }) => {
   const [socketData, setSocketData] = useState({ ss, cs, socket:null, connected: false, id: null });
   const [onlinePlayers, setOnlinePlayers] = useState(null);
   useEffect(() => {
@@ -33,7 +33,7 @@ const OnLinePage = ({ player, setPlayerLoggedIn_D, setPlayerStatus_D, loadPlayer
         player={player}
         setPlayerLoggedIn_D={setPlayerLoggedIn_D}
         setPlayerStatus_D={setPlayerStatus_D}
-        loadPlayers_D={loadPlayers_D}
+        setPlayers_D={setPlayers_D}
       />
       {socketData.connected && (
         <div className="connectionIndecation">{socketData.id}</div>
@@ -52,7 +52,7 @@ const stateOnLinePage = ({ player }) => {
 const dispatchOnLinePage = (dispatch) => ({
   setPlayerLoggedIn_D: (loggedIn, token)=>{ dispatch(setPlayerLoggedIn_A(loggedIn, token)); },
   setPlayerStatus_D: (payload)=>{ dispatch(setPlayerStatus_A(payload)); },
-  loadPlayers_D: (players)=>{ dispatch(setPlayers_A(players)); }
+  setPlayers_D: (players)=>{ dispatch(setPlayers_A(players)); }
 });
 
 const OnLinePageContainer = connect(
