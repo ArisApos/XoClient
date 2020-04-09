@@ -15,6 +15,15 @@ const Loggin = ({ on, setActiveWindows, setPlayerLoggedIn_D, setPlayerStatus_D }
 
   const { register, handleSubmit, reset } = useForm(); // initialise the hook
   const deactivateBoth = ()=>setActiveWindows({ registration: false, loggin: false });
+  const getAllPlayers = (tokken) => {
+    axios.get(ENTRY_POINT+'/players' , { headers: { Authorization:`Bearer ${tokken}`} })
+    .then(res=> {
+      console.log('aaaallllll',res.data)
+    })
+    .catch(err=>{
+      console.log('errrrr',err);
+    })
+  }
   const onSubmit = data => {
     console.log(data);
     setLoader(true);
