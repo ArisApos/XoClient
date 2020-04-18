@@ -1,3 +1,1 @@
-import ServerNotifications from './ServerNotifications';
-
-export  {ServerNotifications }
+export  { ServerNotification } from './ServerNotification';

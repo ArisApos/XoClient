@@ -1,16 +1,16 @@
 import React from 'react';
 import { connect } from "react-redux";
 
-let ServerNotifications = ({ serverNotifications:{ requesting, message, success } }) => {
+let ServerNotification = ({ serverNotification:{ requesting, message, success } }) => {
     const loaderContent = requesting ? <div className='loaderContainer'><div className='loader'></div></div> : null;
     const messageContent = message && !requesting ? <div className={ success? "response" : "response fail" }>{ message }</div> : null;   
     return { loaderContent, messageContent, success };
 };
 
 // ReduxState&Dispatch
-const stateServerNotifications = ({ serverNotifications }) => {
-  return { serverNotifications };
+const stateServerNotification = ({ serverNotification }) => {
+  return { serverNotification };
 };
 
-ServerNotifications = connect(stateServerNotifications)(ServerNotifications);
-export { ServerNotifications };
+ServerNotification = connect(stateServerNotification)(ServerNotification);
+export { ServerNotification };
