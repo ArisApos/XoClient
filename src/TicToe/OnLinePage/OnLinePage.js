@@ -45,7 +45,7 @@ const OnLinePage = ({ player, setPlayerLoggedStatus, setPlayerStatus, setPlayer 
 };
 
 //ReduxState&Dispatch
-const stateOnLinePage = ({ player }) => {
+const stateOnLinePage = ({ online:{ player } }) => {
   return { player };
 };
 const OnLinePageContainer = connect(

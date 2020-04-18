@@ -6,9 +6,9 @@ import * as serviceWorker from './serviceWorker';
 import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import { games } from "./models/tic-tac-toe/";
-import { player } from "./models/onLine/";
+import { online } from "./models/onLine/";
 
-const fullReducer = combineReducers( { player, games }),
+const fullReducer = combineReducers( { online, games }),
       gameStore = createStore(fullReducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )

@@ -4,4 +4,4 @@ export { SET_LOGGED_STATUS, SET_PLAYER_STATUS, SET_PLAYERS } from "./actionTypes
 
 export { setPlayerLoggedStatus, setPlayerStatus, setPlayers } from "./actions";
 
-export { player } from './reducers';
+export { online } from './reducers';
