@@ -1,22 +1,25 @@
 import { GET_PLAYER_REQUESTED } from './actionTypes';
+import { setServerNotificatons,setPlayerStatus, setPlayerLoggedStatus, setPlayers } from './actions';
 import { call, put, takeLatest, all } from 'redux-saga/effects';
 import { axiosApi } from './axiosApi';
 
 // Worker, Wathcer getPlayer saga
 function* getPlayer(action) {
-    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@getPlayer', action);
     const { name, password, endpoint, method } = action;
     const data = { name, password };
-    console.log('action llllllllllllllllll',data, endpoint, method)
-    try {
-      yield put({type:'SUCCESSSSSSSS', data, name, password, endpoint, method});    
-    //   const player = yield call(axiosApi({ data, method, endpoint }));
+    console.log(action)
+    yield put(setServerNotificatons(true))
+    try { 
+      const  {message, authSuccess, token, status} = yield call(axiosApi, {data, method, endpoint });
+      yield put(setServerNotificatons(false, message, authSuccess ));
+      yield put(setPlayerLoggedStatus(true, token));
+      yield put(setPlayerStatus(status));
     }catch(err) {
-      yield put({type:'FAILLLLLLL'});
+    const { message } = err;
+    yield put(setServerNotificatons(false, message, false ));
     }
 }
-function* watchGetPlayer(action) {
-    console.log('watchGetPlayer', action);
+function* watchGetPlayer() {
     yield takeLatest( GET_PLAYER_REQUESTED, getPlayer);
 }
 

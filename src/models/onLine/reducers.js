@@ -33,8 +33,8 @@ const serverNotification = ( state={ requesting: null, message: null, success: n
         case SET_SERVER_NOTIFICATION:
             const { requesting } = action;
             let {  message, success } = action;
-            message = message ? message : state.message;
-            success = success ? success : state.success;
+            message = message !==null ? message : state.message;
+            success = success !== null ? success : state.success;
             return { requesting, message, success };
         default:
             return state;
