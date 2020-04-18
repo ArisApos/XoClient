@@ -5,6 +5,6 @@ const setPlayerLoggedStatus = actionCreator(SET_LOGGED_STATUS, 'loggedIn', 'toke
 
 const setPlayerStatus = actionCreator(SET_PLAYER_STATUS, 'payload');
 
-const setPlayers = actionCreator(SET_PLAYERS, 'newPlayers');
+const setPlayers = actionCreator(SET_PLAYERS, 'players');
 
 export { setPlayerLoggedStatus, setPlayerStatus, setPlayers };
