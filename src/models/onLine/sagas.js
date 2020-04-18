@@ -11,9 +11,11 @@ function* getPlayer(action) {
     yield put(setServerNotificatons(true))
     try { 
       const  {message, authSuccess, token, status} = yield call(axiosApi, {data, method, endpoint });
-      yield put(setServerNotificatons(false, message, authSuccess ));
-      yield put(setPlayerLoggedStatus(true, token));
-      yield put(setPlayerStatus(status));
+      yield all([
+          put(setServerNotificatons(false, message, authSuccess )),
+          put(setPlayerLoggedStatus(true, token)),
+          put(setPlayerStatus(status))
+      ]);
     }catch(err) {
     const { message } = err;
     yield put(setServerNotificatons(false, message, false ));
