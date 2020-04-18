@@ -31,9 +31,10 @@ const players = (state=[], action) => {
 const serverNotification = ( state={ requesting: null, message: null, success: null}, action) => {
     switch(action.type) {
         case SET_SERVER_NOTIFICATION:
-            const requesting = action.requesting;
-            const message = action.message ? action.message : state.message;
-            const success = action.success ? action.success : state.success;
+            const { requesting } = action;
+            let {  message, success } = action;
+            message = message ? message : state.message;
+            success = success ? success : state.success;
             return { requesting, message, success };
         default:
             return state;
