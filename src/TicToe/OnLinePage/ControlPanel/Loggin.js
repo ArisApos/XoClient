@@ -3,6 +3,7 @@ import { batch } from 'react-redux';
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { ENTRY_POINT } from "../../../models/onLine";
+import { ServerNotifications } from "../Common"
 import "./Static/loggin.scss";
 
 
@@ -15,7 +16,7 @@ const Loggin = ({ on, setActiveWindows, setPlayerLoggedStatus, setPlayerStatus }
 
   const { register, handleSubmit, reset } = useForm(); // initialise the hook
   const deactivateBoth = ()=>setActiveWindows({ registration: false, loggin: false });
-  const getAllPlayers = (tokken) => {
+  const getAllPlayers = (tokken) =>
     axios.get(ENTRY_POINT+'/players' , { headers: { Authorization:`Bearer ${tokken}`} })
     .then(res=> {
       console.log('aaaallllll',res.data)
@@ -23,7 +24,6 @@ const Loggin = ({ on, setActiveWindows, setPlayerLoggedStatus, setPlayerStatus }
     .catch(err=>{
       console.log('errrrr',err);
     })
-  }
   const onSubmit = data => {
     console.log(data);
     setLoader(true);
@@ -35,6 +35,7 @@ const Loggin = ({ on, setActiveWindows, setPlayerLoggedStatus, setPlayerStatus }
         if (res.data.authSuccess) {
           setResponseData({ response: true, data: {authSuccess:res.data.authSuccess, message: res.data.message} });
           console.log("GetPlayer-----success-", res.data);
+          console.log("aaaallll players", getAllPlayers(res.data.token));
           deactivateBoth();
           batch(()=>{
             setPlayerStatus(res.data.status);
