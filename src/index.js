@@ -3,16 +3,22 @@ import ReactDOM from 'react-dom';
 import './static/main.scss';
 import { HomePageContainer } from './TicToe/';
 import * as serviceWorker from './serviceWorker';
-import { createStore, combineReducers } from 'redux'
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import { games } from "./models/tic-tac-toe/";
-import { online } from "./models/onLine/";
+import { online, rootSaga } from "./models/onLine/";
+import createSagaMiddleware from "redux-saga";
 
-const fullReducer = combineReducers( { online, games }),
-      gameStore = createStore(fullReducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    )
+const sagaMiddleware = createSagaMiddleware();
 
+const fullReducer = combineReducers({ online, games }),
+  gameStore = createStore(
+    fullReducer,
+    compose(
+     applyMiddleware(sagaMiddleware),
+     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+  );
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={gameStore}>
