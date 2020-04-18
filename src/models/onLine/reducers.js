@@ -34,11 +34,12 @@ const player = ( state = {
 }, action) => {
     switch (action.type) {
       case SET_LOGGED_STATUS:
-          let players = [];
-          if(action.loggedIn) players = action.players;
-        return { ...state, players, loggedStatus: loggedStatusState(state.loggedIn, action) };
+        return { ...state, loggedStatus: loggedStatusState(state.loggedIn, action) };
       case SET_PLAYER_STATUS:
         return { ...state, status: statusState(state.status, action) };
+      case SET_PLAYERS:
+          const players = action.players;
+        return { ...state, players };
       default:
         return state;
     }
