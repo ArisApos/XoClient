@@ -3,7 +3,7 @@ import { batch } from 'react-redux';
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { ENTRY_POINT } from "../../../models/onLine";
-import { ServerNotifications } from "../Common"
+import { ServerNotification } from "../Common";
 import "./Static/loggin.scss";
 
 
