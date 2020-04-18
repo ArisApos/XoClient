@@ -1,6 +1,7 @@
-import { SET_LOGGED_STATUS, SET_PLAYER_STATUS, SET_PLAYERS } from './actionTypes';
+import { combineReducers } from 'redux';
+import { SET_LOGGED_STATUS, SET_PLAYER_STATUS, SET_PLAYERS, SET_SERVER_NOTIFICATION } from './actionTypes';
 
-const loggedStatusState = (state={loggedIn:false, token:null }, action) => {
+const loggedStatus = (state={loggedIn:false, token:null }, action) => {
     switch(action.type) {
         case SET_LOGGED_STATUS:
             return {...state, loggedIn:action.loggedIn, token: action.token};
@@ -9,7 +10,7 @@ const loggedStatusState = (state={loggedIn:false, token:null }, action) => {
     }
 }
 
-const statusState = (state={}, action) => {
+const status = (state={}, action) => {
     switch(action.type) {
         case SET_PLAYER_STATUS:
             return {...state, ...action.payload };
@@ -18,7 +19,7 @@ const statusState = (state={}, action) => {
     }
 }
 
-const playersState = (state=[], action) => {
+const players = (state=[], action) => {
     switch(action.type) {
         case SET_PLAYERS:
             return [...state, ...action.players];
@@ -27,22 +28,33 @@ const playersState = (state=[], action) => {
     }
 }
 
-const player = ( state = { 
-    loggedStatus: loggedStatusState(undefined, {}),
-    status: statusState(undefined, {}),
-    players: playersState(undefined, {})
-}, action) => {
-    switch (action.type) {
-      case SET_LOGGED_STATUS:
-        return { ...state, loggedStatus: loggedStatusState(state.loggedIn, action) };
-      case SET_PLAYER_STATUS:
-        return { ...state, status: statusState(state.status, action) };
-      case SET_PLAYERS:
-          const players = action.players;
-        return { ...state, players };
-      default:
-        return state;
+const serverNotification = ( state={ requesting: null, message: null, success: null}, action) => {
+    switch(action.type) {
+        case SET_SERVER_NOTIFICATION:
+            const requesting = action.requesting;
+            const message = action.message ? action.message : state.message;
+            const success = action.success ? action.success : state.success;
+            return { requesting, message, success };
+        default:
+            return state;
     }
 }
 
-export { player };
+// Old way
+// const player = ( state = { 
+//     loggedStatus: loggedStatusState(undefined, {}),
+//     status: statusState(undefined, {})
+// }, action) => {
+//     switch (action.type) {
+//       case SET_LOGGED_STATUS:
+//         return { ...state, loggedStatus: loggedStatusState(state.loggedIn, action) };
+//       case SET_PLAYER_STATUS:
+//         return { ...state, status: statusState(state.status, action) };
+//       default:
+//         return state;
+//     }
+// }
+
+const player = combineReducers({loggedStatus, status});
+const online = combineReducers({ player, players, serverNotification });
+export { online };
