@@ -3,4 +3,4 @@ export { MyStatus } from './MyStatus';
 export { Registration } from './Registration';
 export { Loggin } from './Loggin';
 export { LiveOverview } from './LiveOverview';
-export { ControlPanelContainer } from './ControlPanel'
+export { ControlPanel } from './ControlPanel'
