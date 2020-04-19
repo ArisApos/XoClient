@@ -8,6 +8,8 @@ import "./Static/loggin.scss";
 
 
 const Loggin = ({ on, setActiveWindows, setPlayerLoggedStatus, setPlayerStatus }) => {
+  const { Loader, Message, success } = ServerNotification();
+
   const [responseData, setResponseData] = useState({ response: false });
   const [loader, setLoader] = useState(false);
   const goRegistration = ()=>setActiveWindows({registration:true, loggin: false});
@@ -56,7 +58,6 @@ const Loggin = ({ on, setActiveWindows, setPlayerLoggedStatus, setPlayerStatus }
   };
   return (
     <section className={on ? "login on" : "login"}>
-      <ServerNotification />
       <h3 className="title">Loggin</h3>
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <div className="inputField">
@@ -68,10 +69,7 @@ const Loggin = ({ on, setActiveWindows, setPlayerLoggedStatus, setPlayerStatus }
         <input className="submit" type="submit" />
       </form>
       <div className='goRegistration' onClick={ goRegistration }>GoRegistration</div>
-      {responseData.response && !loader && (
-        <div className={ responseData.data.authSuccess? "response" : "response fail" }>{responseData.data.message}</div>
-      )}
-      {loader && <div className='loaderContainer'><div className='loader'></div></div>}
+      { [Message, Loader] }
     </section>
   );
 };
