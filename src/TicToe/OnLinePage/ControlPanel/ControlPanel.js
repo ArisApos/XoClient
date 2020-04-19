@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Ranks, MyStatus, Registration, Loggin, LiveOverview } from './';
-import { connect } from 'react-redux';
 import './Static/controlPanel.scss';
 
 //actionFuntions
 
 //Component
-const ControlPanel = ({ socketData, ranks, player, setPlayerLoggedStatus, setPlayerStatus, setPlayer }) => {
+const ControlPanel = ({ socketData, ranks, player, getPlayerRequested, postPlayerRequested, setPlayerLoggedStatus, setPlayerStatus }) => {
   const [ activeWindows, setActiveWindows ] = useState({registration:true,loggin:false});
   return (
     <section className="controlPanel">
@@ -15,21 +14,18 @@ const ControlPanel = ({ socketData, ranks, player, setPlayerLoggedStatus, setPla
         <MyStatus
           myStatus={player.loggedStatus.loggedIn ? player.status : null}
           setActiveWindows={setActiveWindows}
-          setPlayerLoggedStatus={setPlayerLoggedStatus}
           setPlayerStatus={setPlayerStatus}
+          setPlayerLoggedStatus={setPlayerLoggedStatus}
         />
         <Registration
           on={!player.loggedStatus.loggedIn && activeWindows.registration}
-          setActiveWindows={setActiveWindows}
-          setPlayerLoggedStatus={setPlayerLoggedStatus}
-          setPlayerStatus={setPlayerStatus}
+          setActiveWindows={ setActiveWindows }
+          postPlayerRequested={ postPlayerRequested }
         />
         <Loggin
           on={!player.loggedStatus.loggedIn && activeWindows.loggin}
           setActiveWindows={ setActiveWindows }
-          setPlayerLoggedStatus={ setPlayerLoggedStatus }
-          setPlayerStatus={ setPlayerStatus }
-          setPlayer={ setPlayer }
+          getPlayerRequested={ getPlayerRequested }
         />
       </section>
       <LiveOverview LiveOverview={null} />
@@ -37,14 +33,4 @@ const ControlPanel = ({ socketData, ranks, player, setPlayerLoggedStatus, setPla
   );
 };
 
-//ReduxState&Dispatch
-const stateControlPanel = ({ games }) => {
-  return { };
-};
-
-const dispatchControlPanel = dispatch => ({});
-const ControlPanelContainer = connect(
-  stateControlPanel,
-  dispatchControlPanel
-)(ControlPanel);
-export { ControlPanelContainer };
+export { ControlPanel };
