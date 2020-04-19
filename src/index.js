@@ -19,8 +19,6 @@ const gameStore = createStore(
   );
 sagaMiddleware.run(rootSaga);
 
-gameStore.dispatch({ type: "GET_PLAYER_REQUESTED", name: 'aris', password: '123', endpoint:'players', method:'get' });
-
 ReactDOM.render(
   <Provider store={gameStore}>
     <HomePageContainer />
