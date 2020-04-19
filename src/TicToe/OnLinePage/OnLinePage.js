@@ -1,13 +1,13 @@
 import React, { useState, useEffect  } from "react";
-import { ControlPanelContainer } from "./ControlPanel";
-import { setPlayerLoggedStatus, setPlayerStatus } from "../../models/onLine";
+import { ControlPanel } from "./ControlPanel";
+import { getPlayerRequested, postPlayerRequested, setPlayerStatus, setPlayerLoggedStatus } from "../../models/onLine";
 import { ss, cs, ENTRY_POINT } from "../../models/onLine";
 import { connect } from "react-redux";
 import socketIOClient from "socket.io-client";
 import './Static/onlinePage.scss';
 
 //Component
-const OnLinePage = ({ player, setPlayerLoggedStatus, setPlayerStatus, setPlayer }) => {
+const OnLinePage = ({ player, getPlayerRequested, postPlayerRequested,  setPlayerStatus, setPlayerLoggedStatus }) => {
   const [socketData, setSocketData] = useState({ ss, cs, socket:null, connected: false, id: null });
   const [onlinePlayers, setOnlinePlayers] = useState(null);
   useEffect(() => {
@@ -28,12 +28,13 @@ const OnLinePage = ({ player, setPlayerLoggedStatus, setPlayerStatus, setPlayer 
 
   return (
     <section className="onLinePage">
-      <ControlPanelContainer
+      <ControlPanel
         socketData={socketData}
         player={player}
-        setPlayerLoggedStatus={setPlayerLoggedStatus}
+        getPlayerRequested={getPlayerRequested}
+        postPlayerRequested={postPlayerRequested}
         setPlayerStatus={setPlayerStatus}
-        setPlayer={setPlayer}
+        setPlayerLoggedStatus={setPlayerLoggedStatus}
       />
       {socketData.connected && (
         <div className="connectionIndecation">{socketData.id}</div>
@@ -50,6 +51,6 @@ const stateOnLinePage = ({ online:{ player } }) => {
 };
 const OnLinePageContainer = connect(
   stateOnLinePage,
-  {setPlayerLoggedStatus, setPlayerStatus }
+  {  setPlayerStatus, setPlayerLoggedStatus, getPlayerRequested, postPlayerRequested }
 )(OnLinePage);
 export { OnLinePageContainer };
