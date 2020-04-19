@@ -8,12 +8,10 @@ import "./Static/loggin.scss";
 
 
 const Loggin = ({ on, setActiveWindows, setPlayerLoggedStatus, setPlayerStatus }) => {
-
   const [responseData, setResponseData] = useState({ response: false });
   const [loader, setLoader] = useState(false);
   const goRegistration = ()=>setActiveWindows({registration:true, loggin: false});
   useEffect(() => {}, []);
-
   const { register, handleSubmit, reset } = useForm(); // initialise the hook
   const deactivateBoth = ()=>setActiveWindows({ registration: false, loggin: false });
   const getAllPlayers = (tokken) =>
@@ -58,6 +56,7 @@ const Loggin = ({ on, setActiveWindows, setPlayerLoggedStatus, setPlayerStatus }
   };
   return (
     <section className={on ? "login on" : "login"}>
+      <ServerNotification />
       <h3 className="title">Loggin</h3>
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <div className="inputField">

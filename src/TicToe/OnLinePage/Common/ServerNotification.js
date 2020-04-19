@@ -1,16 +1,12 @@
 import React from 'react';
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 
-let ServerNotification = ({ requesting, message, success }) => {
-    const loaderContent = requesting ? <div className='loaderContainer'><div className='loader'></div></div> : null;
-    const messageContent = message && !requesting ? <div className={ success? "response" : "response fail" }>{ message }</div> : null;   
-    return { loaderContent, messageContent, success };
+const ServerNotification = () => {
+  const { requesting, message, success } = useSelector(state=>state.online.serverNotification);
+  console.log('////////////=>ServerNotification', requesting, message, success);
+    const loaderContent = requesting ? <div key='loader' className='loaderContainer'><div className='loader'></div></div> : null;
+    const messageContent = message && !requesting ? <div key='message' className={ success? "response" : "response fail" }>{ message }</div> : null;   
+    return <> {[loaderContent, messageContent]} </>
 };
 
-// ReduxState&Dispatch
-const stateServerNotification = ({ online: {serverNotification} }) => {
-  return { ...serverNotification };
-};
-
-ServerNotification = connect(stateServerNotification)(ServerNotification);
 export { ServerNotification };
