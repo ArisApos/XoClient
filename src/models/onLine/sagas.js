@@ -5,14 +5,14 @@ import { axiosApi } from './axiosApi';
 
 // Worker, Wathcer getPlayer saga
 function* getPlayer(action) {
-    const { name, password, endpoint, method } = action;
+    const { name, password, endpoint, method, userLocation } = action;
     const data = { name, password };
     console.log(action)
     yield put(setServerNotificatons(true))
     try { 
       const  {message, authSuccess, token, status} = yield call(axiosApi, {data, method, endpoint });
       yield all([
-          put(setServerNotificatons(false, message, authSuccess )),
+          put(setServerNotificatons(false, message, authSuccess, userLocation )),
           put(setPlayerLoggedStatus(true, token)),
           put(setPlayerStatus(status))
       ]);
