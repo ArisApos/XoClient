@@ -6,13 +6,13 @@ import "./Static/loggin.scss";
 
 const Loggin = ({ on, setActiveWindows, getPlayerRequested }) => {
   const [userLocationHere, setUserLocationHere] = useState(true);
-  const { Loader, Message, success } = ServerNotification();
+  const { Loader, Message, success, identifier } = false? ServerNotification() : { Loader:null, Message:null, success:null };
   const { register, handleSubmit, reset } = useForm();
   const goRegistration = ()=>setActiveWindows({registration:true, loggin: false});
   // Go player status
   const deactivateBoth = ()=>setActiveWindows({ registration: false, loggin: false });
   // Go to player status and reset form
-  if(success && userLocationHere){
+  if(success && identifier && identifier.location === 'registration'){
     setUserLocationHere(false);
     setTimeout(()=> { reset(); deactivateBoth();},1000);
   } 
@@ -30,8 +30,8 @@ const Loggin = ({ on, setActiveWindows, getPlayerRequested }) => {
     const { name, password } = data;
     const endpoint = 'players';
     const method = 'get'
-    const userLocation = 'loggin';
-    getPlayerRequested(name,password,endpoint,method,userLocation);
+    const identifier = {location:'loggin'};
+    getPlayerRequested(name,password,endpoint,method,identifier);
   };
   return (
     <section className={on ? "login on" : "login"}>
