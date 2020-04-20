@@ -1,44 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { batch } from "react-redux";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
-import { ENTRY_POINT } from "../../../models/onLine";
+import { ServerNotification } from "../Common";
 import "./Static/registration.scss";
 
-
-
-const Registration = ({ on, setActiveWindows, setPlayerLoggedStatus, setPlayerStatus }) => {
-      const [responseData, setResponseData] = useState({response: false});
-      const [loader, setLoader] = useState(false);
-       const [file, setFile] = useState(null);
+const Registration = ({ on, setActiveWindows, postPlayerRequested, getPlayerRequested }) => {
+       const { register, handleSubmit, errors, reset } = useForm();
+       const { Loader, Message, success, identifier } = true ? ServerNotification() : { Loader:null, Message:null, success:null, identifier:null }
+       const [requestedData, setRequestedData] = useState({file:null, name:null, password: null});
        const goLoggin = ()=>setActiveWindows({ registration: false, loggin: true });
        const deactivateBoth = ()=>setActiveWindows({ registration: false, loggin: false });
+      //  if (identifier && identifier.loggedIn) deactivateBoth(); 
        const loggedIn = ()=> {
-         setLoader(true);
-         setResponseData({ response: true, data: {successfulRegistration:true,message: 'wait authentication loggin...'} });
-         const encodedPassword = encodeURIComponent(responseData.data.password);
-         const encodedUri = `${ENTRY_POINT}/players/${responseData.data.name}/${encodedPassword}`;
-         axios.get(encodedUri)
-         .then(res=> {
-           if (res.data.authSuccess) {
-             setResponseData({ response: true, data: {successfulRegistration:true, message: 'Success..'} });
-             console.log("GetPlayer------", res.data);
-              deactivateBoth();
-              batch(()=>{
-               setPlayerLoggedStatus(true, res.data.token);
-               setPlayerStatus(res.data.status);
-              });
-              reset();
-              setResponseData({ response: false });
-           } else {
-             setResponseData({ response: true, data: {message:res.data.message} });
-           }
-           setLoader(false);
-         })
-         .catch(err=>{
-           setResponseData({ response: true, data: {message:'Internal error server'} });
-           setLoader(false);
-         });
+         console.log('===========name,password loggin',requestedData.name, requestedData.password)
+         getPlayerRequested(requestedData.name, requestedData.password, 'players', 'get', {location:'registration'});
        }; 
       // useEffect(()=> {
       //   if(socket) {
@@ -49,49 +23,23 @@ const Registration = ({ on, setActiveWindows, setPlayerLoggedStatus, setPlayerSt
       //   }
       // }, []);
 
-      const { register, handleSubmit, errors, reset } = useForm(); // initialise the hook
-      const onChangeFile =(e) => setFile(e.target.files[0]);
+      const onChangeFile = (e) => setRequestedData({file: e.target.files[0]});
       const onSubmit = data => {
         // socket.emit(cs.root.REGISTER, data);
-        setLoader(true);
-        console.log(data, file);
+        console.log(data, requestedData.file);
+        setRequestedData({name: data.name, password: data.password})
         const formData = new FormData();
         Object.keys(data).forEach(dataKey=>formData.append(dataKey, data[dataKey]))
-        formData.append("avatar", file);
-        const headersConfig = {
-          headers: {
-            "content-type": "multipart/form-data",
-          }
-        };
-        axios
-          .post(ENTRY_POINT + "/players", formData, headersConfig)
-          .then(res => {
-            console.log(res);           
-            setResponseData({ response: true, data: res.data });
-            setLoader(false);
-          })
-          .catch(error => {
-            if(error.response) setResponseData({ response: true, data: error.response.data });
-            else {
-              console.log('internal error',error);
-              setResponseData({ response: true, data: {message:'Internal error server'} });
-            } 
-            setLoader(false);
-          });
+        formData.append("avatar", requestedData.files);
+        const headers = { "content-type": "multipart/form-data"};
+        postPlayerRequested(formData, 'players', 'post', headers, 'regitration');
       };
-      let message = null;
-      let loggin = null;
-      let goLogginDiv = <div className='goLoggin' onClick={ goLoggin }>GoLoggin</div>;
-
-      if(responseData.response && !loader) {
-        message = <div key='message' className={ responseData.data.successfulRegistration ? "response success" : "response fail"}>{responseData.data.message}</div>;
-        loggin =  responseData.data.successfulRegistration ? <div key='loggin' onClick={ loggedIn } className='logginButton'>Loggin</div> : null;
-        goLogginDiv = responseData.data.successfulRegistration ? null : goLogginDiv;
-      }
+  const  loggin =  !Loader && success ? <div key='loggin' onClick={ loggedIn } className='logginButton'>Loggin</div> : null;
+  const  goLogginDiv =!Loader && success ? null : <div className='goLoggin' onClick={ goLoggin }>GoLoggin</div>;
   return (
     <section className={on ? "registration on" : "registration"}>
       <h3 className="title">Register</h3>
-      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+      { <form className="form" onSubmit={handleSubmit(onSubmit)}>
         <div className="inputField">
           <input
             className={errors.name ? "errorInput" : null}
@@ -176,13 +124,10 @@ const Registration = ({ on, setActiveWindows, setPlayerLoggedStatus, setPlayerSt
         </div>
         <input className="submit" type="submit" />
       </form>
+      }
       {goLogginDiv}
-      <div className="responseContainer">{[message, loggin]} </div>
-      {loader && (
-        <div className="loaderContainer">
-          <div className="loader"></div>
-        </div>
-      )}
+      <div className="responseContainer">{[Message, loggin]} </div>
+      { Loader }
     </section>
   );
 };
