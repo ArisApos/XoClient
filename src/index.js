@@ -8,7 +8,6 @@ import { Provider } from 'react-redux'
 import { games } from "./models/tic-tac-toe/";
 import { online, rootSaga } from "./models/onLine/";
 import createSagaMiddleware from "redux-saga";
-
 const sagaMiddleware = createSagaMiddleware();
 const fullReducer = combineReducers({ online, games });
 const gameStore = createStore(
@@ -19,28 +18,12 @@ const gameStore = createStore(
   );
 sagaMiddleware.run(rootSaga);
 
-// gameStore.dispatch({ type: "GET_PLAYER_REQUESTED", name: 'aris', password: '123', endpoint:'players', method:'get', userLocation:'loggin' });
-
-// const data = new FormData();
-// const dataM = { name: "aris"+Math.floor(Math.random() * 10000), password: "123", maxPlayers: 4, maxTime: 4 };
-// Object.keys(dataM).forEach(dataMKey=>data.append(dataMKey, dataM[dataMKey]))
-// const action = {
-//   type: "POST_PLAYER_REQUESTED",
-//   data,
-//   endpoint: "players",
-//   method: "post",
-//   headers: { "content-type": "multipart/form-data" },
-//   identifier: {location:'registration'},
-// };
-// gameStore.dispatch(action);
-
 ReactDOM.render(
   <Provider store={gameStore}>
     <HomePageContainer />
   </Provider>,
   document.getElementById("root")
 );
-
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
