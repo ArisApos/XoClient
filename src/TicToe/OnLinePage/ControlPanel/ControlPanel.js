@@ -19,14 +19,14 @@ const ControlPanel = ({ socketData, ranks, player, getPlayerRequested, postPlaye
         />
         <Registration
           on={!player.loggedStatus.loggedIn && activeWindows.registration}
-          setActiveWindows={setActiveWindows}
-          postPlayerRequested={postPlayerRequested}
-          getPlayerRequested={getPlayerRequested}
+          setActiveWindows={ setActiveWindows }
+          postPlayerRequested={ postPlayerRequested }
+          getPlayerRequested={ getPlayerRequested }
         />
         <Loggin
           on={!player.loggedStatus.loggedIn && activeWindows.loggin}
-          setActiveWindows={setActiveWindows}
-          getPlayerRequested={getPlayerRequested}
+          setActiveWindows={ setActiveWindows }
+          getPlayerRequested={ getPlayerRequested }
         />
       </section>
       <LiveOverview LiveOverview={null} />

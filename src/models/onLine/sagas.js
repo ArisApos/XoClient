@@ -7,7 +7,7 @@ import { axiosApi } from './axiosApi';
 function* getPlayer(action) {
     const { name, password, endpoint, method, identifier } = action;
     const data = { name, password };
-    yield put(setServerNotificatons(true, undefined, undefined, identifier))
+    yield put(setServerNotificatons(true, null, null, identifier))
     try { 
       const  {message, token, status} = yield call(axiosApi, { method, endpoint, data });
       identifier.loggedIn = true;

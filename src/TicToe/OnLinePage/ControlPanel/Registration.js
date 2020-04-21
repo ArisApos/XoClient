@@ -1,15 +1,21 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { ServerNotification } from "../Common";
+import { useServerNotification } from "../Common";
 import "./Static/registration.scss";
-
+let count = 0;
 const Registration = ({ on, setActiveWindows, postPlayerRequested, getPlayerRequested }) => {
        const { register, handleSubmit, errors, reset } = useForm();
-       const { Loader, Message, success, identifier } = true ? ServerNotification() : { Loader:null, Message:null, success:null, identifier:null }
+       const [activeComponent, setActiveComponent] = useState(on);
+       console.log('--------------------Registrattttttiiioooonnnn!!!!!!!!!!!!!',activeComponent, count++);
+       const { Loader, Message, success, identifier } = false ? useServerNotification() : { Loader:null, Message:null, success:null, identifier:null }
        const [requestedData, setRequestedData] = useState({file:null, name:null, password: null});
+       
        const goLoggin = ()=>setActiveWindows({ registration: false, loggin: true });
        const deactivateBoth = ()=>setActiveWindows({ registration: false, loggin: false });
-      //  if (identifier && identifier.loggedIn) deactivateBoth(); 
+       if (activeComponent && identifier && identifier.loggedIn) { 
+         setActiveComponent(false);
+         deactivateBoth(); 
+        }
        const loggedIn = ()=> {
          console.log('===========name,password loggin',requestedData.name, requestedData.password)
          getPlayerRequested(requestedData.name, requestedData.password, 'players', 'get', {location:'registration'});

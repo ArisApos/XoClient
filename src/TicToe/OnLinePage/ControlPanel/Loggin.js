@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { ServerNotification } from "../Common";
+import { useServerNotification } from "../Common";
 import "./Static/loggin.scss";
 
-
+let count =0;
 const Loggin = ({ on, setActiveWindows, getPlayerRequested }) => {
-  const [userLocationHere, setUserLocationHere] = useState(true);
-  const { Loader, Message, success, identifier } = false? ServerNotification() : { Loader:null, Message:null, success:null };
+  const [activeComponent, setActiveComponent] = useState(on);
+  console.log('--------------------Logginnnnnnnnnnnn!!!!!!!!!!!!!',activeComponent, count++);
+  const { Loader, Message, success, identifier } =  true? useServerNotification() : { Loader:null, Message:null, success:null };
   const { register, handleSubmit, reset } = useForm();
   const goRegistration = ()=>setActiveWindows({registration:true, loggin: false});
   // Go player status
   const deactivateBoth = ()=>setActiveWindows({ registration: false, loggin: false });
   // Go to player status and reset form
-  if(success && identifier && identifier.location === 'registration'){
-    setUserLocationHere(false);
+  if(activeComponent && success && identifier && identifier.location === 'loggin'){
+    setActiveComponent(false);
     setTimeout(()=> { reset(); deactivateBoth();},1000);
   } 
 
