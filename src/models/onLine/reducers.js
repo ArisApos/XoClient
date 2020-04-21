@@ -28,7 +28,7 @@ const players = (state=[], action) => {
     }
 }
 
-const serverNotification = ( state={ requesting: null, message: null, success: null, identifier: null}, action) => {
+const serverNotification = ( state={ requesting: null, message: null, success: null, identifier: {}}, action) => {
     switch(action.type) {
         case SET_SERVER_NOTIFICATION:
             const { requesting, identifier } = action;
