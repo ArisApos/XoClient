@@ -1,13 +1,13 @@
 import React, { useState, useEffect  } from "react";
 import { ControlPanel } from "./ControlPanel";
-import { getPlayerRequested, postPlayerRequested, setPlayerStatus, setPlayerLoggedStatus, setServerNotificatons } from "../../models/onLine";
+import { getPlayerRequested, postPlayerRequested, setPlayerStatus, setPlayerLoggedStatus, setServerNotification } from "../../models/onLine";
 import { ss, cs, ENTRY_POINT } from "../../models/onLine";
 import { connect } from "react-redux";
 import socketIOClient from "socket.io-client";
 import './Static/onlinePage.scss';
 
 //Component
-const OnLinePage = ({ player, getPlayerRequested, postPlayerRequested,  setPlayerStatus, setPlayerLoggedStatus, serverNotification,setServerNotificatons }) => {
+const OnLinePage = ({ player, getPlayerRequested, postPlayerRequested,  setPlayerStatus, setPlayerLoggedStatus, serverNotification,setServerNotification }) => {
   const [socketData, setSocketData] = useState({ ss, cs, socket:null, connected: false, id: null });
   const [onlinePlayers, setOnlinePlayers] = useState(null);
   useEffect(() => {
@@ -36,7 +36,7 @@ const OnLinePage = ({ player, getPlayerRequested, postPlayerRequested,  setPlaye
         setPlayerStatus={setPlayerStatus}
         setPlayerLoggedStatus={setPlayerLoggedStatus}
         serverNotification={serverNotification}
-        setServerNotificatons={setServerNotificatons}
+        setServerNotification={setServerNotification}
       />
       {socketData.connected && (
         <div className="connectionIndecation">{socketData.id}</div>
@@ -53,6 +53,6 @@ const stateOnLinePage = ({ online:{ player, serverNotification } }) => {
 };
 const OnLinePageContainer = connect(
   stateOnLinePage,
-  {  setPlayerStatus, setPlayerLoggedStatus, setServerNotificatons, getPlayerRequested, postPlayerRequested }
+  {  setPlayerStatus, setPlayerLoggedStatus, setServerNotification, getPlayerRequested, postPlayerRequested }
 )(OnLinePage);
 export { OnLinePageContainer };

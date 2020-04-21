@@ -2,12 +2,12 @@ import React, {} from 'react';
 import { ENTRY_POINT } from "../../../models/onLine";
 import './Static/myStatus.scss';
 
-const MyStatus = ({myStatus, setActiveWindows, setPlayerLoggedStatus, setPlayerStatus, setServerNotificatons}) => {
+const MyStatus = ({myStatus, setActiveWindows, setPlayerLoggedStatus, setPlayerStatus, setServerNotification}) => {
     const loggedOut = ()=> {
       setActiveWindows({ registration: false, loggin: true });
       setPlayerLoggedStatus(false, null)
       setPlayerStatus(null);
-      setServerNotificatons(null, "", null, null);
+      setServerNotification(null, "", null, null);
     }
   if(myStatus) {
     const {name, avatar, points, maxPlayers, maxTime,} = myStatus;

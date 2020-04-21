@@ -3,13 +3,13 @@ import { useForm } from "react-hook-form";
 import { ServerNotification } from '../Common';
 import "./Static/registration.scss";
 let count = 0;
-const Registration = ({ on, setActiveWindows, postPlayerRequested, getPlayerRequested, serverNotification, setServerNotificatons }) => {
+const Registration = ({ on, setActiveWindows, postPlayerRequested, getPlayerRequested, serverNotification, setServerNotification }) => {
        const { register, handleSubmit, errors, reset } = useForm();
        console.log('--------------------Registrattttttiiioooonnnn!!!!!!!!!!!!!', count++);
        const { Loader, Message, success, identifier } =  ServerNotification(serverNotification);
        const [requestedData, setRequestedData] = useState({file:null, name:null, password: null});
        const goLoggin = ()=>{
-         setServerNotificatons(null, '', null, null);
+         setServerNotification(null, '', null, null);
          setActiveWindows({ registration: false, loggin: true });
        }
        const loggedIn = ()=> {

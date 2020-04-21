@@ -1,5 +1,5 @@
 import { GET_PLAYER_REQUESTED, POST_PLAYER_REQUESTED } from './actionTypes';
-import { setServerNotificatons,setPlayerStatus, setPlayerLoggedStatus, setPlayers } from './actions';
+import { setServerNotification,setPlayerStatus, setPlayerLoggedStatus, setPlayers } from './actions';
 import { call, put, takeLatest, all } from 'redux-saga/effects';
 import { axiosApi } from './axiosApi';
 
@@ -7,19 +7,19 @@ import { axiosApi } from './axiosApi';
 function* getPlayer(action) {
     const { name, password, endpoint, method, identifier } = action;
     const data = { name, password };
-    yield put(setServerNotificatons(true, null, null, identifier))
+    yield put(setServerNotification(true, null, null, identifier))
     try { 
       const  {message, token, status} = yield call(axiosApi, { method, endpoint, data });
       identifier.loggedIn = true;
       if(identifier.cb) identifier.cb();
       yield all([
-          put(setServerNotificatons(false, message, true, identifier )),
+          put(setServerNotification(false, message, true, identifier )),
           put(setPlayerLoggedStatus(true, token)),
           put(setPlayerStatus(status))
       ]);
     }catch(err) {
     const { message } = err.response.data;
-    yield put(setServerNotificatons(false, message, false, identifier ));
+    yield put(setServerNotification(false, message, false, identifier ));
     }
 }
 
@@ -31,13 +31,13 @@ function* watchGetPlayer() {
 function* postPlayer(action) {
     const { endpoint, data, method, identifier, headers } = action;
     console.log('****************PostPlayerWorker Action',action);
-    yield put(setServerNotificatons(true, null, null, identifier))
+    yield put(setServerNotification(true, null, null, identifier))
     try {
         const { message } = yield call(axiosApi, {method, endpoint, data, headers});
-       yield put(setServerNotificatons(false, message, true, {logginSuccess:true}));
+       yield put(setServerNotification(false, message, true, {logginSuccess:true}));
     }catch(err) {
         const { message } = err.response.data;
-        yield put(setServerNotificatons(false, message, false, identifier ));
+        yield put(setServerNotification(false, message, false, identifier ));
     }
 }
 

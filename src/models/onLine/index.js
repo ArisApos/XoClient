@@ -2,7 +2,7 @@ export { ss, cs, ENTRY_POINT } from './sockets';
 
 export { SET_LOGGED_STATUS, SET_PLAYER_STATUS, SET_PLAYERS } from "./actionTypes";
 
-export { setPlayerLoggedStatus, setPlayerStatus, setPlayers, getPlayerRequested, postPlayerRequested, setServerNotificatons } from "./actions";
+export { setPlayerLoggedStatus, setPlayerStatus, setPlayers, getPlayerRequested, postPlayerRequested, setServerNotification } from "./actions";
 
 export { online } from './reducers';
 

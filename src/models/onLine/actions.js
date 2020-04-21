@@ -14,7 +14,7 @@ const setPlayerStatus = actionCreator(SET_PLAYER_STATUS, 'payload');
 
 const setPlayers = actionCreator(SET_PLAYERS, 'players');
 
-const setServerNotificatons = actionCreator(SET_SERVER_NOTIFICATION, 'requesting', 'message', 'success', 'identifier');
+const setServerNotification = actionCreator(SET_SERVER_NOTIFICATION, 'requesting', 'message', 'success', 'identifier');
 
 const getPlayerRequested = actionCreator(GET_PLAYER_REQUESTED, 'name', 'password', 'endpoint', 'method', 'identifier');
 
@@ -24,7 +24,7 @@ export {
   setPlayerLoggedStatus,
   setPlayerStatus,
   setPlayers,
-  setServerNotificatons,
+  setServerNotification,
   getPlayerRequested,
   postPlayerRequested,
 };
