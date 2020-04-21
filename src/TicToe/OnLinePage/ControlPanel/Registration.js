@@ -1,24 +1,21 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useServerNotification } from "../Common";
+import { ServerNotification } from '../Common';
 import "./Static/registration.scss";
 let count = 0;
-const Registration = ({ on, setActiveWindows, postPlayerRequested, getPlayerRequested }) => {
+const Registration = ({ on, setActiveWindows, postPlayerRequested, getPlayerRequested, serverNotification, setServerNotificatons }) => {
        const { register, handleSubmit, errors, reset } = useForm();
-       const [activeComponent, setActiveComponent] = useState(on);
-       console.log('--------------------Registrattttttiiioooonnnn!!!!!!!!!!!!!',activeComponent, count++);
-       const { Loader, Message, success, identifier } = false ? useServerNotification() : { Loader:null, Message:null, success:null, identifier:null }
+       console.log('--------------------Registrattttttiiioooonnnn!!!!!!!!!!!!!', count++);
+       const { Loader, Message, success, identifier } =  ServerNotification(serverNotification);
        const [requestedData, setRequestedData] = useState({file:null, name:null, password: null});
-       
-       const goLoggin = ()=>setActiveWindows({ registration: false, loggin: true });
-       const deactivateBoth = ()=>setActiveWindows({ registration: false, loggin: false });
-       if (activeComponent && identifier && identifier.loggedIn) { 
-         setActiveComponent(false);
-         deactivateBoth(); 
-        }
+       const goLoggin = ()=>{
+         setServerNotificatons(null, '', null, null);
+         setActiveWindows({ registration: false, loggin: true });
+       }
        const loggedIn = ()=> {
          console.log('===========name,password loggin',requestedData.name, requestedData.password)
-         getPlayerRequested(requestedData.name, requestedData.password, 'players', 'get', {location:'registration'});
+         const resetAll = ()=>{reset();setRequestedData({});}
+         getPlayerRequested(requestedData.name, requestedData.password, 'players', 'get', {cb:resetAll});
        }; 
       // useEffect(()=> {
       //   if(socket) {
@@ -32,13 +29,12 @@ const Registration = ({ on, setActiveWindows, postPlayerRequested, getPlayerRequ
       const onChangeFile = (e) => setRequestedData({file: e.target.files[0]});
       const onSubmit = data => {
         // socket.emit(cs.root.REGISTER, data);
-        console.log(data, requestedData.file);
         setRequestedData({name: data.name, password: data.password})
         const formData = new FormData();
         Object.keys(data).forEach(dataKey=>formData.append(dataKey, data[dataKey]))
         formData.append("avatar", requestedData.files);
         const headers = { "content-type": "multipart/form-data"};
-        postPlayerRequested(formData, 'players', 'post', headers, 'regitration');
+        postPlayerRequested(formData, 'players', 'post', headers, {});
       };
   const  loggin =  !Loader && success ? <div key='loggin' onClick={ loggedIn } className='logginButton'>Loggin</div> : null;
   const  goLogginDiv =!Loader && success ? null : <div className='goLoggin' onClick={ goLoggin }>GoLoggin</div>;
