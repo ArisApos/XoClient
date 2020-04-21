@@ -1,13 +1,13 @@
 import React, { useState, useEffect  } from "react";
 import { ControlPanel } from "./ControlPanel";
-import { getPlayerRequested, postPlayerRequested, setPlayerStatus, setPlayerLoggedStatus } from "../../models/onLine";
+import { getPlayerRequested, postPlayerRequested, setPlayerStatus, setPlayerLoggedStatus, setServerNotificatons } from "../../models/onLine";
 import { ss, cs, ENTRY_POINT } from "../../models/onLine";
 import { connect } from "react-redux";
 import socketIOClient from "socket.io-client";
 import './Static/onlinePage.scss';
 
 //Component
-const OnLinePage = ({ player, getPlayerRequested, postPlayerRequested,  setPlayerStatus, setPlayerLoggedStatus }) => {
+const OnLinePage = ({ player, getPlayerRequested, postPlayerRequested,  setPlayerStatus, setPlayerLoggedStatus, serverNotification,setServerNotificatons }) => {
   const [socketData, setSocketData] = useState({ ss, cs, socket:null, connected: false, id: null });
   const [onlinePlayers, setOnlinePlayers] = useState(null);
   useEffect(() => {
@@ -35,6 +35,8 @@ const OnLinePage = ({ player, getPlayerRequested, postPlayerRequested,  setPlaye
         postPlayerRequested={postPlayerRequested}
         setPlayerStatus={setPlayerStatus}
         setPlayerLoggedStatus={setPlayerLoggedStatus}
+        serverNotification={serverNotification}
+        setServerNotificatons={setServerNotificatons}
       />
       {socketData.connected && (
         <div className="connectionIndecation">{socketData.id}</div>
@@ -46,11 +48,11 @@ const OnLinePage = ({ player, getPlayerRequested, postPlayerRequested,  setPlaye
 };
 
 //ReduxState&Dispatch
-const stateOnLinePage = ({ online:{ player } }) => {
-  return { player };
+const stateOnLinePage = ({ online:{ player, serverNotification } }) => {
+  return { player, serverNotification };
 };
 const OnLinePageContainer = connect(
   stateOnLinePage,
-  {  setPlayerStatus, setPlayerLoggedStatus, getPlayerRequested, postPlayerRequested }
+  {  setPlayerStatus, setPlayerLoggedStatus, setServerNotificatons, getPlayerRequested, postPlayerRequested }
 )(OnLinePage);
 export { OnLinePageContainer };
