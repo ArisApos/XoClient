@@ -3,12 +3,12 @@ import { useForm } from "react-hook-form";
 import { useServerNotification } from '../Common';
 import "./Static/loggin.scss";
 let count =0;
-const Loggin = ({ on, setActiveWindows, getPlayerRequested, setServerNotification }) => {
+const Loggin = ({ on, setActiveWindows, getPlayerRequested }) => {
   console.log('--------------------Logginnnnnnnnnnnn!!!!!!!!!!!!!', count++);
-  const { Loader, Message } = useServerNotification();
+  const { Loader, Message, setServerNotificationD } = useServerNotification();
   const { register, handleSubmit, reset } = useForm();
   const goRegistration = ()=>{
-    setServerNotification(null, '', null, null);
+    setServerNotificationD(null, "", null, null);
     setActiveWindows({ registration: true, loggin: false });
   }
   // Go player status

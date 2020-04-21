@@ -24,13 +24,11 @@ const ControlPanel = ({ socketData, ranks, player, getPlayerRequested, postPlaye
           setActiveWindows={setActiveWindows}
           postPlayerRequested={postPlayerRequested}
           getPlayerRequested={getPlayerRequested}
-          setServerNotification={setServerNotification}
         />
         <Loggin
           on={!player.loggedStatus.loggedIn && activeWindows.loggin}
           setActiveWindows={setActiveWindows}
           getPlayerRequested={getPlayerRequested}
-          setServerNotification={setServerNotification}
         />
       </section>
       <LiveOverview LiveOverview={null} />
