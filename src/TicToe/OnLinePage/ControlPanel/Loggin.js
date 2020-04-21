@@ -1,24 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-import { useServerNotification } from "../Common";
+import { ServerNotification } from '../Common';
 import "./Static/loggin.scss";
-
 let count =0;
-const Loggin = ({ on, setActiveWindows, getPlayerRequested }) => {
-  const [activeComponent, setActiveComponent] = useState(on);
-  console.log('--------------------Logginnnnnnnnnnnn!!!!!!!!!!!!!',activeComponent, count++);
-  const { Loader, Message, success, identifier } =  true? useServerNotification() : { Loader:null, Message:null, success:null };
+const Loggin = ({ on, setActiveWindows, getPlayerRequested, serverNotification, setServerNotificatons }) => {
+  console.log('--------------------Logginnnnnnnnnnnn!!!!!!!!!!!!!', count++);
+  const { Loader, Message, success, identifier } = ServerNotification(serverNotification);
   const { register, handleSubmit, reset } = useForm();
-  const goRegistration = ()=>setActiveWindows({registration:true, loggin: false});
+  const goRegistration = ()=>{
+    setServerNotificatons(null, '', null, null);
+    setActiveWindows({ registration: true, loggin: false });
+  }
   // Go player status
-  const deactivateBoth = ()=>setActiveWindows({ registration: false, loggin: false });
   // Go to player status and reset form
-  if(activeComponent && success && identifier && identifier.location === 'loggin'){
-    setActiveComponent(false);
-    setTimeout(()=> { reset(); deactivateBoth();},1000);
-  } 
-
-
   // const getAllPlayers = (tokken) =>()
     // axios.get(ENTRY_POINT+'/players' , { headers: { Authorization:`Bearer ${tokken}`} })
     // .then(res=> {
@@ -31,7 +25,7 @@ const Loggin = ({ on, setActiveWindows, getPlayerRequested }) => {
     const { name, password } = data;
     const endpoint = 'players';
     const method = 'get'
-    const identifier = {location:'loggin'};
+    const identifier = {location:'loggin', cb: reset};
     getPlayerRequested(name,password,endpoint,method,identifier);
   };
   return (
