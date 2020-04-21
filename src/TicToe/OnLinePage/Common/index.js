@@ -1,1 +1,1 @@
-export  { useServerNotification } from './useServerNotification';
+export  { ServerNotification } from './ServerNotification';
