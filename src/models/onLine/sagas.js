@@ -11,13 +11,14 @@ function* getPlayer(action) {
     try { 
       const  {message, token, status} = yield call(axiosApi, { method, endpoint, data });
       identifier.loggedIn = true;
+      if(identifier.cb) identifier.cb();
       yield all([
           put(setServerNotificatons(false, message, true, identifier )),
           put(setPlayerLoggedStatus(true, token)),
           put(setPlayerStatus(status))
       ]);
     }catch(err) {
-    const { message } = err;
+    const { message } = err.response.data;
     yield put(setServerNotificatons(false, message, false, identifier ));
     }
 }
@@ -33,9 +34,9 @@ function* postPlayer(action) {
     yield put(setServerNotificatons(true, null, null, identifier))
     try {
         const { message } = yield call(axiosApi, {method, endpoint, data, headers});
-       yield put(setServerNotificatons(false, message, true, identifier));
+       yield put(setServerNotificatons(false, message, true, {logginSuccess:true}));
     }catch(err) {
-        const { message } = err;
+        const { message } = err.response.data;
         yield put(setServerNotificatons(false, message, false, identifier ));
     }
 }

@@ -20,7 +20,7 @@ const axiosApi = ({ data= null, endpoint, headers, method= 'get', tokken = null 
           return res.data;
       })
       .catch((err) => {
-        console.log("AxioApi----oups! throw error catched", err);
+        console.log("AxioApi----oups! throw error catched", err.response);
         throw err;
       });
 
