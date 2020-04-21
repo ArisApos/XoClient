@@ -5,8 +5,9 @@ import './Static/controlPanel.scss';
 //actionFuntions
 
 //Component
-const ControlPanel = ({ socketData, ranks, player, getPlayerRequested, postPlayerRequested, setPlayerLoggedStatus, setPlayerStatus }) => {
-  const [ activeWindows, setActiveWindows ] = useState({registration:true,loggin:false});
+const ControlPanel = ({ socketData, ranks, player, getPlayerRequested, postPlayerRequested, setPlayerLoggedStatus, setPlayerStatus, serverNotification,setServerNotificatons }) => {
+  const [ activeWindows, setActiveWindows ] = useState({registration:false,loggin:true});
+
   return (
     <section className="controlPanel">
       <Ranks ranks={ranks} />
@@ -16,17 +17,22 @@ const ControlPanel = ({ socketData, ranks, player, getPlayerRequested, postPlaye
           setActiveWindows={setActiveWindows}
           setPlayerStatus={setPlayerStatus}
           setPlayerLoggedStatus={setPlayerLoggedStatus}
+          setServerNotificatons={setServerNotificatons}
         />
         <Registration
           on={!player.loggedStatus.loggedIn && activeWindows.registration}
-          setActiveWindows={ setActiveWindows }
-          postPlayerRequested={ postPlayerRequested }
-          getPlayerRequested={ getPlayerRequested }
+          setActiveWindows={setActiveWindows}
+          postPlayerRequested={postPlayerRequested}
+          getPlayerRequested={getPlayerRequested}
+          serverNotification={serverNotification}
+          setServerNotificatons={setServerNotificatons}
         />
         <Loggin
           on={!player.loggedStatus.loggedIn && activeWindows.loggin}
-          setActiveWindows={ setActiveWindows }
-          getPlayerRequested={ getPlayerRequested }
+          setActiveWindows={setActiveWindows}
+          getPlayerRequested={getPlayerRequested}
+          serverNotification={serverNotification}
+          setServerNotificatons={setServerNotificatons}
         />
       </section>
       <LiveOverview LiveOverview={null} />
