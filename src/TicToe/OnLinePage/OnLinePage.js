@@ -35,7 +35,6 @@ const OnLinePage = ({ player, getPlayerRequested, postPlayerRequested,  setPlaye
         postPlayerRequested={postPlayerRequested}
         setPlayerStatus={setPlayerStatus}
         setPlayerLoggedStatus={setPlayerLoggedStatus}
-        serverNotification={serverNotification}
         setServerNotification={setServerNotification}
       />
       {socketData.connected && (
@@ -48,8 +47,8 @@ const OnLinePage = ({ player, getPlayerRequested, postPlayerRequested,  setPlaye
 };
 
 //ReduxState&Dispatch
-const stateOnLinePage = ({ online:{ player, serverNotification } }) => {
-  return { player, serverNotification };
+const stateOnLinePage = ({ online:{ player } }) => {
+  return { player };
 };
 const OnLinePageContainer = connect(
   stateOnLinePage,
