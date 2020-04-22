@@ -12,6 +12,8 @@ function* getPlayer(action) {
       const  {message, token, status} = yield call(axiosApi, { method, endpoint, data });
       utilities.loggedIn = true;
       // get All players
+      const { players } = yield call(axiosApi, {method:'get', endpoint:'players', token});
+      console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>have all your players baby', players);
       if(utilities.cb) utilities.cb();
       yield all([
           put(setServerNotification(false, message, true, utilities )),
