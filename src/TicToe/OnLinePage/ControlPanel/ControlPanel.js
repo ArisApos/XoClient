@@ -5,7 +5,7 @@ import './Static/controlPanel.scss';
 //actionFuntions
 
 //Component
-const ControlPanel = ({ socketData, ranks, player, getPlayerRequested, postPlayerRequested, setPlayerLoggedStatus, setPlayerStatus,setServerNotification }) => {
+const ControlPanel = ({ socketData, ranks, player, getPlayerRequested, postPlayerRequested, setPlayerLoggedStatus, setPlayerStatus,setServerNotification, setPlayers }) => {
   const [ activeWindows, setActiveWindows ] = useState({registration:false, mountRegistration:false,loggin:true, mountLoggin:true});
   return (
     <section className="controlPanel">
@@ -17,6 +17,7 @@ const ControlPanel = ({ socketData, ranks, player, getPlayerRequested, postPlaye
           setPlayerStatus={setPlayerStatus}
           setPlayerLoggedStatus={setPlayerLoggedStatus}
           setServerNotification={setServerNotification}
+          setPlayers={setPlayers}
         />
         {
         activeWindows.mountRegistration &&
