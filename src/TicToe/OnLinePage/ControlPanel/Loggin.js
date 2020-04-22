@@ -9,8 +9,11 @@ const Loggin = ({ on, setActiveWindows, getPlayerRequested }) => {
   const { register, handleSubmit, reset } = useForm();
   const goRegistration = ()=>{
     setServerNotificationD(null, "", null, null);
+    // Initialization, mount both,  Keep them a little bit initialized for load styles
     setActiveWindows({ registration: false, mountRegistration: true, loggin: false, mountLoggin: true });
+    // Now change the active status(on)
     setTimeout(()=>setActiveWindows({ registration: true, mountRegistration: true, loggin: false, mountLoggin: true }));
+    // When animation stops u
     setTimeout(()=>setActiveWindows({ registration: true, mountRegistration: true, loggin: false, mountLoggin: false }), 800);
   }
   // Go player status
