@@ -1,21 +1,17 @@
 import React, {} from 'react';
+import {useSelector, shallowEqual} from 'react-redux';
+import { ENTRY_POINT } from '../../../models/onLine/libs';
 import './Static/ranks.scss';
 
-const mockRanks = [
-  {id:1, name: "aris", rank: "1", points: "35" },
-  {id:2, name: "ninuk", rank: "2", points: "30" },
-  {id:3, name: "makis", rank: "3", points: "25" },
-  {id:4, name: "Gogo", rank: "4", points: "20" },
-  {id:5, name: "thanos", rank: "5", points: "15" }
-];
 
+const Ranks = () => {
+  const players = useSelector(state=>state.online.players, shallowEqual);
 
-const Ranks = ({ranks=mockRanks}) => {
-  const rankingPlayers = ranks.map(rPlayer => (
-    <div key={rPlayer.id} className="rPlayer">
-      <span className="rate">{rPlayer.rank}</span>
-      <span className="name">{rPlayer.name}</span>
-      <span className="point">{rPlayer.points}</span>
+  const rankingPlayers = Object.values(players).map(({name, points, avatar}) => (
+    <div key={name} className="rPlayer">
+      <img className="avatar" src={ENTRY_POINT+avatar} alt={name}/>
+      <span className="name">{name}</span>
+      <span className="point">{points}</span>
     </div>
   ));
     return (

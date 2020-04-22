@@ -14,24 +14,35 @@
         align-items: center;
         width: 170px;
         color: white;
+        position: relative;
         &:not(:first-child) {
             border-top: 1px solid white;
         }
-        .rate {
-            background: red;
-            width: 20px;
-            height: 20px;
-            border-radius: 20px;
+        .avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-left: 10px;
+            border: 2px solid #5f1515;
+            z-index: 1;
+            &:hover {
+                width:100px;
+                height: 100px;
+                z-index: 2;
+                position: absolute;
+                bottom: 0;
+            }
         }
         .name {
-            margin-left: 10px;
             width: 70px;
+            position: absolute;
+            left: 30%;
         }
         .point {
+            position: absolute;
+            left: 83%;
             color: #c22121;
             font-size: 19px;
         }
