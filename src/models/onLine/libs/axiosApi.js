@@ -1,4 +1,4 @@
-import { ENTRY_POINT } from "./";
+import { ENTRY_POINT } from "./sockets";
 import axios from "axios";
 
 const axiosApi = ({ data, endpoint, headers, method= 'get', token }) => {
@@ -19,8 +19,6 @@ const axiosApi = ({ data, endpoint, headers, method= 'get', token }) => {
       data,
       AxiosParameters
     );
-
-    console.log('')
     return axios[method](...AxiosParameters)
       .then((res) => {
           console.log('AxiosAPI--------202!!!!',res);
