@@ -9,8 +9,13 @@ const Registration = ({ on, setActiveWindows, postPlayerRequested, getPlayerRequ
        const { Loader, Message, success, setServerNotificationD } = useServerNotification();
        const [requestedData, setRequestedData] = useState({file:null, name:null, password: null});
        const goLoggin = ()=>{
-         setServerNotificationD(null, '', null, null);
-         setActiveWindows({ registration: false, loggin: true });
+        setServerNotificationD(null, '', null, null);
+        // Initialization, mount both,  Keep them a little bit initialized for load styles
+        setActiveWindows({ registration: true, mountRegistration: true, loggin: false, mountLoggin: true });
+        // Now change the active status(on)
+        setTimeout(()=>setActiveWindows({ registration: false, mountRegistration: true, loggin: true, mountLoggin: true }));
+        // When animation stops unmount
+        setTimeout(()=>setActiveWindows({ registration: false, mountRegistration: false, loggin: true, mountLoggin: true }), 800);
        }
        const loggedIn = ()=> {
          const resetAll = ()=>{reset();setRequestedData({});}

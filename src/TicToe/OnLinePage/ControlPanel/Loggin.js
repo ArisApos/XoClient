@@ -9,7 +9,9 @@ const Loggin = ({ on, setActiveWindows, getPlayerRequested }) => {
   const { register, handleSubmit, reset } = useForm();
   const goRegistration = ()=>{
     setServerNotificationD(null, "", null, null);
-    setActiveWindows({ registration: true, loggin: false });
+    setActiveWindows({ registration: false, mountRegistration: true, loggin: false, mountLoggin: true });
+    setTimeout(()=>setActiveWindows({ registration: true, mountRegistration: true, loggin: false, mountLoggin: true }));
+    setTimeout(()=>setActiveWindows({ registration: true, mountRegistration: true, loggin: false, mountLoggin: false }), 800);
   }
   // Go player status
   // Go to player status and reset form

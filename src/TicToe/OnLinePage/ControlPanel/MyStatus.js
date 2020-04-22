@@ -4,7 +4,7 @@ import './Static/myStatus.scss';
 
 const MyStatus = ({myStatus, setActiveWindows, setPlayerLoggedStatus, setPlayerStatus, setServerNotification}) => {
     const loggedOut = ()=> {
-      setActiveWindows({ registration: false, loggin: true });
+      setActiveWindows({ registration: false, mountRegistration: false, loggin: true, mountLoggin: false });
       setPlayerLoggedStatus(false, null)
       setPlayerStatus(null);
       setServerNotification(null, "", null, null);
