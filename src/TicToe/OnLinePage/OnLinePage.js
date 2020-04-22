@@ -1,7 +1,7 @@
 import React, { useState, useEffect  } from "react";
 import { ControlPanel } from "./ControlPanel";
 import { getPlayerRequested, postPlayerRequested, setPlayerStatus, setPlayerLoggedStatus, setServerNotification } from "../../models/onLine";
-import { ss, cs, ENTRY_POINT } from "../../models/onLine";
+import { ss, cs, ENTRY_POINT } from "../../models/onLine/libs";
 import { connect } from "react-redux";
 import socketIOClient from "socket.io-client";
 import './Static/onlinePage.scss';

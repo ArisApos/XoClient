@@ -1,5 +1,5 @@
 import React, {} from 'react';
-import { ENTRY_POINT } from "../../../models/onLine";
+import { ENTRY_POINT } from "../../../models/onLine/libs";
 import './Static/myStatus.scss';
 
 const MyStatus = ({myStatus, setActiveWindows, setPlayerLoggedStatus, setPlayerStatus, setServerNotification}) => {
