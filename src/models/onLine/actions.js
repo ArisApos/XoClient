@@ -12,7 +12,7 @@ const setPlayerLoggedStatus = actionCreator(SET_LOGGED_STATUS, 'loggedIn', 'toke
 
 const setPlayerStatus = actionCreator(SET_PLAYER_STATUS, 'payload');
 
-const setPlayers = actionCreator(SET_PLAYERS, 'players');
+const setPlayers = actionCreator(SET_PLAYERS, 'players', 'clear');
 
 const setServerNotification = actionCreator(SET_SERVER_NOTIFICATION, 'requesting', 'message', 'success', 'utilities');
 
