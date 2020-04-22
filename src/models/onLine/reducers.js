@@ -19,10 +19,10 @@ const status = (state={}, action) => {
     }
 }
 
-const players = (state=[], action) => {
+const players = (state={}, action) => {
     switch(action.type) {
         case SET_PLAYERS:
-            return [...state, ...action.players];
+            return {...state, ...action.players};
         default:
             return state;
     }
