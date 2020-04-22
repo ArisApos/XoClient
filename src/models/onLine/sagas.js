@@ -1,7 +1,7 @@
 import { GET_PLAYER_REQUESTED, POST_PLAYER_REQUESTED } from './actionTypes';
 import { setServerNotification,setPlayerStatus, setPlayerLoggedStatus, setPlayers } from './actions';
 import { call, put, takeLatest, all } from 'redux-saga/effects';
-import { axiosApi } from './axiosApi';
+import { axiosApi, indexing } from './libs';
 
 // Worker, Wathcer getPlayer saga
 function* getPlayer(action) {
@@ -12,13 +12,13 @@ function* getPlayer(action) {
       const  {message, token, status} = yield call(axiosApi, { method, endpoint, data });
       utilities.loggedIn = true;
       // get All players
-      const { players } = yield call(axiosApi, {method:'get', endpoint:'players', token});
-      console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>have all your players baby', players);
+      const { allPlayers } = yield call(axiosApi, {method:'get', endpoint:'players', token});
       if(utilities.cb) utilities.cb();
       yield all([
           put(setServerNotification(false, message, true, utilities )),
           put(setPlayerLoggedStatus(true, token)),
-          put(setPlayerStatus(status))
+          put(setPlayerStatus(status)),
+          put(setPlayers(indexing('name',allPlayers))),
       ]);
     }catch(err) {
     const { message } = err.response.data;
