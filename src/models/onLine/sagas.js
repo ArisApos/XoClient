@@ -5,21 +5,22 @@ import { axiosApi } from './axiosApi';
 
 // Worker, Wathcer getPlayer saga
 function* getPlayer(action) {
-    const { name, password, endpoint, method, identifier } = action;
+    const { name, password, endpoint, method, utilities } = action;
     const data = { name, password };
-    yield put(setServerNotification(true, null, null, identifier))
+    yield put(setServerNotification(true, null, null, utilities))
     try { 
       const  {message, token, status} = yield call(axiosApi, { method, endpoint, data });
-      identifier.loggedIn = true;
-      if(identifier.cb) identifier.cb();
+      utilities.loggedIn = true;
+      // get All players
+      if(utilities.cb) utilities.cb();
       yield all([
-          put(setServerNotification(false, message, true, identifier )),
+          put(setServerNotification(false, message, true, utilities )),
           put(setPlayerLoggedStatus(true, token)),
           put(setPlayerStatus(status))
       ]);
     }catch(err) {
     const { message } = err.response.data;
-    yield put(setServerNotification(false, message, false, identifier ));
+    yield put(setServerNotification(false, message, false, utilities ));
     }
 }
 
@@ -29,15 +30,15 @@ function* watchGetPlayer() {
 
 // Worker, Wathcer postPlayer saga
 function* postPlayer(action) {
-    const { endpoint, data, method, identifier, headers } = action;
+    const { endpoint, data, method, utilities, headers } = action;
     console.log('****************PostPlayerWorker Action',action);
-    yield put(setServerNotification(true, null, null, identifier))
+    yield put(setServerNotification(true, null, null, utilities))
     try {
         const { message } = yield call(axiosApi, {method, endpoint, data, headers});
        yield put(setServerNotification(false, message, true, {logginSuccess:true}));
     }catch(err) {
         const { message } = err.response.data;
-        yield put(setServerNotification(false, message, false, identifier ));
+        yield put(setServerNotification(false, message, false, utilities ));
     }
 }
 

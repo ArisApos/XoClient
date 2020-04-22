@@ -25,8 +25,8 @@ const Loggin = ({ on, setActiveWindows, getPlayerRequested }) => {
     const { name, password } = data;
     const endpoint = 'players';
     const method = 'get'
-    const identifier = {location:'loggin', cb: reset};
-    getPlayerRequested(name,password,endpoint,method,identifier);
+    const utilities = {location:'loggin', cb: reset};
+    getPlayerRequested(name,password,endpoint,method,utilities);
   };
   return (
     <section className={on ? "login on" : "login"}>
