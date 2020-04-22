@@ -22,6 +22,7 @@ const status = (state={}, action) => {
 const players = (state={}, action) => {
     switch(action.type) {
         case SET_PLAYERS:
+            if(action.clear) return {};
             return {...state, ...action.players};
         default:
             return state;
