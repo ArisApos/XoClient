@@ -6,6 +6,7 @@ import {
   SET_SERVER_NOTIFICATION,
   GET_PLAYER_REQUESTED,
   POST_PLAYER_REQUESTED,
+  SET_SOCKET_DATA
 } from "./actionTypes";
 
 const setPlayerLoggedStatus = actionCreator(SET_LOGGED_STATUS, 'loggedIn', 'token');
@@ -20,6 +21,8 @@ const getPlayerRequested = actionCreator(GET_PLAYER_REQUESTED, 'name', 'password
 
 const postPlayerRequested = actionCreator(POST_PLAYER_REQUESTED, 'data', 'endpoint', 'method', 'headers', 'utilities' );
 
+const setSocketData = actionCreator(SET_SOCKET_DATA, 'socketData');
+
 export {
   setPlayerLoggedStatus,
   setPlayerStatus,
@@ -27,4 +30,5 @@ export {
   setServerNotification,
   getPlayerRequested,
   postPlayerRequested,
+  setSocketData,
 };
