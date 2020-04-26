@@ -13,8 +13,8 @@ import './Static/onlinePage.scss';
 //Component
 const OnLinePage = ({ player, socketData, getPlayerRequested, postPlayerRequested,  setPlayerStatus, setPlayerLoggedStatus,setServerNotification, setPlayers }) => {
   // const [socketData, setSocket] = useState({ socket:null, connected: false, id: null });
-  const [onlinePlayers, setOnlinePlayers] = useState([]);
-  useEffect(() => {
+  // const [onlinePlayers, setOnlinePlayers] = useState([]);
+  // useEffect(() => {
     // const socket = socketIOClient(ENTRY_POINT);
     // socket.on(ss.root.CONNECTION_REPLY, ({ ss, cs, id, connected, players }) => {
     //   console.log({ss, cs, id, connected, players });
@@ -23,16 +23,16 @@ const OnLinePage = ({ player, socketData, getPlayerRequested, postPlayerRequeste
     //     data: "Dude!!! React Client"
     //   });
     // });
-    if(socketData.socket) {
-      console.log('>>>>>>>>>>>>>>>>>>>>>>>>SETUP ON UPDATE PLAYERS');
-      //>>>>>>>>>>>>>>>>>> On UPDATE_PLAYERS
-          socketData.socket.on(socketData.ss.root.UPDATE_PLAYERS, ({ players }) => {
-            console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Broaaaadcasstttted", players);
-            setOnlinePlayers(players);
-          });
-    }
+    // if(socketData.socket) {
+    //   console.log('>>>>>>>>>>>>>>>>>>>>>>>>SETUP ON UPDATE PLAYERS');
+    //   //>>>>>>>>>>>>>>>>>> On UPDATE_PLAYERS
+    //       socketData.socket.on(socketData.ss.root.UPDATE_PLAYERS, ({ players }) => {
+    //         console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Broaaaadcasstttted", players);
+    //         setOnlinePlayers(players);
+    //       });
+    // }
 
-  }, [socketData]);
+  // }, [socketData]);
 
   return (
     <section className="onLinePage">
@@ -47,7 +47,7 @@ const OnLinePage = ({ player, socketData, getPlayerRequested, postPlayerRequeste
         setPlayers={setPlayers}
       />
 
-      {onlinePlayers.map((player) => <div key={player.id}>{player.id}</div>)}
+      {/* {onlinePlayers.map((player) => <div key={player.id}>{player.id}</div>)} */}
     </section>
   );
 };
