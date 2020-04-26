@@ -2,7 +2,7 @@ import React, {} from 'react';
 import { ENTRY_POINT } from "../../../models/onLine/libs";
 import './Static/myStatus.scss';
 
-const MyStatus = ({myStatus,socket, setActiveWindows, setPlayerLoggedStatus, setPlayerStatus, setServerNotification,setPlayers}) => {
+const MyStatus = ({myStatus,socketData, setActiveWindows, setPlayerLoggedStatus, setPlayerStatus, setServerNotification,setPlayers}) => {
     const loggedOut = ()=> {
       setActiveWindows({ registration: false, mountRegistration: false, loggin: false, mountLoggin: true });
       setTimeout(()=>setActiveWindows({ registration: false, mountRegistration: false, loggin: true, mountLoggin: true }));
@@ -10,7 +10,7 @@ const MyStatus = ({myStatus,socket, setActiveWindows, setPlayerLoggedStatus, set
       setPlayerStatus(null);
       setServerNotification(null, "", null, null);
       setPlayers({},true);
-      socket.socket.emit(socket.cs.root.MANULLY_DISCONNECT);
+      socketData.socket.emit(socketData.cs.root.MANULLY_DISCONNECT);
     }
   if(myStatus) {
     const {name, avatar, points, maxPlayers, maxTime,} = myStatus;
