@@ -1,7 +1,8 @@
 import { GET_PLAYER_REQUESTED, POST_PLAYER_REQUESTED } from './actionTypes';
 import { setServerNotification,setPlayerStatus, setPlayerLoggedStatus, setPlayers, setSocket } from './actions';
-import { call, put, takeLatest, all } from 'redux-saga/effects';
+import { call, put, takeLatest, all, fork } from 'redux-saga/effects';
 import { axiosApi, indexing, createSocketConnection } from './libs';
+import { watchSocketServer } from './sagaChannels';
 
 // Worker, Wathcer getPlayer saga
 function* getPlayer(action) {
@@ -16,6 +17,7 @@ function* getPlayer(action) {
           call(axiosApi, {method:'get', endpoint:'players', token}),
           call( createSocketConnection, name, password, token )
       ]);
+    //   yield fork(watchSocketServer, socketData);
       if(utilities.cb) utilities.cb();
       yield all([
           put(setServerNotification(false, message, true, utilities )),
