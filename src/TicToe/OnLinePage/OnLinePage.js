@@ -1,25 +1,24 @@
 import React, { useState, useEffect  } from "react";
 import { ControlPanel } from "./ControlPanel";
 import { getPlayerRequested, postPlayerRequested, setPlayerStatus, setPlayerLoggedStatus, setServerNotification, setPlayers } from "../../models/onLine";
-import { socketConnection } from "../../models/onLine/libs";
 import { connect } from "react-redux";
 import './Static/onlinePage.scss';
 
-(async ()=>{
-const mySocket = await socketConnection('a','b','c');
-console.log('???????????????????????mysocket', mySocket)
-} )()
+// (async ()=>{
+// const mySocket = await socketConnection('a','b','c');
+// console.log('???????????????????????mysocket', mySocket)
+// } )()
 
 
 //Component
 const OnLinePage = ({ player, getPlayerRequested, postPlayerRequested,  setPlayerStatus, setPlayerLoggedStatus,setServerNotification, setPlayers }) => {
-  const [socketData, setSocketData] = useState({ socket:null, connected: false, id: null });
+  const [socketData, setSocket] = useState({ socket:null, connected: false, id: null });
   const [onlinePlayers, setOnlinePlayers] = useState(null);
   useEffect(() => {
     // const socket = socketIOClient(ENTRY_POINT);
     // socket.on(ss.root.CONNECTION_REPLY, ({ ss, cs, id, connected, players }) => {
     //   console.log({ss, cs, id, connected, players });
-    //   setSocketData({ ...socketData, ss, cs, socket, id, connected });
+    //   setSocket({ ...socketData, ss, cs, socket, id, connected });
     //   socket.emit(cs.root.CONNECTION_REPLY, {
     //     data: "Dude!!! React Client"
     //   });
