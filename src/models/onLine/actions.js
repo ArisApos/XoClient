@@ -21,7 +21,7 @@ const getPlayerRequested = actionCreator(GET_PLAYER_REQUESTED, 'name', 'password
 
 const postPlayerRequested = actionCreator(POST_PLAYER_REQUESTED, 'data', 'endpoint', 'method', 'headers', 'utilities' );
 
-const setSocketData = actionCreator(SET_SOCKET_DATA, 'socketData');
+const setSocket = actionCreator(SET_SOCKET_DATA, 'socketData');
 
 export {
   setPlayerLoggedStatus,
@@ -30,5 +30,5 @@ export {
   setServerNotification,
   getPlayerRequested,
   postPlayerRequested,
-  setSocketData,
+  setSocket,
 };
