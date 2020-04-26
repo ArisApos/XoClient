@@ -11,9 +11,9 @@ import './Static/onlinePage.scss';
 
 
 //Component
-const OnLinePage = ({ player, getPlayerRequested, postPlayerRequested,  setPlayerStatus, setPlayerLoggedStatus,setServerNotification, setPlayers }) => {
-  const [socketData, setSocket] = useState({ socket:null, connected: false, id: null });
-  const [onlinePlayers, setOnlinePlayers] = useState(null);
+const OnLinePage = ({ player, socket, getPlayerRequested, postPlayerRequested,  setPlayerStatus, setPlayerLoggedStatus,setServerNotification, setPlayers }) => {
+  // const [socketData, setSocket] = useState({ socket:null, connected: false, id: null });
+  const [onlinePlayers, setOnlinePlayers] = useState([]);
   useEffect(() => {
     // const socket = socketIOClient(ENTRY_POINT);
     // socket.on(ss.root.CONNECTION_REPLY, ({ ss, cs, id, connected, players }) => {
@@ -23,17 +23,21 @@ const OnLinePage = ({ player, getPlayerRequested, postPlayerRequested,  setPlaye
     //     data: "Dude!!! React Client"
     //   });
     // });
-    // socket.on(ss.root.UPDATE_PLAYERS,({players})=>{
-    //   console.log('Broaaaadcasstttted', players)
-    //   setOnlinePlayers(players);
-    // });
+    if(socket.socket) {
+      console.log('>>>>>>>>>>>>>>>>>>>>>>>>SETUP ON UPDATE PLAYERS');
+      //>>>>>>>>>>>>>>>>>> On UPDATE_PLAYERS
+          socket.socket.on(socket.ss.root.UPDATE_PLAYERS, ({ players }) => {
+            console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Broaaaadcasstttted", players);
+            setOnlinePlayers(players);
+          });
+    }
 
-  }, []);
+  }, [socket]);
 
   return (
     <section className="onLinePage">
       <ControlPanel
-        socketData={socketData}
+        socket={socket}
         player={player}
         getPlayerRequested={getPlayerRequested}
         postPlayerRequested={postPlayerRequested}
@@ -42,18 +46,15 @@ const OnLinePage = ({ player, getPlayerRequested, postPlayerRequested,  setPlaye
         setServerNotification={setServerNotification}
         setPlayers={setPlayers}
       />
-      {socketData.connected && (
-        <div className="connectionIndecation">{socketData.id}</div>
-      )}
-      {onlinePlayers &&
-        onlinePlayers.map((player) => <div key={player.id}>{player.id}</div>)}
+
+      {onlinePlayers.map((player) => <div key={player.id}>{player.id}</div>)}
     </section>
   );
 };
 
 //ReduxState&Dispatch
-const stateOnLinePage = ({ online:{ player } }) => {
-  return { player };
+const stateOnLinePage = ({ online:{ player, socket } }) => {
+  return { player, socket };
 };
 const OnLinePageContainer = connect(
   stateOnLinePage,
