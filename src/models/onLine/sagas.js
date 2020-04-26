@@ -1,7 +1,7 @@
 import { GET_PLAYER_REQUESTED, POST_PLAYER_REQUESTED } from './actionTypes';
-import { setServerNotification,setPlayerStatus, setPlayerLoggedStatus, setPlayers, setSocketData } from './actions';
+import { setServerNotification,setPlayerStatus, setPlayerLoggedStatus, setPlayers, setSocket } from './actions';
 import { call, put, takeLatest, all } from 'redux-saga/effects';
-import { axiosApi, indexing, socketConnection } from './libs';
+import { axiosApi, indexing, createSocketConnection } from './libs';
 
 // Worker, Wathcer getPlayer saga
 function* getPlayer(action) {
@@ -12,17 +12,20 @@ function* getPlayer(action) {
       const  {message, token, status} = yield call(axiosApi, { method, endpoint, data });
       utilities.loggedIn = true;
       // get All players
-      const { allPlayers } = yield call(axiosApi, {method:'get', endpoint:'players', token});
-      const socketData = socketConnection(name, password, token);
+      const [{ allPlayers }, socketData] = yield all([
+          call(axiosApi, {method:'get', endpoint:'players', token}),
+          call( createSocketConnection, name, password, token )
+      ]);
       if(utilities.cb) utilities.cb();
       yield all([
           put(setServerNotification(false, message, true, utilities )),
           put(setPlayerLoggedStatus(true, token)),
           put(setPlayerStatus(status)),
           put(setPlayers(indexing('name',allPlayers))),
+          put(setSocket(socketData))
       ]);
     }catch(err) {
-    const { message } = err.response.data;
+    const { message } = err.response ? err.response.data : {message:'unknown error'};
     yield put(setServerNotification(false, message, false, utilities ));
     }
 }
@@ -48,8 +51,6 @@ function* postPlayer(action) {
 function* watchPostPlayer() {
     yield takeLatest( POST_PLAYER_REQUESTED, postPlayer);
 }
-
-
 
 // RootSaga
 function* rootSaga() {
