@@ -15,9 +15,9 @@ const cs = {
     CONNECTION_REPLY: "CONNECTION_REPLY",
   }
 };
-const socketConnection = async (name,password,token)=>{
+const createSocketConnection = async (name,password,token)=>{
+  // const socket = socketIOClient(ENTRY_POINT);
   const socket = socketIOClient(ENTRY_POINT);
-  // const socket = io(ENTRY_POINT);
   return await new Promise((resolve)=>{
       socket.on(ss.root.CONNECTION_REPLY, (socketData) => {
         socketData.socket = socket;
@@ -32,4 +32,4 @@ const socketConnection = async (name,password,token)=>{
   });
 }
 
-export { ss, cs, ENTRY_POINT, socketConnection };
+export { ss, cs, ENTRY_POINT, createSocketConnection };
