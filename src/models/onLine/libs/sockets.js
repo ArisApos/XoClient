@@ -19,10 +19,10 @@ const createSocketConnection = async (name,password,token)=>{
   // const socket = socketIOClient(ENTRY_POINT);
   const socket = socketIOClient(ENTRY_POINT);
   return await new Promise((resolve)=>{
-      socket.on(ss.root.CONNECTION_REPLY, (socketData) => {
+      socket.on("connection", (socketData) => {
         socketData.socket = socket;
         console.log(">>>>>>>SOCKET CONNECTION,socketData", socketData);
-        socket.emit(cs.root.CONNECTION_REPLY, {
+        socket.emit("passIdentity", {
           message:
             "Dude!!! I am a React Client and i am connected to you!!!!Take my name,my password and my token",
           data: { name, password, token },
