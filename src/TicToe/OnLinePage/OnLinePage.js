@@ -11,7 +11,7 @@ import './Static/onlinePage.scss';
 
 
 //Component
-const OnLinePage = ({ player, socket, getPlayerRequested, postPlayerRequested,  setPlayerStatus, setPlayerLoggedStatus,setServerNotification, setPlayers }) => {
+const OnLinePage = ({ player, socketData, getPlayerRequested, postPlayerRequested,  setPlayerStatus, setPlayerLoggedStatus,setServerNotification, setPlayers }) => {
   // const [socketData, setSocket] = useState({ socket:null, connected: false, id: null });
   const [onlinePlayers, setOnlinePlayers] = useState([]);
   useEffect(() => {
@@ -23,21 +23,21 @@ const OnLinePage = ({ player, socket, getPlayerRequested, postPlayerRequested,  
     //     data: "Dude!!! React Client"
     //   });
     // });
-    if(socket.socket) {
+    if(socketData.socket) {
       console.log('>>>>>>>>>>>>>>>>>>>>>>>>SETUP ON UPDATE PLAYERS');
       //>>>>>>>>>>>>>>>>>> On UPDATE_PLAYERS
-          socket.socket.on(socket.ss.root.UPDATE_PLAYERS, ({ players }) => {
+          socketData.socket.on(socketData.ss.root.UPDATE_PLAYERS, ({ players }) => {
             console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Broaaaadcasstttted", players);
             setOnlinePlayers(players);
           });
     }
 
-  }, [socket]);
+  }, [socketData]);
 
   return (
     <section className="onLinePage">
       <ControlPanel
-        socket={socket}
+        socketData={socketData}
         player={player}
         getPlayerRequested={getPlayerRequested}
         postPlayerRequested={postPlayerRequested}
@@ -53,8 +53,8 @@ const OnLinePage = ({ player, socket, getPlayerRequested, postPlayerRequested,  
 };
 
 //ReduxState&Dispatch
-const stateOnLinePage = ({ online:{ player, socket } }) => {
-  return { player, socket };
+const stateOnLinePage = ({ online:{ player, socketData } }) => {
+  return { player, socketData };
 };
 const OnLinePageContainer = connect(
   stateOnLinePage,

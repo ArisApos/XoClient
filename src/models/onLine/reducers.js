@@ -19,7 +19,7 @@ const status = (state={}, action) => {
     }
 }
 
-const socket = (state={}, action) => {
+const socketData = (state={}, action) => {
     switch(action.type) {
         case SET_SOCKET_DATA:
             return {...state, ...action.socketData};
@@ -67,5 +67,5 @@ const serverNotification = ( state={ requesting: null, message: null, success: n
 // }
 
 const player = combineReducers({loggedStatus, status});
-const online = combineReducers({ player, players, serverNotification, socket });
+const online = combineReducers({ player, players, serverNotification, socketData });
 export { online };
