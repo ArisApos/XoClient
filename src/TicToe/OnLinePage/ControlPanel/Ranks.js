@@ -7,11 +7,12 @@ import './Static/ranks.scss';
 const Ranks = () => {
   const players = useSelector(state=>state.online.players, shallowEqual);
 
-  const rankingPlayers = Object.values(players).map(({name, points, avatar}) => (
+  const rankingPlayers = Object.values(players).map(({name, points, avatar, online}) => (
     <div key={name} className="rPlayer">
       <img className="avatar" src={ENTRY_POINT+avatar} alt={name}/>
       <span className="name">{name}</span>
       <span className="point">{points}</span>
+      <span className={ online ? 'online on' : 'online' }></span>
     </div>
   ));
     return (
