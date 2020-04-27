@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { SET_LOGGED_STATUS, SET_PLAYER_STATUS, SET_PLAYERS, SET_SERVER_NOTIFICATION, SET_SOCKET_DATA } from './actionTypes';
+import { SET_LOGGED_STATUS, SET_PLAYER_STATUS, SET_PLAYERS, SET_SERVER_NOTIFICATION, SET_SOCKET_DATA, UPDATE_PLAYERS_ONLINE } from './actionTypes';
 
 const loggedStatus = (state={loggedIn:false, token:null }, action) => {
     switch(action.type) {
@@ -33,6 +33,10 @@ const players = (state={}, action) => {
         case SET_PLAYERS:
             if(action.clear) return {};
             return {...state, ...action.players};
+        case UPDATE_PLAYERS_ONLINE:
+            const newState = {...state};
+            action.payload.forEach(({name})=>newState[name].online = true);
+            return newState;
         default:
             return state;
     }
