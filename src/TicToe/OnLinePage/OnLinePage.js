@@ -7,7 +7,6 @@ import './Static/onlinePage.scss';
 
 //Component
 const OnLinePage = ({ player, getPlayerRequested, postPlayerRequested, logout }) => {
-
   return (
     <section className="onLinePage">
       <ControlPanel
