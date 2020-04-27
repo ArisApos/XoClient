@@ -35,7 +35,9 @@ const players = (state={}, action) => {
             return {...state, ...action.players};
         case UPDATE_PLAYERS_ONLINE:
             const newState = {...state};
-            action.payload.forEach(({name})=>newState[name].online = true);
+            Object.keys(newState)
+            .forEach((playerName)=>
+            newState[playerName].online = action.payload.find(({name})=>name === playerName));        
             return newState;
         default:
             return state;
