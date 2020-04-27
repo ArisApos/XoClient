@@ -26,6 +26,7 @@ const setSocket = actionCreator(SET_SOCKET_DATA, 'socketData');
 
 const logout = actionCreator(LOGOUT);
 
+
 export {
   setPlayerLoggedStatus,
   setPlayerStatus,
