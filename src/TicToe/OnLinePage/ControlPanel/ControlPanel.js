@@ -34,7 +34,7 @@ const ControlPanel = ({  ranks, player, getPlayerRequested, postPlayerRequested,
         />
         }
       </section>
-      <LiveOverview LiveOverview={null} />
+      <LiveOverview/>
     </section>
   );
 };
