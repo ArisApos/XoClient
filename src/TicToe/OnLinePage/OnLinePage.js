@@ -1,24 +1,20 @@
 import React, { useState, useEffect  } from "react";
 import { ControlPanel } from "./ControlPanel";
-import { getPlayerRequested, postPlayerRequested, setPlayerStatus, setPlayerLoggedStatus, setServerNotification, setPlayers } from "../../models/onLine";
+import { getPlayerRequested, postPlayerRequested, logout } from "../../models/onLine";
 import { connect } from "react-redux";
 import './Static/onlinePage.scss';
 
 
 //Component
-const OnLinePage = ({ player, socketData, getPlayerRequested, postPlayerRequested,  setPlayerStatus, setPlayerLoggedStatus,setServerNotification, setPlayers }) => {
+const OnLinePage = ({ player, getPlayerRequested, postPlayerRequested, logout }) => {
 
   return (
     <section className="onLinePage">
       <ControlPanel
-        socketData={socketData}
         player={player}
         getPlayerRequested={getPlayerRequested}
         postPlayerRequested={postPlayerRequested}
-        setPlayerStatus={setPlayerStatus}
-        setPlayerLoggedStatus={setPlayerLoggedStatus}
-        setServerNotification={setServerNotification}
-        setPlayers={setPlayers}
+        logout={logout}
       />
 
       {/* {onlinePlayers.map((player) => <div key={player.id}>{player.id}</div>)} */}
@@ -32,6 +28,6 @@ const stateOnLinePage = ({ online:{ player, socketData } }) => {
 };
 const OnLinePageContainer = connect(
   stateOnLinePage,
-  {  setPlayerStatus, setPlayerLoggedStatus, setServerNotification, getPlayerRequested, postPlayerRequested, setPlayers }
+  { getPlayerRequested, postPlayerRequested, logout }
 )(OnLinePage);
 export { OnLinePageContainer };

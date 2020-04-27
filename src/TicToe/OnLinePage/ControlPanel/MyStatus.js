@@ -2,15 +2,11 @@ import React, {} from 'react';
 import { ENTRY_POINT } from "../../../models/onLine/libs";
 import './Static/myStatus.scss';
 
-const MyStatus = ({myStatus,socketData, setActiveWindows, setPlayerLoggedStatus, setPlayerStatus, setServerNotification,setPlayers}) => {
+const MyStatus = ({ myStatus,logout, setActiveWindows }) => {
     const loggedOut = ()=> {
       setActiveWindows({ registration: false, mountRegistration: false, loggin: false, mountLoggin: true });
       setTimeout(()=>setActiveWindows({ registration: false, mountRegistration: false, loggin: true, mountLoggin: true }));
-      setPlayerLoggedStatus(false, null)
-      setPlayerStatus(null);
-      setServerNotification(null, "", null, null);
-      setPlayers({},true);
-      socketData.socket.emit(socketData.cs.root.MANULLY_DISCONNECT);
+      logout();
     }
   if(myStatus) {
     const {name, avatar, points, maxPlayers, maxTime,} = myStatus;

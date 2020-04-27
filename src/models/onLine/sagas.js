@@ -1,6 +1,6 @@
-import { GET_PLAYER_REQUESTED, POST_PLAYER_REQUESTED } from './actionTypes';
+import { GET_PLAYER_REQUESTED, POST_PLAYER_REQUESTED, LOGOUT } from './actionTypes';
 import { setServerNotification,setPlayerStatus, setPlayerLoggedStatus, setPlayers, setSocket } from './actions';
-import { call, put, takeLatest, all, fork } from 'redux-saga/effects';
+import { select, call, put, takeLatest, take, all, fork } from 'redux-saga/effects';
 import { axiosApi, indexing, createSocketConnection } from './libs';
 import { watchSocketServer } from './sagaChannels';
 
@@ -53,10 +53,25 @@ function* postPlayer(action) {
 function* watchPostPlayer() {
     yield takeLatest( POST_PLAYER_REQUESTED, postPlayer);
 }
+      
+      
+function* logout() {
+    while( yield take(LOGOUT) ){
+        console.log("loggoutTriggeeerrreeeddd")
+    const socketData = yield select(state=>state.online.socketData);
+    socketData.socket.emit(socketData.cs.root.MANULLY_DISCONNECT);
+        yield all([
+            put(setPlayerLoggedStatus(false, null)),
+            put(setPlayerStatus(null)),
+            put(setServerNotification(null, "", null, null)),
+            put(setPlayers({}, true))
+        ])
+    }
+}
 
 // RootSaga
 function* rootSaga() {
-  yield all([ watchGetPlayer(), watchPostPlayer()])
+  yield all([ watchGetPlayer(), watchPostPlayer(), logout()])
 }
 
 export { rootSaga };
