@@ -21,19 +21,14 @@ const Registration = ({ on, setActiveWindows, postPlayerRequested, getPlayerRequ
          const resetAll = ()=>{reset();setRequestedData({});}
          getPlayerRequested(requestedData.name, requestedData.password, 'players', 'get', {cb:resetAll});
        }; 
-      // useEffect(()=> {
-      //   if(socket) {
-      //     socket.on(ss.root.REGISTER, data => {
-      //       console.log(data);
-      //       setResponseData({ response: data.checkingPassed });
-      //     });
-      //   }
-      // }, []);
 
-      const onChangeFile = (e) => setRequestedData({file: e.target.files[0]});
+      const onChangeFile = (e) => {
+        console.log(e.target.files[0])
+        setRequestedData({files: e.target.files[0]});
+      }
       const onSubmit = data => {
         // socket.emit(cs.root.REGISTER, data);
-        setRequestedData({name: data.name, password: data.password})
+        setRequestedData({...requestedData, name: data.name, password: data.password})
         const formData = new FormData();
         Object.keys(data).forEach(dataKey=>formData.append(dataKey, data[dataKey]))
         formData.append("avatar", requestedData.files);
