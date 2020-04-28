@@ -1,5 +1,5 @@
 import React, {} from 'react';
-import {useSelector, shallowEqual} from 'react-redux';
+import {useSelector} from 'react-redux';
 import { ENTRY_POINT } from '../../../models/onLine/libs';
 import './Static/ranks.scss';
 
