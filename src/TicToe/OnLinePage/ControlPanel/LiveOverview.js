@@ -1,15 +1,18 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { createGame } from '../../../models/onLine/actions';
 import groupBy from "lodash/groupBy";
 import { TimeRoom } from './TimeRoom';
 import './Static/liveOverview.scss';
 
 const LiveOverview = () => {
   const { players, myPlayerName } = useSelector(state => ({ players: state.online.players, myPlayerName: state.online.player.status.name}));
+  const dispatch = useDispatch();
   const onlinePlayers = Object.values(players).reduce((acc,player)=>player.online && player.name !== myPlayerName ? [...acc, player]:acc,[]);
   const groupByMaxTimePlayers = groupBy(onlinePlayers, ({maxTime})=>maxTime);
+  const onClickPlayer = (e)=> dispatch(createGame({player1: myPlayerName, player2:e.target.getAttribute('data-key')}));
   const timeRooms = Object.values(groupByMaxTimePlayers).reduce(
-    (acc, roomPlayers) => [...acc, TimeRoom(roomPlayers)],
+    (acc, roomPlayers) => [...acc, TimeRoom(roomPlayers, onClickPlayer)],
     []
   );
   return  <section className="liveOverview">
