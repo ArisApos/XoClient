@@ -1,5 +1,5 @@
 import { take, put, call, apply, delay, fork } from 'redux-saga/effects';
-import { UPDATE_PLAYERS_ONLINE } from '../../models/onLine/actionTypes'
+import { UPDATE_PLAYERS_ONLINE, UPDATE_GAME  } from '../../models/onLine/actionTypes'
 import { eventChannel } from 'redux-saga';
 
 function createSocketChannel({socket, ss}) {
@@ -9,7 +9,12 @@ function createSocketChannel({socket, ss}) {
     const updatePlayers = ({onlinePlayers}) => {
       emit({ type: UPDATE_PLAYERS_ONLINE, payload: onlinePlayers });
     }
+    const updateGame = (game) => {
+      console.log('sagaaaaaaaChaaaannnneeeeellllllllllllll', game)
+      emit({ type: UPDATE_GAME, payload: game });
+    };
     socket.on(ss.root.UPDATE_PLAYERS, updatePlayers);
+    socket.on(ss.root.UPDATE_GAME, updateGame);
     const unsubscribe = () => {
     }
     return unsubscribe;
