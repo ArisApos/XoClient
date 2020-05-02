@@ -1,6 +1,5 @@
 import React from 'react';
-import { useSelector, shallowEqual } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { setServerNotification } from '../../../models/onLine/actions'
 
 const useServerNotification = () => {
