@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { SET_LOGGED_STATUS, SET_PLAYER_STATUS, SET_PLAYERS, SET_SERVER_NOTIFICATION, SET_SOCKET_DATA, UPDATE_PLAYERS_ONLINE } from './actionTypes';
+import { SET_LOGGED_STATUS, SET_PLAYER_STATUS, SET_PLAYERS, SET_SERVER_NOTIFICATION, SET_SOCKET_DATA, UPDATE_PLAYERS_ONLINE, UPDATE_GAME } from './actionTypes';
 
 const loggedStatus = (state={loggedIn:false, token:null }, action) => {
     switch(action.type) {
@@ -56,6 +56,16 @@ const serverNotification = ( state={ requesting: null, message: null, success: n
     }
 }
 
+const games = (state={}, action) => {
+    switch(action.type) {
+        case UPDATE_GAME: 
+         console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>UPDATE_GAME', action);
+         return {...state, ...action.payload};
+        default:
+            return state;
+    }
+}
+
 // Old way
 // const player = ( state = { 
 //     loggedStatus: loggedStatusState(undefined, {}),
@@ -72,5 +82,5 @@ const serverNotification = ( state={ requesting: null, message: null, success: n
 // }
 
 const player = combineReducers({loggedStatus, status});
-const online = combineReducers({ player, players, serverNotification, socketData });
+const online = combineReducers({ player, players, serverNotification, socketData, games });
 export { online };
