@@ -5,8 +5,8 @@ import { TimeRoom } from './TimeRoom';
 import './Static/liveOverview.scss';
 
 const LiveOverview = () => {
-  const players = useSelector((state) => state.online.players);
-  const onlinePlayers = Object.values(players).reduce((acc,player)=>player.online ? [...acc, player]:acc,[]);
+  const { players, myPlayerName } = useSelector(state => ({ players: state.online.players, myPlayerName: state.online.player.status.name}));
+  const onlinePlayers = Object.values(players).reduce((acc,player)=>player.online && player.name !== myPlayerName ? [...acc, player]:acc,[]);
   const groupByMaxTimePlayers = groupBy(onlinePlayers, ({maxTime})=>maxTime);
   const timeRooms = Object.values(groupByMaxTimePlayers).reduce(
     (acc, roomPlayers) => [...acc, TimeRoom(roomPlayers)],
