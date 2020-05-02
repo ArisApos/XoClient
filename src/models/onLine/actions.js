@@ -7,7 +7,8 @@ import {
   GET_PLAYER_REQUESTED,
   POST_PLAYER_REQUESTED,
   SET_SOCKET_DATA,
-  LOGOUT
+  LOGOUT,
+  CREATE_GAME
 } from "./actionTypes";
 
 const setPlayerLoggedStatus = actionCreator(SET_LOGGED_STATUS, 'loggedIn', 'token');
@@ -26,6 +27,8 @@ const setSocket = actionCreator(SET_SOCKET_DATA, 'socketData');
 
 const logout = actionCreator(LOGOUT);
 
+const createGame = actionCreator(CREATE_GAME, 'payload')
+
 
 export {
   setPlayerLoggedStatus,
@@ -35,5 +38,6 @@ export {
   getPlayerRequested,
   postPlayerRequested,
   setSocket,
-  logout
+  logout,
+  createGame
 };
