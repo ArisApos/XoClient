@@ -72,7 +72,9 @@ function* logout() {
 function* createGame(action) {
     while( true ){
         const action = yield take(CREATE_GAME);
-        console.log('CREATE_GAME',action)
+        const socketData = yield select(state=>state.online.socketData);
+        console.log("CREATE_GAME", action);
+        socketData.socket.emit(socketData.cs.root.CREATE_GAME, { ...action.payload });       
     }
 }
 
