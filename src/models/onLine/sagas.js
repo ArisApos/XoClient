@@ -1,4 +1,4 @@
-import { GET_PLAYER_REQUESTED, POST_PLAYER_REQUESTED, LOGOUT } from './actionTypes';
+import { GET_PLAYER_REQUESTED, POST_PLAYER_REQUESTED, LOGOUT, CREATE_GAME } from './actionTypes';
 import { setServerNotification,setPlayerStatus, setPlayerLoggedStatus, setPlayers, setSocket } from './actions';
 import { select, call, put, takeLatest, take, all, fork } from 'redux-saga/effects';
 import { axiosApi, indexing, createSocketConnection } from './libs';
@@ -69,9 +69,16 @@ function* logout() {
     }
 }
 
+function* createGame(action) {
+    while( true ){
+        const action = yield take(CREATE_GAME);
+        console.log('CREATE_GAME',action)
+    }
+}
+
 // RootSaga
 function* rootSaga() {
-  yield all([ watchGetPlayer(), watchPostPlayer(), logout()])
+  yield all([ watchGetPlayer(), watchPostPlayer(), logout(), createGame()])
 }
 
 export { rootSaga };
