@@ -41,6 +41,7 @@
                 &.enemy{
                     background: #66171c;
                     cursor: default;
+                    pointer-events: none;
                 }
             }
         }
