@@ -6,13 +6,14 @@ import { TimeRoom } from './TimeRoom';
 import './Static/liveOverview.scss';
 
 const LiveOverview = () => {
-  const { players, myPlayerName } = useSelector(state => ({ players: state.online.players, myPlayerName: state.online.player.status.name}));
+  const { players, myPlayerName, games } = useSelector(state => ({ players: state.online.players, games: state.online.games, myPlayerName: state.online.player.status.name}));
   const dispatch = useDispatch();
+  const enemies= Object.keys(games).map(gameName=>gameName.split('-').find((name, index)=>name!==myPlayerName && index !== 2))
   const onlinePlayers = Object.values(players).reduce((acc,player)=>player.online && player.name !== myPlayerName ? [...acc, player]:acc,[]);
   const groupByMaxTimePlayers = groupBy(onlinePlayers, ({maxTime})=>maxTime);
   const onClickPlayer = (e)=> dispatch(createGame({player1: myPlayerName, player2:e.target.getAttribute('data-key')}));
   const timeRooms = Object.values(groupByMaxTimePlayers).reduce(
-    (acc, roomPlayers) => [...acc, TimeRoom(roomPlayers, onClickPlayer)],
+    (acc, roomPlayers) => [...acc, TimeRoom(roomPlayers, onClickPlayer, enemies)],
     []
   );
   return  <section className="liveOverview">
