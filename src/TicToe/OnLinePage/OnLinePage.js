@@ -1,7 +1,8 @@
 import React, { useState, useEffect  } from "react";
-import { ControlPanel } from "./ControlPanel";
-import { getPlayerRequested, postPlayerRequested, logout } from "../../models/onLine";
 import { connect } from "react-redux";
+import { ControlPanel } from "./ControlPanel";
+import { Games } from './Games';
+import { getPlayerRequested, postPlayerRequested, logout } from "../../models/onLine";
 import './Static/onlinePage.scss';
 
 
@@ -15,8 +16,7 @@ const OnLinePage = ({ player, getPlayerRequested, postPlayerRequested, logout })
         postPlayerRequested={postPlayerRequested}
         logout={logout}
       />
-
-      {/* {onlinePlayers.map((player) => <div key={player.id}>{player.id}</div>)} */}
+      <Games />
     </section>
   );
 };
