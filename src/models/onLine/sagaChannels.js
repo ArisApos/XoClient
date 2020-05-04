@@ -9,12 +9,12 @@ function createSocketChannel(socketData) {
     const updatePlayers = ({onlinePlayers}) => {
       emit({ type: UPDATE_PLAYERS_ONLINE, payload: onlinePlayers });
     }
-    const createGame = async(nameSpace)=>{
-      console.log('>>>>>>>>>sagaaaaaaaChaaaannnneeeeellllllllllllll>>>>createGame', nameSpace);
+   async function createGame(nameSpace){
+      console.log('>>>>>>>>>SAGA-------CREATE-SOCKET-CHANEL___createGame-from ss', nameSpace);
       const socketData = await createSocketConnection({nameSpace});
       socketData.ss = ss;
       socketData.cs = cs;
-      watchSocketServerGame(socketData);
+      emit({type: 'WATCH_SOCKET_GAME', payload: socketData})
     };
     socket.on(ss.root.UPDATE_PLAYERS, updatePlayers);
     socket.on(ss.root.CREATE_GAME, createGame);
@@ -55,8 +55,9 @@ function* watchSocketServer(socketData, {name, password, token}) {
 function createSocketChannelGame(socketData) {
   const { socket, ss } = socketData;
   return eventChannel((emit) => {
+
     const updateGame = (game) => {
-      console.log('Myyyyyyyyyyyyyyyyyyyyyyyy chaanneeeelll is workinggggggg UPDATE_GAME!!!');
+      console.log('>>>>>>>>>SAGA-------CREATE-SOCKET-CHANE-GAME___updateGame-from ss');
       emit({ type: UPDATE_GAME, payload: game });
     };
 
@@ -71,22 +72,18 @@ function createSocketChannelGame(socketData) {
 // }
 
 function* watchSocketServerGame(socketData) {
-  const socketChannelGame = yield call(createSocketChannelGame, socketData);
 
+  const socketChannelGame = yield call(createSocketChannelGame, socketData);
   while (true) {
     try {
       const { type, payload } = yield take(socketChannelGame);
       yield put({ type, payload });
-      //   yield fork(pong, socket)
     } catch (err) {
       console.error("socket error:", err);
-      // socketChannel is still open in catch block
-      // if we want end the socketChannel, we need close it explicitly
-      // socketChannel.close()
     }
   }
 }
 
 
 
-export { watchSocketServer };
+export { watchSocketServer, watchSocketServerGame };
