@@ -1,20 +1,23 @@
 import { take, put, call, apply, delay, fork } from 'redux-saga/effects';
 import { UPDATE_PLAYERS_ONLINE, UPDATE_GAME  } from '../../models/onLine/actionTypes'
+import { createSocketConnection } from "../onLine/libs";
 import { eventChannel } from 'redux-saga';
 
-function createSocketChannel({socket, ss}) {
-
+function createSocketChannel(socketData) {
+  const { socket, ss, cs } = socketData;
   return eventChannel(emit => {
-
     const updatePlayers = ({onlinePlayers}) => {
       emit({ type: UPDATE_PLAYERS_ONLINE, payload: onlinePlayers });
     }
-    const updateGame = (game) => {
-      console.log('sagaaaaaaaChaaaannnneeeeellllllllllllll', game)
-      emit({ type: UPDATE_GAME, payload: game });
+    const createGame = async(nameSpace)=>{
+      console.log('>>>>>>>>>sagaaaaaaaChaaaannnneeeeellllllllllllll>>>>createGame', nameSpace);
+      const socketData = await createSocketConnection({nameSpace});
+      socketData.ss = ss;
+      socketData.cs = cs;
+      watchSocketServerGame(socketData);
     };
     socket.on(ss.root.UPDATE_PLAYERS, updatePlayers);
-    socket.on(ss.root.UPDATE_GAME, updateGame);
+    socket.on(ss.root.CREATE_GAME, createGame);
     const unsubscribe = () => {
     }
     return unsubscribe;
@@ -46,5 +49,44 @@ function* watchSocketServer(socketData, {name, password, token}) {
     }
   }
 }
+
+//--------------GAME CHANNEL------------------------
+
+function createSocketChannelGame(socketData) {
+  const { socket, ss } = socketData;
+  return eventChannel((emit) => {
+    const updateGame = (game) => {
+      console.log('Myyyyyyyyyyyyyyyyyyyyyyyy chaanneeeelll is workinggggggg UPDATE_GAME!!!');
+      emit({ type: UPDATE_GAME, payload: game });
+    };
+
+    socket.on(ss.root.UPDATE_GAME, updateGame);
+    const unsubscribe = () => {};
+    return unsubscribe;
+  });
+}
+
+// function* pong(socket) {
+//   yield apply(socket, socket.emit, ['pong']) // call `emit` as a method with `socket` as context
+// }
+
+function* watchSocketServerGame(socketData) {
+  const socketChannelGame = yield call(createSocketChannelGame, socketData);
+
+  while (true) {
+    try {
+      const { type, payload } = yield take(socketChannelGame);
+      yield put({ type, payload });
+      //   yield fork(pong, socket)
+    } catch (err) {
+      console.error("socket error:", err);
+      // socketChannel is still open in catch block
+      // if we want end the socketChannel, we need close it explicitly
+      // socketChannel.close()
+    }
+  }
+}
+
+
 
 export { watchSocketServer };
