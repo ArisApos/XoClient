@@ -2,7 +2,7 @@ import { GET_PLAYER_REQUESTED, POST_PLAYER_REQUESTED, LOGOUT, CREATE_GAME } from
 import { setServerNotification,setPlayerStatus, setPlayerLoggedStatus, setPlayers, setSocket } from './actions';
 import { select, call, put, takeLatest, take, all, fork } from 'redux-saga/effects';
 import { axiosApi, indexing, createSocketConnection } from './libs';
-import { watchSocketServer } from './sagaChannels';
+import { watchSocketServer, watchSocketServerGame } from './sagaChannels';
 
 // Worker, Wathcer getPlayer saga
 function* getPlayer(action) {
@@ -74,13 +74,21 @@ function* createGame() {
         const action = yield take(CREATE_GAME);
         const socketData = yield select(state=>state.online.socketData);
         console.log("CREATE_GAME", action);
-        socketData.socket.emit(socketData.cs.root.CREATE_GAME, { ...action.payload });       
+        socketData.socket.emit(socketData.cs.root.CREATE_GAME, { ...action.payload });      
+    }
+}
+
+function* createWatcherChanelGame() {
+    while( true ) {
+        const {payload} = yield take('WATCH_SOCKET_GAME');
+        console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF')
+        yield fork(watchSocketServerGame, payload)
     }
 }
 
 // RootSaga
 function* rootSaga() {
-  yield all([ watchGetPlayer(), watchPostPlayer(), logout(), createGame()])
+  yield all([ watchGetPlayer(), watchPostPlayer(), logout(), createGame(), createWatcherChanelGame()])
 }
 
 export { rootSaga };
