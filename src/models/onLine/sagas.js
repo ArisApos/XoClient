@@ -15,7 +15,7 @@ function* getPlayer(action) {
       // get All players
       const [{ allPlayers }, socketData] = yield all([
           call(axiosApi, {method:'get', endpoint:'players', token}),
-          call( createSocketConnection, name, password, token )
+          call( createSocketConnection, {name, password, token} )
       ]);
       yield fork(watchSocketServer, socketData, {name,password, token});
       if(utilities.cb) utilities.cb();
@@ -69,7 +69,7 @@ function* logout() {
     }
 }
 
-function* createGame(action) {
+function* createGame() {
     while( true ){
         const action = yield take(CREATE_GAME);
         const socketData = yield select(state=>state.online.socketData);
