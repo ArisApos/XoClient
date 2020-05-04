@@ -5,10 +5,10 @@ import './Static/ranks.scss';
 
 
 const Ranks = () => {
-  const players = useSelector(state=>state.online.players);
-
+  const { players, myPlayerName, games } = useSelector(state=>({players: state.online.players, myPlayerName:state.online.player.status.name, games: state.online.games}));
+  const enemies= Object.keys(games).map(gameName=>gameName.split('-').find((name, index)=>name!==myPlayerName && index !== 2))
   const rankingPlayers = Object.values(players).map(({name, points, avatar, online}) => (
-    <div key={name} className="rPlayer">
+    <div key={name} className={enemies.find(enemy=>enemy===name) ?"rPlayer enemy":"rPlayer"}>
       <img className="avatar" src={ENTRY_POINT+avatar} alt={name}/>
       <span className="name">{name}</span>
       <span className="point">{points}</span>
