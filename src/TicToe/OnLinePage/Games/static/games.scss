@@ -15,11 +15,15 @@
             display: flex;
             justify-content: space-around;
             .player{
+                padding: 8px;
                 &.myPlayer{
                     color: lime;
                 }
                 &.enemy{
                     color: #ff000e;
+                }
+                &.turn{
+                    background: #178792;
                 }
             }
         }
