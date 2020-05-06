@@ -81,7 +81,6 @@ function* createGame() {
 function* createWatcherChanelGame() {
     while( true ) {
         const {payload} = yield take('WATCH_SOCKET_GAME');
-        console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF')
         yield fork(watchSocketServerGame, payload)
     }
 }
