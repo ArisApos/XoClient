@@ -1,10 +1,13 @@
 import React from 'react';
 import { useStore } from 'react-redux';
 
-const Game = (game) => {
-
+const Game = ({myName, player1Name, player2Name}) => {
+  console.log(myName, player1Name, player2Name)
  return <div className="game">
-   <h3 className={}></h3>
+   <div className='players'>
+        <span className={player1Name === myName ? "player myPlayer":"player enemy"}>{player1Name}</span>
+        <span className={player2Name === myName ? "player myPlayer":"player enemy"}>{player2Name}</span>
+   </div>
     <div className="gameBoard">
       <div className="boardRow">
         <button className="square"></button>
