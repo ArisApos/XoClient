@@ -4,7 +4,7 @@ import { Game } from './Game';
 
 const Games = () => {
     const { games } = useSelector(state=>({games:Object.values(state.online.games)}));
-    const gamesEls = games.map(game=><Game/>);
+    const gamesEls = games.map(game=><Game game={game}/>);
     return (
       <div className="gamesContainer">
           {gamesEls}
