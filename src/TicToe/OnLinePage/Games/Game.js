@@ -3,10 +3,9 @@ import React from 'react';
 
 const Game = ({myName, player1Name, player2Name, squares, turn, nameSpace, socketData}) => {
   const onClickSquare = (e)=>{
-    if(myName !== turn) return;
+    if(myName !== turn || e.target.innerText) return;
     const squareIndex = e.target.getAttribute("data-squareindex");
     socketData.socket.emit(socketData.cs.root.UPDATE_GAME,{squareIndex})
-    console.log(squareIndex)
   }
   let firstPlayerClassName = player1Name === myName ? "player myPlayer" : "player enemy";
   firstPlayerClassName += turn === player1Name ? " turn" : ""; 
