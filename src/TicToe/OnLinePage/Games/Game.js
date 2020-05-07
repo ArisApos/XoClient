@@ -4,7 +4,7 @@ import React from 'react';
 const Game = ({game:{myName, player1Name, player2Name, squares, turn, nameSpace}, socketData}) => {
   const onClickSquare = (e)=>{
     const squareIndex = e.target.getAttribute("data-squareindex");
-    socketData.socket.emit(socketData.cs.UPDATE_GAME,{squareIndex})
+    socketData.socket.emit(socketData.cs.root.UPDATE_GAME,{squareIndex})
     console.log(squareIndex)
   }
   let firstPlayerClassName = player1Name === myName ? "player myPlayer" : "player enemy";
