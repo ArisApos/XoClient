@@ -57,7 +57,11 @@ function createSocketChannelGame(socketData) {
   return eventChannel((emit) => {
 
     const updateGame = (game) => {
-      console.log('>>>>>>>>>SAGA-------CREATE-SOCKET-CHANE-GAME___updateGame-from ss');
+      console.log('>>>>>>>>>SAGA-------CREATE-SOCKET-CHANE-GAME___updateGame-from ss',game);
+      for (var key in game) {
+        game[key].socketData = socketData;
+        break;
+      }
       emit({ type: UPDATE_GAME, payload: game });
     };
 
