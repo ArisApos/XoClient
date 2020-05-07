@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const Game = ({game:{myName, player1Name, player2Name, squares, turn, nameSpace}, socketData}) => {
+const Game = ({myName, player1Name, player2Name, squares, turn, nameSpace, socketData}) => {
   const onClickSquare = (e)=>{
     const squareIndex = e.target.getAttribute("data-squareindex");
     socketData.socket.emit(socketData.cs.root.UPDATE_GAME,{squareIndex})
