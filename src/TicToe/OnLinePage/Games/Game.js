@@ -3,6 +3,7 @@ import React from 'react';
 
 const Game = ({myName, player1Name, player2Name, squares, turn, nameSpace, socketData}) => {
   const onClickSquare = (e)=>{
+    if(myName !== turn) return;
     const squareIndex = e.target.getAttribute("data-squareindex");
     socketData.socket.emit(socketData.cs.root.UPDATE_GAME,{squareIndex})
     console.log(squareIndex)
