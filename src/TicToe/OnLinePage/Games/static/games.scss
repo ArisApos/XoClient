@@ -5,7 +5,7 @@
         display: flex;
         flex-wrap: wrap;
         text-align: center;
-        width: 180px;
+        width: 200px;
         position: relative;
         margin: 10px;
         .players{
@@ -16,14 +16,15 @@
             justify-content: space-around;
             .player{
                 padding: 8px;
+                font-size: 20px;
                 &.myPlayer{
-                    color: lime;
+                    color:  dodgerblue;
                 }
                 &.enemy{
                     color: #ff000e;
                 }
                 &.turn{
-                    background: #178792;
+                    background: #2e3072;
                 }
             }
         }
@@ -80,6 +81,9 @@
                         background: dodgerblue;
                         font-size: 28px;
                         color: antiquewhite;
+                        &.lost {
+                            background: #931616;
+                        }
 
                         &:hover {
                             background: dodgerblue;
@@ -90,6 +94,7 @@
                         margin-right: 4px;
                         margin-top: 4px;
                     }
+
                 }
             }
         }
