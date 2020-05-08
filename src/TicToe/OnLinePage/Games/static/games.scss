@@ -39,7 +39,7 @@
                 }
 
                 .square {
-                    color: white;
+                    color: firebrick;
                     background: #fff;
                     border: 1px solid #999;
                     float: left;
@@ -75,6 +75,9 @@
 
                     &:focus {
                         outline: none;
+                    }
+                    &.mySquare {
+                        color: dodgerblue;
                     }
 
                     &.squareW {
