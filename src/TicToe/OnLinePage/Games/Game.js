@@ -4,6 +4,7 @@ import React from 'react';
 const Game = ({myName, player1Name, player2Name, squares, turn, nameSpace, socketData, winnerData:{ winner, winnerLine }}) => {
   const onClickSquare = (e)=>{
     if(myName !== turn || e.target.innerText || winner) return;
+    e.target.classList.add('mySquare')
     const squareIndex = e.target.getAttribute("data-squareindex");
     socketData.socket.emit(socketData.cs.root.UPDATE_GAME,{squareIndex})
   }
@@ -28,7 +29,7 @@ const Game = ({myName, player1Name, player2Name, squares, turn, nameSpace, socke
      </div>
      <div className="gameBoard">
        <div className="boardRow">
-         <button className={winnerLine ? winnerLine.find(squareIndex=>squareIndex === 0) ?
+         <button className={winnerLine !==null ? winnerLine.find(squareIndex=>squareIndex === 0) ?
             "squareW squareA square " + playerState : "squareA square" :"square"} data-squareindex='0' onClick={onClickSquare}>
             {squares[0]}
           </button>
