@@ -1,8 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { ENTRY_POINT } from "../../../models/onLine/libs";
 
 
 const Game = ({myName, player1, player2, squares, turn, nameSpace, socketData, winnerData:{ winner, winnerLine }}) => {
+  useEffect(()=>{
+    if(myName === turn){
+     const losePoints = setInterval(()=>console.log('lose points'), player1.maxTime * 1000);
+     return ()=> clearTimeout(losePoints);
+    }
+  },[turn]);
   const onClickSquare = (e)=>{
     if(myName !== turn || e.target.innerText || winner) return;
     e.target.classList.add('mySquare')
