@@ -1,17 +1,17 @@
 import React from 'react';
 
 
-const Game = ({myName, player1Name, player2Name, squares, turn, nameSpace, socketData, winnerData:{ winner, winnerLine }}) => {
+const Game = ({myName, player1, player2, squares, turn, nameSpace, socketData, winnerData:{ winner, winnerLine }}) => {
   const onClickSquare = (e)=>{
     if(myName !== turn || e.target.innerText || winner) return;
     e.target.classList.add('mySquare')
     const squareIndex = e.target.getAttribute("data-squareindex");
     socketData.socket.emit(socketData.cs.root.UPDATE_GAME,{squareIndex})
   }
-  let firstPlayerClassName = player1Name === myName ? "player myPlayer" : "player enemy";
-  firstPlayerClassName += turn === player1Name ? " turn" : ""; 
-  let secondPlayerClassName = player2Name === myName ? "player myPlayer" : "player enemy";
-  secondPlayerClassName += turn === player2Name ? " turn" : ""; 
+  let firstPlayerClassName = player1.name === myName ? "player myPlayer" : "player enemy";
+  firstPlayerClassName += turn === player1.name ? " turn" : ""; 
+  let secondPlayerClassName = player2.name === myName ? "player myPlayer" : "player enemy";
+  secondPlayerClassName += turn === player2.name ? " turn" : ""; 
   const playerState = winner ? winner === myName ? 'won' : 'lost' : '';
  return (
   <div className={"game "+playerState}>
@@ -19,12 +19,12 @@ const Game = ({myName, player1Name, player2Name, squares, turn, nameSpace, socke
        <span
          className={firstPlayerClassName}
        >
-         {player1Name}
+         {player1.name}
        </span>
        <span
          className={secondPlayerClassName}
        >
-         {player2Name}
+         {player2.name}
        </span>
      </div>
      <div className="gameBoard">
