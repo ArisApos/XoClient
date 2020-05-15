@@ -22,7 +22,7 @@ const Game = ({myName, player1, player2, squares, turn, nameSpace, socketData, w
        >
          {player1.name}
        </span>
-       <img className="enemysAvatar" src={ myName !== player1.name ? ENTRY_POINT+player1.avatar : ENTRY_POINT+player2.avatar  } alt=""/>
+       <img className="player enemysAvatar" src={ myName !== player1.name ? ENTRY_POINT+player1.avatar : ENTRY_POINT+player2.avatar  } alt=""/>
        <span
          className={secondPlayerClassName}
        >

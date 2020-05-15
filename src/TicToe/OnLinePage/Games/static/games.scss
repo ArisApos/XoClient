@@ -11,17 +11,24 @@
         .players{
             font-size: 17px;
             font-weight: bold;
-            width: 93%;
+            width: 90%;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             .player{
-                padding: 8px;
-                font-size: 20px;
+                width: 33%;
+                font-size: 14px;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 &.myPlayer{
                     color:  dodgerblue;
                 }
                 &.enemy{
                     color: #ff000e;
+                    &.turn{
+                        background: #722e54;
+                    }
                 }
                 &.turn{
                     background: #2e3072;
