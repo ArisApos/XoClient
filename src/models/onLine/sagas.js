@@ -17,7 +17,7 @@ function* getPlayer(action) {
           call(axiosApi, {method:'get', endpoint:'players', token}),
           call( createSocketConnection, {name, password, token} )
       ]);
-      yield fork(watchSocketServer, socketData, {name,password, token});
+      yield fork(watchSocketServer, socketData, {status, token});
       if(utilities.cb) utilities.cb();
       yield all([
           put(setServerNotification(false, message, true, utilities )),

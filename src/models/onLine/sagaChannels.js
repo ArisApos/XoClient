@@ -28,12 +28,12 @@ function createSocketChannel(socketData) {
 //   yield apply(socket, socket.emit, ['pong']) // call `emit` as a method with `socket` as context
 // }
 
-function* watchSocketServer(socketData, {name, password, token}) {
+function* watchSocketServer(socketData, {status, token}) {
     const socketChannel = yield call(createSocketChannel, socketData);
     socketData.socket.emit(socketData.cs.root.UPDATE_PLAYERS, {
     message:
         "Dude!!! I am a React Client IN SAGA CHANELL!! and i am connected to you!!!!Take my name,my password and my token",
-    data: { name, password, token },
+    data: { ...status },
     });
 
   while (true) {
