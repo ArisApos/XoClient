@@ -20,13 +20,15 @@ const Game = ({myName, player1, player2, squares, turn, nameSpace, socketData, w
        <span
          className={firstPlayerClassName}
        >
-         {player1.name}
+         <span>{player1.name}</span>
+         <span>{player1.points}</span>
        </span>
        <img className="player enemysAvatar" src={ myName !== player1.name ? ENTRY_POINT+player1.avatar : ENTRY_POINT+player2.avatar  } alt=""/>
        <span
          className={secondPlayerClassName}
        >
-         {player2.name}
+         <span>{player2.name}</span>
+         <span>{player2.points}</span>
        </span>
      </div>
      <div className="gameBoard">
