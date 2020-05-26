@@ -39,7 +39,7 @@ const Game = ({myName, player1, player2, squares, turn, nameSpace, socketData, w
      </div>
      <div className="gameBoard">
        <div className="boardRow">
-         <button className={winnerLine !==null ? winnerLine.find(squareIndex=>squareIndex === 0) ?
+         <button className={winnerLine ? winnerLine.find(squareIndex=>squareIndex === 0) !== undefined ?
             "squareW squareA square " + playerState : "squareA square" :"square"} data-squareindex='0' onClick={onClickSquare}>
             {squares[0]}
           </button>
