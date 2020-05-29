@@ -1,6 +1,6 @@
 import socketIOClient from "socket.io-client";
 
-const ENTRY_POINT = "http://127.0.0.1:5000";
+const ENTRY_POINT = "http://127.0.0.1";
 
 const createSocketConnection = async ({nameSpace})=>{
   const url = nameSpace ? ENTRY_POINT+nameSpace : ENTRY_POINT;
