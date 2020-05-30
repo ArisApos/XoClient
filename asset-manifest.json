@@ -1,13 +1,13 @@
 {
-  "main.css": "./static/css/main.57cb98db.chunk.css",
-  "main.js": "./static/js/main.a04612b1.chunk.js",
-  "main.js.map": "./static/js/main.a04612b1.chunk.js.map",
-  "static/js/1.46f31b7b.chunk.js": "./static/js/1.46f31b7b.chunk.js",
-  "static/js/1.46f31b7b.chunk.js.map": "./static/js/1.46f31b7b.chunk.js.map",
-  "runtime~main.js": "./static/js/runtime~main.4a686d48.js",
-  "runtime~main.js.map": "./static/js/runtime~main.4a686d48.js.map",
-  "static/css/main.57cb98db.chunk.css.map": "./static/css/main.57cb98db.chunk.css.map",
-  "index.html": "./index.html",
-  "precache-manifest.ae8a521332ef13ae5f6304a3caf6af63.js": "./precache-manifest.ae8a521332ef13ae5f6304a3caf6af63.js",
-  "service-worker.js": "./service-worker.js"
+  "main.css": "/XoClient/static/css/main.57cb98db.chunk.css",
+  "main.js": "/XoClient/static/js/main.b8ba795f.chunk.js",
+  "main.js.map": "/XoClient/static/js/main.b8ba795f.chunk.js.map",
+  "static/js/1.60e29081.chunk.js": "/XoClient/static/js/1.60e29081.chunk.js",
+  "static/js/1.60e29081.chunk.js.map": "/XoClient/static/js/1.60e29081.chunk.js.map",
+  "runtime~main.js": "/XoClient/static/js/runtime~main.0bdfbd43.js",
+  "runtime~main.js.map": "/XoClient/static/js/runtime~main.0bdfbd43.js.map",
+  "static/css/main.57cb98db.chunk.css.map": "/XoClient/static/css/main.57cb98db.chunk.css.map",
+  "index.html": "/XoClient/index.html",
+  "precache-manifest.ab75ddd8fd5d6ecc48a82efd70b3ea89.js": "/XoClient/precache-manifest.ab75ddd8fd5d6ecc48a82efd70b3ea89.js",
+  "service-worker.js": "/XoClient/service-worker.js"
 }
