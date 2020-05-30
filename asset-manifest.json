@@ -1,0 +1,13 @@
+{
+  "main.css": "/XoClient/static/css/main.57cb98db.chunk.css",
+  "main.js": "/XoClient/static/js/main.65679d13.chunk.js",
+  "main.js.map": "/XoClient/static/js/main.65679d13.chunk.js.map",
+  "static/js/1.60e29081.chunk.js": "/XoClient/static/js/1.60e29081.chunk.js",
+  "static/js/1.60e29081.chunk.js.map": "/XoClient/static/js/1.60e29081.chunk.js.map",
+  "runtime~main.js": "/XoClient/static/js/runtime~main.0bdfbd43.js",
+  "runtime~main.js.map": "/XoClient/static/js/runtime~main.0bdfbd43.js.map",
+  "static/css/main.57cb98db.chunk.css.map": "/XoClient/static/css/main.57cb98db.chunk.css.map",
+  "index.html": "/XoClient/index.html",
+  "precache-manifest.7e3eae8321e317d52a5a9e13d5d468b8.js": "/XoClient/precache-manifest.7e3eae8321e317d52a5a9e13d5d468b8.js",
+  "service-worker.js": "/XoClient/service-worker.js"
+}
